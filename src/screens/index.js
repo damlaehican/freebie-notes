@@ -1,6 +1,6 @@
 export {default as Login} from './Login'
 export {default as SignUp} from './SignUp'
-export {default as SplashScreen} './SplashScreen'
+export {default as SplashScreen} from './SplashScreen'
 
 
 
