@@ -35,7 +35,6 @@ const styles = {
         borderWidth: 1,
         borderRadius: 10,
         borderColor: '#FFFFFF',
-        padding: 5,
         shadowOpacity: 0.1,
         shadowRadius: 5,
         shadowColor: '#000000',
