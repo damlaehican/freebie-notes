@@ -71,7 +71,7 @@ const Login = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#EFEFEF',
   },
   googleLoginContainer: {
     width: Width / 1.2,
