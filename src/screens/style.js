@@ -40,6 +40,23 @@ const styles = {
                 fontSize: 20,
             },
         }),
+        signUpPage: StyleSheet.create({
+            container: {
+                flex:1,
+                backgroundColor:'#FF5227',
+            },
+            logoContainer: {
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginVertical: 40,
+            },
+            imageBackground: {
+                flex:1,
+            },
+            safeAreaView: {
+                flex:1,
+            },
+        })
     },
 };
 export default styles;    
