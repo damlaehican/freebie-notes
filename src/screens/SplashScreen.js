@@ -1,21 +1,42 @@
 import React from 'react';
-import {SafeAreaView,View, Text,Image,ImageBackground} from 'react-native';
-import styles from './style';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  StyleSheet,
+} from 'react-native';
 
 const SplashScreen = () => {
   return (
-    <View style={styles.pages.signUpPage.container}>
+    <View style={styles.container}>
       <ImageBackground
-        style={styles.pages.signUpPage.imageBackground}
+        style={{flex: 1}}
         source={require('../assets/background.png')}>
-        <SafeAreaView style={styles.pages.signUpPage.safeAreaView}>
-          <View style={{flex:1,justifyContent:'center',alignItems:'center'}} >
-              <Image source={require('../assets/signUpLogo.png')} />
+        <SafeAreaView style={{flex: 1}}>
+          <View style={styles.logoContainer}>
+            <Image source={require('../assets/signUpLogo.png')} />
           </View>
-          <Text style={{color:'white',fontWeight:'bold',alignSelf:'center'}}>Freebie Notes</Text>
+          <Text
+            style={{color: 'white', fontWeight: 'bold', alignSelf: 'center'}}>
+            Freebie Notes
+          </Text>
         </SafeAreaView>
       </ImageBackground>
     </View>
   );
 };
-export default SplashScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FF5227',
+  },
+  logoContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+export {SplashScreen};
