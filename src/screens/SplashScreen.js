@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 const SplashScreen = () => {
+  SplashScreen.hide();
   return (
     <View style={styles.container}>
       <ImageBackground
