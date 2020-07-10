@@ -40,7 +40,11 @@ const Login = (props) => {
             capital="none"
             keyboard="email-address"
           />
-          <MyInput holder="Parola giriniz..." changeText={setMail} />
+          <MyInput 
+            holder="Parola giriniz..." 
+            changeText={setMail} 
+            secureText={true}
+          />
         </View>
         <View style={{marginVertical: 10}}>
           <MyButton buttonName={'GİRİŞ'} pressButton={login} />

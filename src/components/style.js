@@ -25,9 +25,11 @@ const styles = {
         fontWeight: 'bold',
       },
     }),
-    input: StyleSheet.create({
+    input: StyleSheet.create({    
       container: {
-        justifyContent: 'center',
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"space-between",
         alignSelf: 'center',
         width: Width / 1.12,
         height: Height / 17,
@@ -39,7 +41,7 @@ const styles = {
         shadowRadius: 5,
         shadowColor: '#000000',
         shadowOffset: { height: 0, width: 0 },
-        paddingLeft: 30,
+        paddingHorizontal: 30,
         margin: 15,
       },
     }),  
