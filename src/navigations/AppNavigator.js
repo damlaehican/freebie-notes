@@ -9,7 +9,8 @@ const RootStack = createStackNavigator();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator screenOptions={{headerShown: false}}>
+      <RootStack.Navigator initialRouteName="Splash" screenOptions={{headerShown: false}}>
+        <RootStack.Screen name="Splash" component={Splash} />
         <RootStack.Screen name="Login" component={Login} />
         <RootStack.Screen
           name="SignUp"
