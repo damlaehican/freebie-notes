@@ -5,22 +5,16 @@ import {Login, SignUp, Splash} from '../screens';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
-const RootStack = createStackNavigator();
-const AppNavigator = () => {
+const Stack = createStackNavigator();
+const MainNavigator = () => {
   return (
-    <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Splash" screenOptions={{headerShown: false}}>
-        <RootStack.Screen name="Splash" component={Splash} />
-        <RootStack.Screen name="Login" component={Login} />
-        <RootStack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{
-            ...TransitionPresets.ModalPresentationIOS,
-          }}
-        />
-      </RootStack.Navigator>
+    <NavigationContainer initialRouteName="Splash">
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
-export default AppNavigator;
+export default MainNavigator;

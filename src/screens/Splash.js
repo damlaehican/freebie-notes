@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -7,27 +7,25 @@ import {
   ImageBackground,
   StyleSheet,
 } from 'react-native';
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from 'react-native-splash-screen';
 
 const Splash = (props) => {
-
   SplashScreen.hide();
-  
   useEffect(() => {
-    props.navigation.navigate("Login") //
-  }, [])
+    props.navigation.navigate('Login'); //
+  }, []);
 
   return (
     <View style={styles.container}>
       <ImageBackground
-        style={{ flex: 1 }}
+        style={{flex: 1}}
         source={require('../assets/background.png')}>
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{flex: 1}}>
           <View style={styles.logoContainer}>
             <Image source={require('../assets/signUpLogo.png')} />
           </View>
           <Text
-            style={{ color: 'white', fontWeight: 'bold', alignSelf: 'center' }}>
+            style={{color: 'white', fontWeight: 'bold', alignSelf: 'center'}}>
             Freebie Notes
           </Text>
         </SafeAreaView>
@@ -47,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { Splash };
+export {Splash};

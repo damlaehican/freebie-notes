@@ -40,9 +40,9 @@ const Login = (props) => {
             capital="none"
             keyboard="email-address"
           />
-          <MyInput 
-            holder="Parola giriniz..." 
-            changeText={setMail} 
+          <MyInput
+            holder="Parola giriniz..."
+            changeText={setMail}
             secureText={true}
           />
         </View>
@@ -54,19 +54,15 @@ const Login = (props) => {
             veya
           </Text>
         </View>
-        <TouchableOpacity
-          style={styles.googleLoginContainer}
-          onPress={() => props.navigation.navigate('SignUp')}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Image
-              style={styles.googleIcon}
-              source={require('../assets/google-icon.png')}
-            />
-            <View style={{marginLeft: 20}}>
-              <Text style={styles.googleText}>Google ile giriş yap</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+        <MyButton
+          buttonName={'Hemen Katıl'}
+          style={{
+            backgroundColor: '#fff',
+            color: '#FF5227',
+            borderColor: 'white',
+          }}
+          pressButton={() => props.navigation.navigate('SignUp')}
+        />
         <AppName />
       </SafeAreaView>
     </KeyboardAvoidingView>
