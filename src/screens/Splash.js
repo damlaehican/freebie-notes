@@ -7,9 +7,11 @@ import {
   ImageBackground,
   StyleSheet,
 } from 'react-native';
+import SplashScreen from 'react-native-splash-screen'
 
-const SplashScreen = () => {
+const Splash = () => {
   SplashScreen.hide();
+  
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -40,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {SplashScreen};
+export {Splash};

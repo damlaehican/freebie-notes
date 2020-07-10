@@ -1,3 +1,3 @@
 export * from './Login';
 export * from './SignUp';
-export * from './SplashScreen';
+export * from './Splash';

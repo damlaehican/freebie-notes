@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {View, Text} from 'react-native';
-import {Login, SignUp, SplashScreen} from '../screens';
+import {Login, SignUp, Splash} from '../screens';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
