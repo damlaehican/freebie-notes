@@ -8,10 +8,13 @@ import {
   StyleSheet,
   Keyboard,
 } from 'react-native';
-
+import PassMeter from "react-native-passmeter";
 import {MyInput, MyButton, AppName} from '../components';
 
 const SignUp = () => {
+  const MAX_LEN = 9,
+  MIN_LEN = 6,
+  PASS_LABELS = ["Çok Kısa", "Normal", "Güçlü"];
   const [usermail, setUserMail] = useState('');
   const [userpass, setUserPass] = useState('');
 
@@ -44,6 +47,13 @@ const SignUp = () => {
               capital="none"
               keyboard="default"
               secureText={true}
+            />
+            <PassMeter
+              showLabels
+              password={userpass}
+              maxLength={MAX_LEN}
+              minLength={MIN_LEN}
+              labels={PASS_LABELS}
             />
           </View>
           <View style={{marginVertical: 10}}>
