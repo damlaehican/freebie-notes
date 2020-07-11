@@ -12,7 +12,9 @@ import SplashScreen from 'react-native-splash-screen';
 const Splash = (props) => {
   SplashScreen.hide();
   useEffect(() => {
-    props.navigation.navigate('Login'); //
+    setTimeout(() => {
+      props.navigation.navigate('Login'); //
+    }, 1500);
   }, []);
 
   return (
