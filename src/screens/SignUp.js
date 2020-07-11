@@ -17,7 +17,9 @@ const SignUp = () => {
   const setMail = (text) => setUserMail(text);
   const setPass = (text) => setUserPass(text);
 
-  const signUp = (props) => {};
+  const signUp = (props) => {
+    Keyboard.dismiss();
+  };
 
   return (
     <View style={styles.container}>

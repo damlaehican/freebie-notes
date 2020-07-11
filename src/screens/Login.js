@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   StyleSheet,
   Dimensions,
+  Keyboard,
 } from 'react-native';
 import {MyButton, MyInput, AppName} from '../components';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -24,6 +25,7 @@ const Login = (props) => {
   let useruid = 'abc'; // firebaseden gelecek, firebase auth().currentUser.uid
 
   const login = async () => {
+    Keyboard.dismiss();
     AsyncStorage.setItem('@USER_ID', userid);
   };
 
