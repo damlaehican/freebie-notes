@@ -15,9 +15,11 @@ const SignUp = () => {
   const MAX_LEN = 9,
   MIN_LEN = 6,
   PASS_LABELS = ["Çok Kısa", "Normal", "Güçlü"];
+  const [userName, setUserName] = useState('');
   const [usermail, setUserMail] = useState('');
   const [userpass, setUserPass] = useState('');
 
+  const setName = (text) => setUserName(text);
   const setMail = (text) => setUserMail(text);
   const setPass = (text) => setUserPass(text);
 
@@ -35,6 +37,11 @@ const SignUp = () => {
             <Image source={require('../assets/signUpLogo.png')} />
           </View>
           <View style={{marginVertical: 45}}>
+            <MyInput
+              holder="Adınızı giriniz..."
+              changeText={setName}
+              keyboard="default"
+            />
             <MyInput
               holder="E-mail giriniz..."
               changeText={setMail}
