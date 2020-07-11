@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {Login, SignUp, Splash} from '../screens';
+import {Login, SignUp, Splash, MainScreen} from '../screens';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -16,6 +16,7 @@ const MainNavigator = () => {
           options={{gestureEnabled: false}}
         />
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="MainScreen" component={MainScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

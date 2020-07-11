@@ -8,9 +8,11 @@ import {
   KeyboardAvoidingView,
   StyleSheet,
   Dimensions,
+  Alert,
 } from 'react-native';
 import {MyButton, MyInput, AppName} from '../components';
 import AsyncStorage from '@react-native-community/async-storage';
+import auth from '@react-native-firebase/auth';
 
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
@@ -21,10 +23,14 @@ const Login = (props) => {
   const setMail = (text) => setUserMail(text);
   const setPass = (text) => setUserPass(text);
 
-  let useruid = 'abc'; // firebaseden gelecek, firebase auth().currentUser.uid
-
   const login = async () => {
-    AsyncStorage.setItem('@USER_ID', userid);
+    try {
+      await auth().signInWithEmailAndPassword(usermail, userpass);
+      props.navigation.navigate('MainScreen');
+      AsyncStorage.setItem('@USER_ID', auth().currentUser.uid);
+    } catch (error) {
+      Alert.alert('Freebie Notes');
+    }
   };
 
   return (
@@ -42,7 +48,7 @@ const Login = (props) => {
           />
           <MyInput
             holder="Parola giriniz..."
-            changeText={setMail}
+            changeText={setPass}
             secureText={true}
           />
         </View>

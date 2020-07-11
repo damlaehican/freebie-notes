@@ -6,18 +6,38 @@ import {
   Image,
   ImageBackground,
   StyleSheet,
+  Alert,
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
 
 import {MyInput, MyButton, AppName} from '../components';
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [usermail, setUserMail] = useState('');
   const [userpass, setUserPass] = useState('');
+  const [userpassRep, setPasswordRep] = useState('');
 
   const setMail = (text) => setUserMail(text);
   const setPass = (text) => setUserPass(text);
 
-  const signUp = (props) => {};
+  const signUp = async () => {
+    await auth()
+      .createUserWithEmailAndPassword(usermail, userpass)
+      .then(() => {
+        props.navigation.navigate('MainScreen');
+      })
+      .catch((error) => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
 
   return (
     <View style={styles.container}>

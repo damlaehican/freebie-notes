@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "33866530069",
+    "firebase_url": "https://freebie-notes.firebaseio.com",
+    "project_id": "freebie-notes",
+    "storage_bucket": "freebie-notes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33866530069:android:ce9b64f244107ed8cc7d1c",
+        "android_client_info": {
+          "package_name": "com.freebienotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33866530069-vj39pgj98goii80nid964r6g4l3rrk3b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo4dKv__F6tUkGg4vyMDJmewe23HDE2Ss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33866530069-vj39pgj98goii80nid964r6g4l3rrk3b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
