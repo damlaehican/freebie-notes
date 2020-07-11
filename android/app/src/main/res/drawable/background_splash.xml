@@ -5,8 +5,8 @@
         android:drawable="@color/background" />
 
     <item
-        android:drawable="@drawable/splash_icon"
-        android:gravity="fill"
+        android:drawable="@drawable/whiteicon"
+        android:gravity="center"
     />
 
 </layer-list>
