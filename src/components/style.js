@@ -25,11 +25,11 @@ const styles = {
         fontWeight: 'bold',
       },
     }),
-    input: StyleSheet.create({    
+    input: StyleSheet.create({
       container: {
-        flexDirection:"row",
-        alignItems:"center",
-        justifyContent:"space-between",
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         alignSelf: 'center',
         width: Width / 1.12,
         height: Height / 17,
@@ -40,11 +40,12 @@ const styles = {
         shadowOpacity: 0.1,
         shadowRadius: 5,
         shadowColor: '#000000',
-        shadowOffset: { height: 0, width: 0 },
+        shadowOffset: {height: 0, width: 0},
         paddingHorizontal: 30,
         margin: 15,
+        paddingLeft: 1,
       },
-    }),  
+    }),
     appName: StyleSheet.create({
       container: {
         flex: 1,
@@ -56,9 +57,9 @@ const styles = {
         fontWeight: 'bold',
         fontSize: 16,
         color: '#FF5227',
-      }
+      },
     }),
-  }
-};      
+  },
+};
 
 export default styles;
