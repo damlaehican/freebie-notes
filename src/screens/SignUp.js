@@ -6,6 +6,7 @@ import {
   Image,
   ImageBackground,
   StyleSheet,
+  Keyboard,
 } from 'react-native';
 
 import {MyInput, MyButton, AppName} from '../components';
