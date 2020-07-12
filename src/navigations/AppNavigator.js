@@ -16,7 +16,11 @@ const MainNavigator = () => {
           options={{gestureEnabled: false}}
         />
         <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="MainScreen" component={MainScreen} />
+        <Stack.Screen 
+          name="MainScreen" 
+          component={MainScreen}
+          options={{gestureEnabled: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

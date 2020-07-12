@@ -9,19 +9,27 @@ import {
   Alert,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import PassMeter from "react-native-passmeter";
 
 import {MyInput, MyButton, AppName} from '../components';
 
 const SignUp = (props) => {
+  const MAX_LEN = 9,
+  MIN_LEN = 6,
+  PASS_LABELS = ["Çok Kısa", "Normal", "Güçlü"];
+  const [userName, setUserName] = useState('');
   const [usermail, setUserMail] = useState('');
   const [userpass, setUserPass] = useState('');
   const [userpassRep, setPasswordRep] = useState('');
 
+  const setName = (text) => setUserName(text);
   const setMail = (text) => setUserMail(text);
   const setPass = (text) => setUserPass(text);
+  const setPassRep = text => setPasswordRep(text);
 
   const signUp = async () => {
-    await auth()
+    if (userpass == userpassRep) {
+      await auth()
       .createUserWithEmailAndPassword(usermail, userpass)
       .then(() => {
         props.navigation.navigate('MainScreen');
@@ -37,6 +45,10 @@ const SignUp = (props) => {
 
         console.error(error);
       });
+    }
+    else {
+      Alert.alert('Hata', 'Şifreler uyuşmuyor !')
+    }
   };
 
   return (
@@ -50,6 +62,11 @@ const SignUp = (props) => {
           </View>
           <View style={{marginVertical: 45}}>
             <MyInput
+              holder="Adınızı giriniz..."
+              changeText={setName}
+              keyboard="default"
+            />
+            <MyInput
               holder="E-mail giriniz..."
               changeText={setMail}
               capital="none"
@@ -61,6 +78,20 @@ const SignUp = (props) => {
               capital="none"
               keyboard="default"
               secureText={true}
+            />
+            <MyInput
+              holder="Parola tekrarı giriniz..."
+              changeText={setPassRep}
+              capital="none"
+              keyboard="default"
+              secureText={true}
+            />
+            <PassMeter
+              showLabels
+              password={userpass}
+              maxLength={MAX_LEN}
+              minLength={MIN_LEN}
+              labels={PASS_LABELS}
             />
           </View>
           <View style={{marginVertical: 10}}>

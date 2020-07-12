@@ -1,12 +1,13 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {SafeAreaView, Text, Button} from 'react-native';
 
-const MainScreen = () => {
+const MainScreen = props => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Burası not sayfası</Text>
-    </View>
+      <Button title="Cıkıs" onPress={() => props.navigation.navigate('Login')}/>
+    </SafeAreaView>
   );
 };
 
-export default MainScreen;
+export {MainScreen};
