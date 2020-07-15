@@ -14,7 +14,7 @@ const MyInput = (props) => {
   return (
     <View style={styles.components.input.container}>
       <TextInput
-        style={{flex: 1, backgroundColor: 'white', padding: 12}}
+        style={[{flex: 1, backgroundColor: 'white', padding: 12}, {...props.style}]}
         placeholder={props.holder}
         placeholderTextColor="grey"
         onChangeText={props.changeText}
