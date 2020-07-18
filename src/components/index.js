@@ -1,3 +1,3 @@
 export * from './MyButton';
-export * from './MyInput';
+export {default as MyInput} from './MyInput';
 export * from './AppName';

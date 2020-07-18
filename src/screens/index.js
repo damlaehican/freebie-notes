@@ -3,4 +3,4 @@ export * from './ForgotPass';
 export * from './SignUp';
 export * from './Splash';
 export * from './MainScreen';
-export * from './Notes';
+export {default as AddNotePage} from './AddNotePage';

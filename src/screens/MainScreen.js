@@ -73,7 +73,9 @@ const MainScreen = (props) => {
         </Text>
       </View>
       <View style={{paddingTop: 10}}>
-        <TouchableOpacity style={styles.vectorImage}>
+        <TouchableOpacity
+          style={styles.vectorImage}
+          onPress={() => props.navigation.navigate('AddNotePage')}>
           <Image
             source={require('../assets/circle.png')}
             style={styles.vector}

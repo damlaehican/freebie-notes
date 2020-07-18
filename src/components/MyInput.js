@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {View, TextInput, TouchableOpacity} from 'react-native';
+import {View, TextInput, TouchableOpacity, Text} from 'react-native';
 import styles from './style';
 
-import {Eye, EyeOff} from '../components/SVGR-Components';
+import {Eye, EyeOff, Menu} from '../components/SVGR-Components';
 
 const MyInput = (props) => {
   const [isSecure, setIsSecure] = useState(props.secureText);
@@ -14,13 +14,17 @@ const MyInput = (props) => {
   return (
     <View style={styles.components.input.container}>
       <TextInput
-        style={[{flex: 1, backgroundColor: 'white', padding: 12}, {...props.style}]}
+        style={[
+          {flex: 1, backgroundColor: 'white', padding: 12},
+          {...props.style},
+        ]}
         placeholder={props.holder}
         placeholderTextColor="grey"
         onChangeText={props.changeText}
         secureTextEntry={isSecure}
         autoCapitalize={props.capital}
         keyboardType={props.keyboard}
+        {...props.menu}
       />
       {isSecure !== undefined ? (
         <TouchableOpacity onPress={secureTextHandler}>
@@ -31,4 +35,4 @@ const MyInput = (props) => {
   );
 };
 
-export {MyInput};
+export default MyInput;

@@ -4,4 +4,3 @@ import {Login, SignUp, Splash} from './src/screens';
 import {name as appName} from './app.json';
 
 AppRegistry.registerComponent(appName, () => AppNavigator);
-

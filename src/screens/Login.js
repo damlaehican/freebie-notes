@@ -29,7 +29,7 @@ const Login = (props) => {
       props.navigation.navigate('MainScreen');
       AsyncStorage.setItem('@USER_ID', auth().currentUser.uid);
     } catch (error) {
-      Alert.alert('Freebie Notes');
+      Alert.alert('MyApp', 'Bir hata oluştu.');
     }
   };
 
@@ -57,38 +57,37 @@ const Login = (props) => {
         </View>
         <TouchableOpacity
           style={{alignItems: 'center', marginVertical: 15}}
-          onPress={() => props.navigation.navigate('ForgotPass')}
-        >
+          onPress={() => props.navigation.navigate('ForgotPass')}>
           <Text style={{fontWeight: 'bold', fontSize: 17, color: '#FF5227'}}>
             Şifremi Unuttum ?
           </Text>
         </TouchableOpacity>
         <View style={{alignItems: 'center', marginVertical: 30}}>
           <Text
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{
+              fontSize: 12,
+              color: 'grey',
+              marginTop: 15,
+              fontWeight: 'bold',
+            }}>
+            Henüz hesabınız yok mu?
+          </Text>
+          <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
+            <Text
               // eslint-disable-next-line react-native/no-inline-styles
               style={{
-                fontSize: 12,
-                color: 'grey',
-                marginTop: 15,
+                width: 100,
+                height: 70,
+                color: '#FF5227',
+                textAlign: 'center',
+                padding: 5,
+                fontSize: 22,
                 fontWeight: 'bold',
               }}>
-              Henüz hesabınız yok mu?
+              Kaydol
             </Text>
-            <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
-              <Text
-                // eslint-disable-next-line react-native/no-inline-styles
-                style={{
-                  width: 100,
-                  height: 70,
-                  color: '#FF5227',
-                  textAlign: 'center',
-                  padding: 5,
-                  fontSize: 22,
-                  fontWeight: 'bold',
-                }}>
-                Kaydol
-              </Text>
-            </TouchableOpacity>
+          </TouchableOpacity>
         </View>
         <AppName />
       </SafeAreaView>
