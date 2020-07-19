@@ -1,115 +1,104 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   SafeAreaView,
+  Alert,
   Image,
   TextInput,
   Text,
   Dimensions,
   ImageBackground,
   TouchableOpacity,
+  FlatList,
+  StatusBar,
 } from 'react-native';
-import MyInput from '../components/MyInput';
+import {MyInput, NoteSearchBar, NoteCard} from '../components';
 import {
   Album,
-  Add,
+  Plus,
   Microphone,
   Light,
   Menu,
 } from '../components/SVGR-Components/';
+import PhotoNote from './PhotoNote';
+
+const dummy = [
+  {
+    time: '15.07.2020',
+    title: 'Alışveriş',
+    icerik: 'Zeytin, Şarap, Peynir',
+  },
+  {
+    time: 'Bugün',
+    title: 'Notlarım',
+    icerik: 'React Native Çalış,',
+  },
+  {
+    time: 'Bugün',
+    title: 'Notlarım',
+    icerik: 'React Native Çalış,',
+  },
+  {
+    time: 'Bugün',
+    title: 'Notlarım',
+    icerik: 'React Native Çalış,',
+  },
+  {
+    time: 'Bugün',
+    title: 'Notlarım',
+    icerik: 'React Native Çalış,',
+  },
+  {
+    time: 'Bugün',
+    title: 'Notlarım',
+    icerik: 'React Native Çalış,',
+  },
+];
 
 const AddNotePage = (props) => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setData(dummy);
+    }, 1000);
+  }, []);
+  const renderItem = ({item}) => {
+    return (
+      <View style={{marginRight: 10, marginLeft: 10}}>
+        <NoteCard title={item.title} icerik={item.icerik} date={item.time} />
+      </View>
+    );
+  };
+
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View>
-        <MyInput holder="Not defterlerinde ara" activeMenu={true} />
-      </View>
-      <View
+    <View style={{flex: 1}}>
+      <StatusBar barStyle="light-content" />
+      <NoteSearchBar />
+      <FlatList data={data} numColumns={2} renderItem={renderItem} />
+      <TouchableOpacity
         style={{
-          flex: 1,
-          justifyContent: 'flex-end',
-          top: 34,
+          borderRadius: 100,
+          marginRight: 10,
+          position: 'absolute',
+          bottom: 20,
+          right: 20,
+          backgroundColor: '#ff5227',
+          width: 60,
+          height: 60,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+
+          elevation: 5,
         }}>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Light width={200} height={200} fill="#FF5227" />
-          <Text style={{fontSize: 25, fontWeight: 'bold', color: '#FF5227'}}>
-            Eklediğiniz notlar burada görünür
-          </Text>
-        </View>
-
-        <View
-          style={{
-            height: Dimensions.get('window').height / 12,
-            backgroundColor: 'white',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 6,
-            },
-            shadowOpacity: 0.39,
-            shadowRadius: 8.3,
-
-            elevation: 13,
-          }}>
-          <View style={{paddingLeft: 10, paddingTop: 20, flexDirection: 'row'}}>
-            <TouchableOpacity
-              style={{
-                width: 30,
-                height: 30,
-                borderRadius: 100,
-              }}>
-              <Album width={35} height={35} fill="gray" />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: 30,
-                height: 30,
-                borderRadius: 100,
-              }}>
-              <Microphone width={35} height={35} fill="gray" paddingLeft={70} />
-            </TouchableOpacity>
-          </View>
-
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-              bottom: 60,
-              paddingRight: 20,
-              margin: 10,
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 8,
-              },
-              shadowOpacity: 0.44,
-              shadowRadius: 10.32,
-
-              elevation: 16,
-            }}>
-            <TouchableOpacity
-              style={{
-                borderRadius: 100,
-                borderWidth: 0.2,
-                backgroundColor: '#FF5227',
-                width: 60,
-                height: 60,
-                alignItems: 'center',
-              }}>
-              <View style={{}}>
-                <Add width={60} height={60} fill="white" />
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </SafeAreaView>
+        <Plus width={40} height={40} fill="white" margin={10} />
+      </TouchableOpacity>
+    </View>
   );
 };
 export default AddNotePage;
