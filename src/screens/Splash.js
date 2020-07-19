@@ -7,10 +7,8 @@ import {
   ImageBackground,
   StyleSheet,
 } from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
 
 const Splash = (props) => {
-  SplashScreen.hide();
   useEffect(() => {
     props.navigation.navigate('Login');
     // setTimeout(() => {
