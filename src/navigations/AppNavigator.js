@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
   return (
-    <Tab.Navigator initialRouteName="Notes">
+    <Tab.Navigator initialRouteName="Login">
       <Tab.Screen name="Photo" component={PhotoNote} />
       <Tab.Screen name="Notes" component={AddNotePage} />
       <Tab.Screen name="Voice" component={VoiceNote} />
