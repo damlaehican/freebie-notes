@@ -30,7 +30,7 @@ const Login = (props) => {
         'damlaehican@gmail.com',
         'ffgghh0112',
       );
-      props.navigation.navigate('Tabs');
+      props.navigation.navigate('Menu');
       AsyncStorage.setItem('@USER_ID', auth().currentUser.uid);
     } catch (error) {
       Alert.alert('MyApp', 'Bir hata oluştu.');

@@ -8,19 +8,31 @@ import {
   PhotoNote,
   VoiceNote,
   AddNote,
+  Favourites
 } from '../screens';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import {Microphone, Menu, Note} from '../components/SVGR-Components';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const icons = {
   Photo: <Menu fill="gray" width={25} height={25} />,
   Notes: <Note fill="black" width={25} height={25} />,
   Voice: <Microphone fill="gray" width={24} height={25} />,
 };
+
+function Menus({ navigation }) {
+  return (
+      <Drawer.Navigator initialRouteName="Tabs">
+        <Drawer.Screen name="Favourites" component={Favourites} />
+        <Drawer.Screen name="Tabs" component={Tabs} />
+      </Drawer.Navigator>
+  );
+}
 
 const Tabs = () => {
   return (
@@ -55,6 +67,7 @@ const MainNavigator = () => {
         />
         <Stack.Screen name="ForgotPass" component={ForgotPass} />
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Menu" component={Menus} />
         <Stack.Screen
           name="AddNote"
           component={AddNote}

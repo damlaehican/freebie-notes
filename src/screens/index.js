@@ -5,3 +5,4 @@ export {default as NotesList} from './NotesList';
 export {default as PhotoNote} from './PhotoNote';
 export {default as VoiceNote} from './VoiceNote';
 export {default as AddNote} from './AddNote';
+export {default as Favourites} from './Favourites'
