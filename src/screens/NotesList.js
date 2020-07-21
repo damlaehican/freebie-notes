@@ -7,8 +7,8 @@ import {
   StatusBar,
 } from 'react-native';
 import {NoteSearchBar, NoteCard} from '../components';
-import {Plus} from '../components/SVGR-Components/';
-import PhotoNote from './PhotoNote';
+import {Plus} from '../components/SVGR-Components';
+import {ActivityIndicator} from 'react-native-paper';
 
 const dummy = [
   {
@@ -47,12 +47,14 @@ const dummy = [
   },
 ];
 
-const AddNotePage = (props) => {
+const NotesList = (props) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setData(dummy);
+      setLoading(true);
     }, 1000);
   }, []);
   const renderItem = ({item}) => {
@@ -72,8 +74,22 @@ const AddNotePage = (props) => {
     <View style={{flex: 1}}>
       <StatusBar barStyle="light-content" />
       <NoteSearchBar />
-      <FlatList data={data} numColumns={2} renderItem={renderItem} />
-      <TouchableOpacity style={styles.addButton}>
+      {!loading ? (
+        <View style={{alignItems: 'center'}}>
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <FlatList
+          data={data}
+          numColumns={2}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      )}
+
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => props.navigation.navigate('AddNote')}>
         <Plus width={40} height={40} fill="white" margin={10} />
       </TouchableOpacity>
     </View>
@@ -101,4 +117,4 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 });
-export default AddNotePage;
+export default NotesList;

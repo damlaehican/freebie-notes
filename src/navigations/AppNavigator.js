@@ -1,29 +1,40 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {View, Text} from 'react-native';
 import {
   Login,
   SignUp,
-  Splash,
-  MainScreen,
   ForgotPass,
-  AddNotePage,
+  NotesList,
   PhotoNote,
   VoiceNote,
+  AddNote,
 } from '../screens';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Album} from '../components/SVGR-Components';
-
+import {Microphone, Menu, Note} from '../components/SVGR-Components';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const icons = {
+  Photo: <Menu fill="gray" width={25} height={25} />,
+  Notes: <Note fill="black" width={25} height={25} />,
+  Voice: <Microphone fill="gray" width={24} height={25} />,
+};
+
 const Tabs = () => {
   return (
-    <Tab.Navigator initialRouteName="Login">
+    <Tab.Navigator
+      initialRouteName="Notes"
+      screenOptions={({route}) => ({
+        tabBarIcon: () => icons[route.name],
+      })}
+      tabBarOptions={{
+        activeTintColor: '#FF5227',
+        inactiveTintColor: 'gray',
+      }}>
       <Tab.Screen name="Photo" component={PhotoNote} />
-      <Tab.Screen name="Notes" component={AddNotePage} />
+      <Tab.Screen name="Notes" component={NotesList} />
       <Tab.Screen name="Voice" component={VoiceNote} />
     </Tab.Navigator>
   );
@@ -37,13 +48,17 @@ const MainNavigator = () => {
           component={Login}
           options={{gestureEnabled: false}}
         />
-        <Stack.Screen name="Tabs" component={Tabs} />
+        <Stack.Screen
+          name="Tabs"
+          component={Tabs}
+          options={{gestureEnabled: false}}
+        />
         <Stack.Screen name="ForgotPass" component={ForgotPass} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen
-          name="MainScreen"
-          component={MainScreen}
-          options={{gestureEnabled: false}}
+          name="AddNote"
+          component={AddNote}
+          options={{gestureDirection: 'vertical-inverted'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -9,14 +9,14 @@ import {
   Alert,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import PassMeter from "react-native-passmeter";
+import PassMeter from 'react-native-passmeter';
 
 import {MyInput, MyButton, AppName} from '../components';
 
 const SignUp = (props) => {
   const MAX_LEN = 9,
-  MIN_LEN = 6,
-  PASS_LABELS = ["Çok Kısa", "Normal", "Güçlü"];
+    MIN_LEN = 6,
+    PASS_LABELS = ['Çok Kısa', 'Normal', 'Güçlü'];
   const [userName, setUserName] = useState('');
   const [usermail, setUserMail] = useState('');
   const [userpass, setUserPass] = useState('');
@@ -25,29 +25,28 @@ const SignUp = (props) => {
   const setName = (text) => setUserName(text);
   const setMail = (text) => setUserMail(text);
   const setPass = (text) => setUserPass(text);
-  const setPassRep = text => setPasswordRep(text);
+  const setPassRep = (text) => setPasswordRep(text);
 
   const signUp = async () => {
     if (userpass == userpassRep) {
       await auth()
-      .createUserWithEmailAndPassword(usermail, userpass)
-      .then(() => {
-        props.navigation.navigate('MainScreen');
-      })
-      .catch((error) => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
+        .createUserWithEmailAndPassword(usermail, userpass)
+        .then(() => {
+          props.navigation.navigate('Tabs');
+        })
+        .catch((error) => {
+          if (error.code === 'auth/email-already-in-use') {
+            console.log('That email address is already in use!');
+          }
 
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
+          if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+          }
 
-        console.error(error);
-      });
-    }
-    else {
-      Alert.alert('Hata', 'Şifreler uyuşmuyor !')
+          console.error(error);
+        });
+    } else {
+      Alert.alert('Hata', 'Şifreler uyuşmuyor !');
     }
   };
 

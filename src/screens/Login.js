@@ -24,9 +24,13 @@ const Login = (props) => {
   const setPass = (text) => setUserPass(text);
 
   const login = async () => {
+    //Burada girişe basıldığı gibi girilsin diye şimdilik
     try {
-      await auth().signInWithEmailAndPassword(usermail, userpass);
-      props.navigation.navigate('MainScreen');
+      await auth().signInWithEmailAndPassword(
+        'damlaehican@gmail.com',
+        'ffgghh0112',
+      );
+      props.navigation.navigate('Tabs');
       AsyncStorage.setItem('@USER_ID', auth().currentUser.uid);
     } catch (error) {
       Alert.alert('MyApp', 'Bir hata oluştu.');

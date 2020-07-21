@@ -1,19 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {View, Text, Dimensions, StyleSheet} from 'react-native';
 import {Clock} from '../components/SVGR-Components';
 
 const NoteCard = (props) => {
   return (
-    <View style={{flexDirection: 'row'}}>
-      <View style={styles.container}>
-        <Text style={{fontSize: 12, color: '#FF5227'}}>{props.date}</Text>
-        <Text style={{fontWeight: 'bold', fontSize: 16}}>{props.title}</Text>
-        <Text style={{fontSize: 14}} numberOfLines={5}>
-          {props.icerik}
-        </Text>
-        <View style={styles.clockView}>
-          <Clock fill="#FF5227" width={18} height={18} />
-        </View>
+    <View style={styles.container}>
+      <Text style={{fontSize: 12, color: '#FF5227'}}>{props.date}</Text>
+      <Text style={{fontWeight: 'bold', fontSize: 16}}>{props.title}</Text>
+      <Text style={{fontSize: 14}} numberOfLines={5}>
+        {props.icerik}
+      </Text>
+      <View style={styles.clockView}>
+        <Clock fill="#FF5227" width={18} height={18} />
       </View>
     </View>
   );
@@ -33,7 +31,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
     marginLeft: 5,
     paddingLeft: 10,

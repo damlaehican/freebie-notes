@@ -6,3 +6,4 @@ export {default as Microphone} from './Microphone';
 export {default as Light} from './Light';
 export {default as Menu} from './Menu';
 export {default as Clock} from './Clock';
+export {default as Note} from './Note';
