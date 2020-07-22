@@ -16,7 +16,7 @@ import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {NavigationContainer,DefaultTheme,DarkTheme} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+//import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import {Microphone, Menu, Note} from '../components/SVGR-Components';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,7 +29,7 @@ const icons = {
 };
 
 function Menus({ navigation }) {
-  const scheme = useColorScheme();
+  //const scheme = useColorScheme();
   return (
     <PaperProvider theme={PaperDarkTheme}>
         <Drawer.Navigator 
