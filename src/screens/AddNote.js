@@ -1,12 +1,33 @@
-import React from 'react';
-import {View, TextInput, StatusBar} from 'react-native';
+import React, { useContext } from 'react';
+import { SafeAreaView, TextInput, StatusBar, StyleSheet } from 'react-native';
+import Context from '../context/store';
 
 const AddNote = (props) => {
+
+  const { state, dispatch } = useContext(Context);
+  const themeColor = state.themeColors[state.currentTheme];
+  const styles = customStyles(themeColor);
+
   return (
-    <View style={{flex: 1, margin: 100}}>
+    <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
-      <TextInput placeholder="bir not giriniz..." />
-    </View>
+      <TextInput
+        placeholder="bir not giriniz..."
+        placeholderTextColor={themeColor.textColor}
+        style={styles.textInput} />
+    </SafeAreaView>
   );
 };
 export default AddNote;
+
+const customStyles = (themeColor) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: themeColor.backgroundColor,
+    },
+    textInput: {
+      margin:100,
+      color: themeColor.textColor,
+    }
+  });

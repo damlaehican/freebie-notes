@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, { useState, useContext} from 'react';
 import {
   Text,
   View,
@@ -10,12 +10,18 @@ import {
   Image,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import {Gravatar, GravatarApi} from 'react-native-gravatar';
+import { Gravatar, GravatarApi } from 'react-native-gravatar';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-community/async-storage';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import Context from "../context/store";
 
 const Profile = (props) => {
+
+  const { state, dispatch } = useContext(Context);
+  const themeColor = state.themeColors[state.currentTheme];
+  const styles = customStyles(themeColor);
+
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
@@ -37,7 +43,7 @@ const Profile = (props) => {
         <Gravatar
           options={{
             email: 'alpkrts3@gmail.com', //m.enver.akkoc@gmail.com
-            parameters: {size: '200', d: 'mm'},
+            parameters: { size: '200', d: 'mm' },
             secure: true,
           }}
           style={styles.roundedProfileImage}
@@ -49,11 +55,11 @@ const Profile = (props) => {
           animationType="fade"
           transparent={true}
           onBackdropPress={() => setModalVisible(false)}>
-          <View style={{alignSelf: 'center'}}>
+          <View style={{ alignSelf: 'center' }}>
             <Gravatar
               options={{
                 email: 'alpkrts3@gmail.com', //m.enver.akkoc@gmail.com
-                parameters: {size: '200', d: 'mm'},
+                parameters: { size: '200', d: 'mm' },
                 secure: true,
               }}
               style={[styles.roundedProfileImage, styles.modalProfileImage]}
@@ -90,67 +96,68 @@ const Profile = (props) => {
   );
 };
 
-export {Profile};
+export { Profile };
 
-const styles = StyleSheet.create({
-  modalContainer: {
-    borderRadius: 10,
-    backgroundColor: 'white',
-    height: Dimensions.get('window').height / 6.2,
-    borderWidth: 3,
-    borderColor: 'grey',
-  },
-  roundedProfileImage: {
-    width: 40,
-    height: 40,
-    borderWidth: 2,
-    borderColor: 'white',
-    borderRadius: 25,
-  },
-  modalProfileImage: {
-    width: 110,
-    height: 110,
-    borderRadius: 55,
-  },
-  infoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 10,
-    alignSelf: 'center',
-    width: 250,
-    height: 30,
-    borderRadius: 10,
-    backgroundColor: 'white',
-  },
-  mailText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#FF5227',
-  },
-  IconCont: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  settingsImage: {
-    width: 35,
-    height: 35,
-    marginLeft: 12,
-  },
-  logoutImage: {
-    width: 35,
-    height: 35,
-    marginLeft: 9,
-  },
-  chooseContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginVertical: 11,
-  },
-  settingsText: {
-    marginVertical: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#FF5227',
-  },
-});
+const customStyles = (themeColor) =>
+  StyleSheet.create({
+    modalContainer: {
+      borderRadius: 10,
+      backgroundColor: themeColor.backgroundColor,
+      height: Dimensions.get('window').height / 6.2,
+      borderWidth: 3,
+      borderColor: 'grey',
+    },
+    roundedProfileImage: {
+      width: 40,
+      height: 40,
+      borderWidth: 2,
+      borderColor: 'white',
+      borderRadius: 25,
+    },
+    modalProfileImage: {
+      width: 110,
+      height: 110,
+      borderRadius: 55,
+    },
+    infoContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginVertical: 10,
+      alignSelf: 'center',
+      width: 250,
+      height: 30,
+      borderRadius: 10,
+      backgroundColor: themeColor.backgroundColor,
+    },
+    mailText: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: themeColor.mainColor,
+    },
+    IconCont: {
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    settingsImage: {
+      width: 35,
+      height: 35,
+      marginLeft: 12,
+    },
+    logoutImage: {
+      width: 35,
+      height: 35,
+      marginLeft: 9,
+    },
+    chooseContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+      marginVertical: 11,
+    },
+    settingsText: {
+      marginVertical: 10,
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: '#FF5227',
+    },
+  });

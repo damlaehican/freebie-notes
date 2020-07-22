@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Provider as PaperProvider,
   DarkTheme as PaperDarkTheme,
@@ -16,16 +16,13 @@ import {
   Theme,
   Settings,
 } from '../screens';
-import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-//import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
-import {Microphone, Menu, Note} from '../components/SVGR-Components';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Microphone, Menu, Note } from '../components/SVGR-Components';
+import Provider from '../context/Provider';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -36,20 +33,18 @@ const icons = {
   Voice: <Microphone fill="gray" width={24} height={25} />,
 };
 
-function Menus({navigation}) {
-  //const scheme = useColorScheme();
+function Menus({ navigation }) {
+
   return (
-    <PaperProvider theme={PaperDarkTheme}>
-      <Drawer.Navigator
-        initialRouteName="Tabs"
-        drawerContentOptions={{
-          activeTintColor: '#ffa726',
-        }}>
-        <Drawer.Screen name="Ayarlar" component={Favourites} />
-        <Drawer.Screen name="Tema" component={Theme} />
-        <Drawer.Screen name="Tabs" component={Tabs} />
-      </Drawer.Navigator>
-    </PaperProvider>
+    <Drawer.Navigator
+      initialRouteName="Tabs"
+      drawerContentOptions={{
+        activeTintColor: '#ffa726',
+    }}>
+      <Drawer.Screen name="Ayarlar" component={Favourites} />
+      <Drawer.Screen name="Tema" component={Theme} />
+      <Drawer.Screen name="Tabs" component={Tabs} />
+    </Drawer.Navigator>
   );
 }
 
@@ -57,7 +52,7 @@ const Tabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="Notes"
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         tabBarIcon: () => icons[route.name],
       })}
       tabBarOptions={{
@@ -72,29 +67,31 @@ const Tabs = () => {
 };
 const MainNavigator = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{gestureEnabled: false}}
-        />
-        <Stack.Screen
-          name="Tabs"
-          component={Tabs}
-          options={{gestureEnabled: false}}
-        />
-        <Stack.Screen name="ForgotPass" component={ForgotPass} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Menu" component={Menus} />
-        <Stack.Screen
-          name="AddNote"
-          component={AddNote}
-          options={{gestureDirection: 'vertical-inverted'}}
-        />
-        <Stack.Screen name="Settings" component={Settings} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ gestureEnabled: false }}
+          />
+          <Stack.Screen
+            name="Tabs"
+            component={Tabs}
+            options={{ gestureEnabled: false }}
+          />
+          <Stack.Screen name="ForgotPass" component={ForgotPass} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="Menu" component={Menus} />
+          <Stack.Screen
+            name="AddNote"
+            component={AddNote}
+            options={{ gestureDirection: 'vertical-inverted' }}
+          />
+          <Stack.Screen name="Settings" component={Settings} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 export default MainNavigator;

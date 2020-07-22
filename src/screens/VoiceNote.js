@@ -1,14 +1,31 @@
-import React from 'react';
-import {View, Text, StatusBar, SafeAreaView} from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, StatusBar, SafeAreaView , StyleSheet} from 'react-native';
+import Context from '../context/store';
 
 const VoiceNote = () => {
+
+  const { state, dispatch } = useContext(Context);
+  const themeColor = state.themeColors[state.currentTheme];
+  const styles = customStyles(themeColor)
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
 
-      <Text>Burası Sesli not</Text>
+      <Text style={styles.text}>Burası Sesli not</Text>
     </SafeAreaView>
   );
 };
 
 export default VoiceNote;
+
+const customStyles = (themeColor) => 
+ StyleSheet.create({
+  container: {
+    flex:1,
+    backgroundColor:themeColor.backgroundColor,
+  },
+  text : {
+    color:themeColor.textColor,
+  }
+ });
