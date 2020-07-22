@@ -44,19 +44,22 @@ const Profile = (props) => {
           animationType="fade"
           transparent={true}
           onBackdropPress={() => setModalVisible(false)}>
+          <View style={{alignSelf: 'center'}}>
+            <Gravatar
+              options={{
+                email: 'alpkrts3@gmail.com', //m.enver.akkoc@gmail.com
+                parameters: {size: '200', d: 'mm'},
+                secure: true,
+              }}
+              style={[styles.roundedProfileImage, styles.modalProfileImage]}
+            />
+          </View>
           <View style={styles.modalContainer}>
             <View style={styles.infoContainer}>
-              <Gravatar
-                options={{
-                  email: 'alpkrts3@gmail.com', //m.enver.akkoc@gmail.com
-                  parameters: {size: '200', d: 'mm'},
-                  secure: true,
-                }}
-                style={styles.roundedProfileImage}
-              />
+              <Text style={styles.mailText}>alpkrts3@gmail.com</Text>
             </View>
             <View style={styles.chooseContainer}>
-              <View style={{flexDirection: 'column', alignItems: 'center'}}>
+              <View style={styles.IconCont}>
                 <TouchableOpacity>
                   <Image
                     style={styles.settingsImage}
@@ -65,7 +68,7 @@ const Profile = (props) => {
                   <Text style={styles.settingsText}>Ayarlar</Text>
                 </TouchableOpacity>
               </View>
-              <View style={{flexDirection: 'column', alignItems: 'center'}}>
+              <View style={styles.IconCont}>
                 <TouchableOpacity onPress={signOut}>
                   <Image
                     style={styles.logoutImage}
@@ -89,39 +92,55 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'white',
     height: Dimensions.get('window').height / 6.2,
+    borderWidth: 3,
+    borderColor: 'grey',
   },
   roundedProfileImage: {
-    width: 43,
-    height: 43,
-    borderWidth: 3,
+    width: 40,
+    height: 40,
+    borderWidth: 2,
     borderColor: 'white',
     borderRadius: 25,
   },
+  modalProfileImage: {
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+  },
   infoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 10,
     alignSelf: 'center',
     width: 250,
     height: 30,
-    borderColor: 'grey',
-    borderWidth: 1,
     borderRadius: 10,
     backgroundColor: 'white',
+  },
+  mailText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#FF5227',
+  },
+  IconCont: {
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   settingsImage: {
     width: 35,
     height: 35,
-    marginLeft: 9,
+    marginLeft: 12,
   },
   logoutImage: {
     width: 35,
     height: 35,
-    marginLeft: 4,
+    marginLeft: 9,
   },
   chooseContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginVertical: 10,
+    marginVertical: 11,
   },
   settingsText: {
     marginVertical: 10,
