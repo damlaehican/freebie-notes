@@ -13,9 +13,10 @@ import Modal from 'react-native-modal';
 import {Gravatar, GravatarApi} from 'react-native-gravatar';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-community/async-storage';
+import {useNavigation} from '@react-navigation/native';
 
 const Profile = (props) => {
-  const navigate = props.navigation;
+  const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -23,14 +24,14 @@ const Profile = (props) => {
   const signOut = () => {
     auth().signOut();
     AsyncStorage.removeItem('@USER_ID');
-    navigate('Login');
+    navigation.navigate('Login');
   };
   return (
     <SafeAreaView>
       <TouchableOpacity onPress={toggleModal}>
         <Gravatar
           options={{
-            email: 'm.enver.akkoc@gmail.com', //alpkrts3@gmail.com
+            email: 'alpkrts3@gmail.com', //m.enver.akkoc@gmail.com
             parameters: {size: '200', d: 'mm'},
             secure: true,
           }}
@@ -55,7 +56,7 @@ const Profile = (props) => {
                 </TouchableOpacity>
               </View>
               <View style={{flexDirection: 'column', alignItems: 'center'}}>
-                <TouchableOpacity onPress={() => navigate('Login')}>
+                <TouchableOpacity onPress={signOut}>
                   <Image
                     style={styles.logoutImage}
                     source={require('../assets/logout.png')}
