@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Menu} from '../components/SVGR-Components';
 import {Profile} from '../screens';
+import {useNavigation} from '@react-navigation/native';
 
 const NotesSearchBar = (props) => {
   return (
@@ -25,11 +26,14 @@ const NotesSearchBar = (props) => {
   );
 };
 const Header1 = (props) => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.headerContainer}>
-      <View style={{marginLeft: 5}}>
+      <TouchableOpacity
+        style={{marginLeft: 5}}
+        onPress={() => navigation.openDrawer()}>
         <Menu width={30} height={30} fill="white" />
-      </View>
+      </TouchableOpacity>
 
       <TouchableOpacity style={{borderRadius: 100, marginRight: 10}}>
         <Profile />

@@ -1,6 +1,9 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {Provider as PaperProvider,DarkTheme as PaperDarkTheme} from 'react-native-paper'
+import {
+  Provider as PaperProvider,
+  DarkTheme as PaperDarkTheme,
+} from 'react-native-paper';
 import {
   Login,
   SignUp,
@@ -10,12 +13,16 @@ import {
   VoiceNote,
   AddNote,
   Favourites,
-  Theme
+  Theme,
 } from '../screens';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import {NavigationContainer,DefaultTheme,DarkTheme} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 //import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import {Microphone, Menu, Note} from '../components/SVGR-Components';
 const Stack = createStackNavigator();
@@ -28,19 +35,19 @@ const icons = {
   Voice: <Microphone fill="gray" width={24} height={25} />,
 };
 
-function Menus({ navigation }) {
+function Menus({navigation}) {
   //const scheme = useColorScheme();
   return (
     <PaperProvider theme={PaperDarkTheme}>
-        <Drawer.Navigator 
-          initialRouteName="Tabs"
-          drawerContentOptions={{
-            activeTintColor: '#ffa726'
-          }}>
-          <Drawer.Screen name="Ayarlar" component={Favourites} />
-          <Drawer.Screen name="Tema" component={Theme}/>
-          <Drawer.Screen name="Tabs" component={Tabs} />
-        </Drawer.Navigator>
+      <Drawer.Navigator
+        initialRouteName="Tabs"
+        drawerContentOptions={{
+          activeTintColor: '#ffa726',
+        }}>
+        <Drawer.Screen name="Ayarlar" component={Favourites} />
+        <Drawer.Screen name="Tema" component={Theme} />
+        <Drawer.Screen name="Tabs" component={Tabs} />
+      </Drawer.Navigator>
     </PaperProvider>
   );
 }
