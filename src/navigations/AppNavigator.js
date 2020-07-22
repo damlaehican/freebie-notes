@@ -14,6 +14,7 @@ import {
   AddNote,
   Favourites,
   Theme,
+  Settings,
 } from '../screens';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {
@@ -91,6 +92,7 @@ const MainNavigator = () => {
           component={AddNote}
           options={{gestureDirection: 'vertical-inverted'}}
         />
+        <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   );

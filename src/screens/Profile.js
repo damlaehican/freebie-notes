@@ -25,6 +25,11 @@ const Profile = (props) => {
     auth().signOut();
     AsyncStorage.removeItem('@USER_ID');
     navigation.navigate('Login');
+    setModalVisible(false);
+  };
+  const goSettings = () => {
+    setModalVisible(false);
+    navigation.navigate('Settings');
   };
   return (
     <SafeAreaView>
@@ -60,7 +65,7 @@ const Profile = (props) => {
             </View>
             <View style={styles.chooseContainer}>
               <View style={styles.IconCont}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={goSettings}>
                   <Image
                     style={styles.settingsImage}
                     source={require('../assets/settings.png')}

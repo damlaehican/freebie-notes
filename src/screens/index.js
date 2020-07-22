@@ -8,3 +8,4 @@ export {default as AddNote} from './AddNote';
 export {default as Favourites} from './Favourites';
 export {default as Theme} from './Theme';
 export * from './Profile';
+export * from './Settings';
