@@ -45,6 +45,16 @@ const Profile = (props) => {
           transparent={true}
           onBackdropPress={() => setModalVisible(false)}>
           <View style={styles.modalContainer}>
+            <View style={styles.infoContainer}>
+              <Gravatar
+                options={{
+                  email: 'alpkrts3@gmail.com', //m.enver.akkoc@gmail.com
+                  parameters: {size: '200', d: 'mm'},
+                  secure: true,
+                }}
+                style={styles.roundedProfileImage}
+              />
+            </View>
             <View style={styles.chooseContainer}>
               <View style={{flexDirection: 'column', alignItems: 'center'}}>
                 <TouchableOpacity>
@@ -87,24 +97,35 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderRadius: 25,
   },
+  infoContainer: {
+    justifyContent: 'center',
+    marginVertical: 10,
+    alignSelf: 'center',
+    width: 250,
+    height: 30,
+    borderColor: 'grey',
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: 'white',
+  },
   settingsImage: {
-    width: 45,
-    height: 45,
+    width: 35,
+    height: 35,
     marginLeft: 9,
   },
   logoutImage: {
-    width: 45,
-    height: 45,
+    width: 35,
+    height: 35,
     marginLeft: 4,
   },
   chooseContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginVertical: 40,
+    marginVertical: 10,
   },
   settingsText: {
     marginVertical: 10,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#FF5227',
   },

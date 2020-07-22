@@ -76,7 +76,7 @@ const NotesList = (props) => {
       <NoteSearchBar />
       {!loading ? (
         <View style={{alignItems: 'center'}}>
-          <ActivityIndicator />
+          <ActivityIndicator color="#ff5227" />
         </View>
       ) : (
         <FlatList
