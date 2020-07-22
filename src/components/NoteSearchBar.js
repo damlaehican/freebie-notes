@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Menu} from '../components/SVGR-Components';
+import {Profile} from '../screens';
 
 const NotesSearchBar = (props) => {
   return (
@@ -23,7 +24,7 @@ const NotesSearchBar = (props) => {
     </>
   );
 };
-const Header1 = () => {
+const Header1 = (props) => {
   return (
     <SafeAreaView style={styles.headerContainer}>
       <View style={{marginLeft: 5}}>
@@ -31,10 +32,7 @@ const Header1 = () => {
       </View>
 
       <TouchableOpacity style={{borderRadius: 100, marginRight: 10}}>
-        <Image
-          source={require('../assets/profileEx.jpeg')}
-          style={{width: 40, height: 40, borderRadius: 100}}
-        />
+        <Profile />
       </TouchableOpacity>
     </SafeAreaView>
   );
