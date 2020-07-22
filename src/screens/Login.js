@@ -26,24 +26,23 @@ const Login = (props) => {
   const login = async () => {
     //Burada girişe basıldığı gibi girilsin diye şimdilik
     try {
-      await auth().signInWithEmailAndPassword(
-        'damlaehican@gmail.com',
-        'ffgghh0112',
-      );
+      await auth().signInWithEmailAndPassword(usermail, userpass);
       props.navigation.navigate('Menu');
       AsyncStorage.setItem('@USER_ID', auth().currentUser.uid);
     } catch (error) {
-      Alert.alert('MyApp', 'Bir hata oluştu.');
+      Alert.alert('Freebie Notes', 'Bir hata oluştu, tekrar deneyin.', [
+        {text: 'Tamam'},
+      ]);
     }
   };
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <SafeAreaView style={styles.container}>
         <View style={styles.logoContainer}>
           <Image source={require('../assets/logo.png')} />
         </View>
-        <View style={{marginVertical: 45}}>
+        <View style={styles.inputCont}>
           <MyInput
             holder="E-mail giriniz..."
             changeText={setMail}
@@ -56,41 +55,18 @@ const Login = (props) => {
             secureText={true}
           />
         </View>
-        <View style={{marginVertical: 10}}>
+        <View style={styles.loginButtonCont}>
           <MyButton buttonName={'GİRİŞ'} pressButton={login} />
         </View>
         <TouchableOpacity
-          style={{alignItems: 'center', marginVertical: 15}}
+          style={styles.forgotPassCont}
           onPress={() => props.navigation.navigate('ForgotPass')}>
-          <Text style={{fontWeight: 'bold', fontSize: 17, color: '#FF5227'}}>
-            Şifremi Unuttum ?
-          </Text>
+          <Text style={styles.forgotPass}>Şifremi Unuttum ?</Text>
         </TouchableOpacity>
-        <View style={{alignItems: 'center', marginVertical: 30}}>
-          <Text
-            // eslint-disable-next-line react-native/no-inline-styles
-            style={{
-              fontSize: 12,
-              color: 'grey',
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}>
-            Henüz hesabınız yok mu?
-          </Text>
+        <View style={styles.accountYetCont}>
+          <Text style={styles.accountYet}>Henüz hesabınız yok mu?</Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
-            <Text
-              // eslint-disable-next-line react-native/no-inline-styles
-              style={{
-                width: 100,
-                height: 70,
-                color: '#FF5227',
-                textAlign: 'center',
-                padding: 5,
-                fontSize: 22,
-                fontWeight: 'bold',
-              }}>
-              Kaydol
-            </Text>
+            <Text style={styles.signUpText}>Kaydol</Text>
           </TouchableOpacity>
         </View>
         <AppName />
@@ -103,34 +79,41 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#EFEFEF',
   },
-  googleLoginContainer: {
-    width: Width / 1.2,
-    height: Height / 14.5,
-    backgroundColor: '#FFFFFF',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    borderRadius: 25,
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    shadowColor: '#000000',
-    shadowOffset: {height: 0, width: 0},
-    marginVertical: 10,
-  },
-  googleIcon: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 15,
-  },
+  inputCont: {marginVertical: 45},
+  loginButtonCont: {marginVertical: 10},
   logoContainer: {
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
     marginVertical: 40,
   },
-  googleText: {
-    color: '#BDAAAA',
+  forgotPassCont: {
+    alignItems: 'center',
+    marginVertical: 15,
+  },
+  forgotPass: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 17,
+    color: '#FF5227',
+  },
+  accountYetCont: {
+    alignItems: 'center',
+    marginVertical: 30,
+  },
+  accountYet: {
+    fontSize: 12,
+    color: 'grey',
+    marginTop: 15,
+    fontWeight: 'bold',
+  },
+  signUpText: {
+    width: 100,
+    height: 70,
+    color: '#FF5227',
+    textAlign: 'center',
+    padding: 5,
+    fontSize: 22,
+    fontWeight: 'bold',
   },
 });
 
