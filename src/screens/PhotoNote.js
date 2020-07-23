@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
-import Context from "../context/store";
+import { useTheme } from "@react-navigation/native";
 
 const PhotoNote = () => {
 
-  const { state, dispatch } = useContext(Context);
-  const themeColor = state.themeColors[state.currentTheme];
-  const styles = customStyles(themeColor)
+  const { colors } = useTheme();
+  const styles = customStyles(colors);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -17,13 +16,13 @@ const PhotoNote = () => {
 export default PhotoNote;
 
 
-const customStyles = (themeColor) =>
+const customStyles = (colors) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: themeColor.backgroundColor,
+      backgroundColor: colors.background,
     },
     text: {
-      color: themeColor.textColor,
+      color: colors.text,
     }
   });

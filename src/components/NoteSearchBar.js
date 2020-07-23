@@ -9,14 +9,12 @@ import {
 } from 'react-native';
 import { Menu } from '../components/SVGR-Components';
 import { Profile } from '../screens';
-import { useNavigation } from '@react-navigation/native';
-import Context from "../context/store";
+import { useNavigation, useTheme } from '@react-navigation/native';
+
 
 const NotesSearchBar = (props) => {
 
-  const { state, dispatch } = useContext(Context);
-  const themeColor = state.themeColors[state.currentTheme];
-  const styles = customStyles(themeColor)
+  const styles = customStyles(useTheme().colors);
 
   return (
     <>
@@ -24,7 +22,7 @@ const NotesSearchBar = (props) => {
       <View style={styles.container}>
         <TextInput
           placeholder="Notlar içerisinde ara"
-          placeholderTextColor={themeColor.textColor}
+          placeholderTextColor={useTheme().colors.text}
           onChangeText={props.onSearch}
           style={styles.textInput}
         />
@@ -34,10 +32,8 @@ const NotesSearchBar = (props) => {
 };
 const Header1 = (props) => {
   const navigation = useNavigation();
-
-  const { state, dispatch } = useContext(Context);
-  const themeColor = state.themeColors[state.currentTheme];
-  const styles = customStyles(themeColor)
+  const { colors } = useTheme();
+  const styles = customStyles(colors);
   return (
     <SafeAreaView style={styles.headerContainer}>
       <TouchableOpacity
@@ -52,7 +48,7 @@ const Header1 = (props) => {
     </SafeAreaView>
   );
 };
-const customStyles = (themeColor) =>
+const customStyles = (colors) =>
   StyleSheet.create({
     container: {
       marginHorizontal: 10,
@@ -68,15 +64,15 @@ const customStyles = (themeColor) =>
     },
     textInput: {
       borderRadius: 10,
-      backgroundColor: themeColor.backgroundColor,
-      color:themeColor.textColor,
+      backgroundColor: colors.secondary,
+      color: colors.text,
       fontSize: 16,
       paddingVertical: 10,
       paddingHorizontal: 5,
     },
     headerContainer: {
       height: 110,
-      backgroundColor: themeColor.mainColor,
+      backgroundColor: colors.primary,
       justifyContent: 'space-between',
       flexDirection: 'row',
     },

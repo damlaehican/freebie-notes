@@ -14,13 +14,12 @@ import { Gravatar, GravatarApi } from 'react-native-gravatar';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import Context from "../context/store";
+import { useTheme } from "@react-navigation/native";
 
 const Profile = (props) => {
 
-  const { state, dispatch } = useContext(Context);
-  const themeColor = state.themeColors[state.currentTheme];
-  const styles = customStyles(themeColor);
+  const { colors } = useTheme();
+  const styles = customStyles(colors);
 
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
@@ -98,11 +97,11 @@ const Profile = (props) => {
 
 export { Profile };
 
-const customStyles = (themeColor) =>
+const customStyles = (colors) =>
   StyleSheet.create({
     modalContainer: {
       borderRadius: 10,
-      backgroundColor: themeColor.backgroundColor,
+      backgroundColor: colors.background,
       height: Dimensions.get('window').height / 6.2,
       borderWidth: 3,
       borderColor: 'grey',
@@ -128,12 +127,12 @@ const customStyles = (themeColor) =>
       width: 250,
       height: 30,
       borderRadius: 10,
-      backgroundColor: themeColor.backgroundColor,
+      backgroundColor: colors.background,
     },
     mailText: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: themeColor.mainColor,
+      color: colors.primary,
     },
     IconCont: {
       flexDirection: 'column',
@@ -158,6 +157,6 @@ const customStyles = (themeColor) =>
       marginVertical: 10,
       fontSize: 18,
       fontWeight: 'bold',
-      color: '#FF5227',
+      color: colors.primary,
     },
   });

@@ -9,7 +9,7 @@ import {
 import { NoteSearchBar, NoteCard } from '../components';
 import { Plus } from '../components/SVGR-Components';
 import { ActivityIndicator } from 'react-native-paper';
-import Context from "../context/store";
+import { useTheme } from "@react-navigation/native";
 
 
 const dummy = [
@@ -51,9 +51,8 @@ const dummy = [
 
 const NotesList = (props) => {
 
-  const { state, dispatch } = useContext(Context);
-  const themeColor = state.themeColors[state.currentTheme];
-  const styles = customStyles(themeColor)
+  const { colors } = useTheme();
+  const styles = customStyles(colors);
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -103,11 +102,11 @@ const NotesList = (props) => {
   );
 };
 
-const customStyles = (themeColor) =>
+const customStyles = (colors) =>
   StyleSheet.create({
     container: {
       flex:1,
-      backgroundColor:themeColor.backgroundColor,
+      backgroundColor:colors.background,
     },
     addButton: {
       borderRadius: 100,
@@ -115,7 +114,7 @@ const customStyles = (themeColor) =>
       position: 'absolute',
       bottom: 20,
       right: 20,
-      backgroundColor: themeColor.mainColor,
+      backgroundColor: colors.primary,
       width: 60,
       height: 60,
       shadowColor: '#000',
@@ -125,7 +124,6 @@ const customStyles = (themeColor) =>
       },
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
-
       elevation: 5,
     },
   });

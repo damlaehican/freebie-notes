@@ -1,12 +1,11 @@
-import React, { useContext } from 'react'
-import { SafeAreaView, View, Text, StyleSheet} from 'react-native'
-import Context from '../context/store';
+import React from 'react'
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native'
+import { useTheme } from "@react-navigation/native";
 
 const Favourites = props => {
 
-    const { state, dispatch } = useContext(Context);
-    const themeColor = state.themeColors[state.currentTheme];
-    const styles = customStyles(themeColor)
+    const { colors } = useTheme();
+    const styles = customStyles(colors);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -18,13 +17,13 @@ const Favourites = props => {
 }
 export default Favourites
 
-const customStyles = (themeColor) =>
+const customStyles = (colors) =>
     StyleSheet.create({
         container: {
             flex: 1,
-            backgroundColor: themeColor.backgroundColor,
+            backgroundColor: colors.background,
         },
         text: {
-            color: themeColor.textColor,
+            color: colors.text,
         }
     });

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   View,
@@ -7,9 +7,14 @@ import {
   ImageBackground,
   StyleSheet,
 } from 'react-native';
-import {MyInput, MyButton, AppName} from '../components';
+import { MyInput, MyButton, AppName } from '../components';
+import { useTheme } from "@react-navigation/native";
 
 const Settings = (props) => {
+
+  const { colors } = useTheme();
+  const styles = customStyles(colors);
+
   const [userName, setUserName] = useState('');
   const [usermail, setUserMail] = useState('');
   const [userpass, setUserPass] = useState('');
@@ -43,48 +48,49 @@ const Settings = (props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FF5227',
-  },
-  imageBackground: {
-    flex: 1,
-  },
-  settingsContainer: {
-    flexDirection: 'row',
-    marginVertical: 10,
-    marginLeft: 20,
-    borderWidth: 0.1,
-    padding: 10,
-    borderBottomColor: 'white',
-    borderColor: '#FF5227',
-    borderBottomWidth: 5,
-  },
-  settingsText: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  settingsImage: {
-    marginRight: 20,
-    width: 45,
-    height: 45,
-  },
-  mail: {
-    borderWidth: 2,
-    padding: 10,
-    borderRadius: 10,
-    borderColor: 'white',
-    marginVertical: 25,
-    alignSelf: 'center',
-    flexDirection: 'row',
-  },
-  infoTexts: {
-    fontWeight: 'bold',
-    fontSize: 22,
-    color: 'white',
-  },
-});
+const customStyles = (colors) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.primary,
+    },
+    imageBackground: {
+      flex: 1,
+    },
+    settingsContainer: {
+      flexDirection: 'row',
+      marginVertical: 10,
+      marginLeft: 20,
+      borderWidth: 0.1,
+      padding: 10,
+      borderBottomColor: 'white',
+      borderColor: '#FF5227',
+      borderBottomWidth: 5,
+    },
+    settingsText: {
+      fontSize: 40,
+      fontWeight: 'bold',
+      color: 'white',
+    },
+    settingsImage: {
+      marginRight: 20,
+      width: 45,
+      height: 45,
+    },
+    mail: {
+      borderWidth: 2,
+      padding: 10,
+      borderRadius: 10,
+      borderColor: 'white',
+      marginVertical: 25,
+      alignSelf: 'center',
+      flexDirection: 'row',
+    },
+    infoTexts: {
+      fontWeight: 'bold',
+      fontSize: 22,
+      color: 'white',
+    },
+  });
 
-export {Settings};
+export { Settings };

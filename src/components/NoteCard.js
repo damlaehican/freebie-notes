@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { Clock } from '../components/SVGR-Components';
+import { useTheme } from "@react-navigation/native";
 
 const NoteCard = (props) => {
 
-  const { state, dispatch } = useContext(Context);
-  const themeColor = state.themeColors[state.currentTheme];
-  const styles = customStyles(themeColor)
+  const { colors } = useTheme();
+  const styles = customStyles(colors);
 
   return (
     <View style={styles.container}>
@@ -22,12 +22,12 @@ const NoteCard = (props) => {
   );
 };
 
-const customStyles = (themeColor) =>
+const customStyles = (colors) =>
   StyleSheet.create({
     container: {
       height: 250,
       borderRadius: 10,
-      backgroundColor: themeColor.backgroundColor,
+      backgroundColor: colors.secondary,
       width: Dimensions.get('window').width / 2.3,
       shadowColor: '#000',
       shadowOffset: {
@@ -38,20 +38,21 @@ const customStyles = (themeColor) =>
       shadowRadius: 3.84,
       elevation: 5,
       marginLeft: 5,
-      paddingLeft: 10,
+      padding: 10,
       marginTop: 20,
     },
     dateText: {
-      color: themeColor.mainColor,
+      color: colors.primary,
       fontSize: 12,
+      marginBottom: 10,
     },
     titleText: {
-      color: themeColor.textColor,
+      color: colors.text,
       fontWeight: 'bold',
       fontSize: 16,
     },
     bodyText: {
-      color: themeColor.textColor,
+      color: colors.text,
       fontSize: 14,
     },
     clockView: {

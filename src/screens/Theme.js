@@ -1,27 +1,27 @@
 import React, { useState, useContext } from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import {Switch} from 'react-native-paper'
-import Context from "../context/store";
-import styles from "../components/style";
+import { SafeAreaView, Switch, StyleSheet } from "react-native";
+import { useTheme } from "@react-navigation/native";
+
 
 
 const Theme = () => {
-  const {state, dispatch} = useContext(Context);
-  const themeColor = state.themeColors[state.currentTheme];
-  const styles = customStyles(themeColor);
 
-
+  const { state, dispatch } = useContext(Context);
+  const { colors } = useTheme();
+  const styles = customStyles(colors);
   const [isEnabled, setIsEnabled] = useState(false);
+
   const toggleSwitch = () => {
+
     setIsEnabled(previousState => !previousState);
-    dispatch({type:'SET_THEME'});
+    dispatch({ type: 'SET_THEME' });
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        trackColor={{ false: colors.background, true: colors.text }}
+        thumbColor={isEnabled ? colors.background : colors.background}
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
         value={isEnabled}
@@ -32,10 +32,10 @@ const Theme = () => {
 
 export default Theme;
 
-const customStyles = (themeColor) => 
+const customStyles = (colors) =>
   StyleSheet.create({
     container: {
-      flex:1,
-      backgroundColor:themeColor.backgroundColor,
+      flex: 1,
+      backgroundColor: colors.background,
     }
   });
