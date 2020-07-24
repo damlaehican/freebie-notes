@@ -12,7 +12,7 @@ const MyInput = (props) => {
   };
 
   return (
-    <View style={styles.components.input.container}>
+    <View style={[styles.components.input.container, {...props.style}]}>
       <TextInput
         style={[
           {flex: 1, backgroundColor: 'white', padding: 12},

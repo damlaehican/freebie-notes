@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   Text,
   View,
@@ -10,15 +10,14 @@ import {
   Image,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Gravatar, GravatarApi } from 'react-native-gravatar';
+import {Gravatar, GravatarApi} from 'react-native-gravatar';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-community/async-storage';
-import { useNavigation } from '@react-navigation/native';
-import { useTheme } from "@react-navigation/native";
+import {useNavigation} from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 
 const Profile = (props) => {
-
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const styles = customStyles(colors);
 
   const navigation = useNavigation();
@@ -42,7 +41,7 @@ const Profile = (props) => {
         <Gravatar
           options={{
             email: 'alpkrts3@gmail.com', //m.enver.akkoc@gmail.com
-            parameters: { size: '200', d: 'mm' },
+            parameters: {size: '200', d: 'mm'},
             secure: true,
           }}
           style={styles.roundedProfileImage}
@@ -54,11 +53,11 @@ const Profile = (props) => {
           animationType="fade"
           transparent={true}
           onBackdropPress={() => setModalVisible(false)}>
-          <View style={{ alignSelf: 'center' }}>
+          <View style={{alignSelf: 'center'}}>
             <Gravatar
               options={{
                 email: 'alpkrts3@gmail.com', //m.enver.akkoc@gmail.com
-                parameters: { size: '200', d: 'mm' },
+                parameters: {size: '200', d: 'mm'},
                 secure: true,
               }}
               style={[styles.roundedProfileImage, styles.modalProfileImage]}
@@ -95,7 +94,7 @@ const Profile = (props) => {
   );
 };
 
-export { Profile };
+export {Profile};
 
 const customStyles = (colors) =>
   StyleSheet.create({
