@@ -10,64 +10,48 @@ import { NoteSearchBar, NoteCard } from '../components';
 import { Plus } from '../components/SVGR-Components';
 import { ActivityIndicator } from 'react-native-paper';
 import { useTheme } from "@react-navigation/native";
+import firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 
+const config =  {
+  apiKey: "AIzaSyC7Wtd777P-gYVGWvtvx148h7c8YJZU8Qo",
+  authDomain: "freebie-notes.firebaseapp.com",
+  databaseURL: "https://freebie-notes.firebaseio.com",
+  projectId: "freebie-notes",
+  storageBucket: "freebie-notes.appspot.com",
+  messagingSenderId: "33866530069",
+  appId: "1:33866530069:web:e59e809cf02da65fcc7d1c"
+}
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 
-const dummy = [
-  {
-    time: '15.07.2020',
-    title: 'Alışveriş',
-    icerik:
-      'Eiusmod qui officia ad est.Ipsum laborum consectetur enim laboris.Laboris nisi incididunt eiusmod voluptate tempor et aute velit.',
-  },
-  {
-    time: 'Bugün',
-    title: 'Notlarım',
-    icerik:
-      'Pariatur sunt veniam dolore quis fugiat ipsum voluptate fugiat pariatur ipsum adipisicing exercitation cillum.',
-  },
-  {
-    time: 'Bugün',
-    title: 'Notlarım',
-    icerik: 'Pariatur aliqua dolor consequat et sunt laboris et labore.',
-  },
-  {
-    time: 'Bugün',
-    title: 'Notlarım',
-    icerik:
-      'Id amet ullamco laboris veniam irure sint cillum proident cillum ex proident.In deserunt qui esse labore eu anim reprehenderit mollit commodo tempor do commodo duis.Nulla nulla aute aute consectetur tempor.Enim nostrud tempor quis consectetur consequat labore laboris aliqua.',
-  },
-  {
-    time: 'Bugün',
-    title: 'Notlarım',
-    icerik: 'Elit id proident proident cillum qui sint ad voluptate eu.',
-  },
-  {
-    time: 'Bugün',
-    title: 'Notlarım',
-    icerik:
-      'Irure nulla ex commodo qui consectetur sit nostrud anim occaecat enim cupidatat adipisicing aliquip.',
-  },
-];
 
 const NotesList = (props) => {
 
   const { colors } = useTheme();
   const styles = customStyles(colors);
 
+  const user = auth().currentUser
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const getData = () => {
+    firebase.database().ref(`notes/`).on('value', function (snapshot) {
+        console.log(snapshot.val())
+        setLoading(true);
+    });
+  }
+
   useEffect(() => {
-    setTimeout(() => {
-      setData(dummy);
-      setLoading(true);
-    }, 1000);
+      setData(getData);
   }, []);
+  
   const renderItem = ({ item }) => {
     return (
       <View style={{ marginRight: 10, marginLeft: 10 }}>
         <TouchableOpacity>
-          <NoteCard title={item.title} icerik={item.icerik} date={item.time} />
+          <NoteCard title={item.noteTitle} icerik={item.noteDetails} date={item.timestamp} />
         </TouchableOpacity>
       </View>
     );
