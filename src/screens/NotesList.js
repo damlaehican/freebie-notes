@@ -27,6 +27,7 @@ if (!firebase.apps.length) {
 }
 
 
+
 const NotesList = (props) => {
 
   const { colors } = useTheme();
@@ -37,14 +38,16 @@ const NotesList = (props) => {
   const [loading, setLoading] = useState(false);
 
   const getData = () => {
-    firebase.database().ref(`notes/`).on('value', function (snapshot) {
+    firebase.database().ref(`/notes/`).on('value', snapshot => {
+        let responselist = Object.values(snapshot.val())
+        setData(responselist)
         console.log(snapshot.val())
         setLoading(true);
     });
   }
 
   useEffect(() => {
-      setData(getData);
+      getData();
   }, []);
   
   const renderItem = ({ item }) => {
