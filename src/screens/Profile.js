@@ -19,7 +19,7 @@ import {useTheme} from '@react-navigation/native';
 const Profile = (props) => {
   const {colors} = useTheme();
   const styles = customStyles(colors);
-
+  const user = auth().currentUser;
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
@@ -40,7 +40,7 @@ const Profile = (props) => {
       <TouchableOpacity onPress={toggleModal}>
         <Gravatar
           options={{
-            email: 'alpkrts3@gmail.com', //m.enver.akkoc@gmail.com
+            email: user.email, //m.enver.akkoc@gmail.com
             parameters: {size: '200', d: 'mm'},
             secure: true,
           }}
@@ -56,7 +56,7 @@ const Profile = (props) => {
           <View style={{alignSelf: 'center'}}>
             <Gravatar
               options={{
-                email: 'alpkrts3@gmail.com', //m.enver.akkoc@gmail.com
+                email: user.email, //m.enver.akkoc@gmail.com
                 parameters: {size: '200', d: 'mm'},
                 secure: true,
               }}
@@ -65,7 +65,7 @@ const Profile = (props) => {
           </View>
           <View style={styles.modalContainer}>
             <View style={styles.infoContainer}>
-              <Text style={styles.mailText}>alpkrts3@gmail.com</Text>
+              <Text style={styles.mailText}>{user.email}</Text>
             </View>
             <View style={styles.chooseContainer}>
               <View style={styles.IconCont}>

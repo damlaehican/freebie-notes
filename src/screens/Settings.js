@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react-native/no-inline-styles */
 
 //ContextAPI 'den ya da firebase' deki yapıda usermailden mail adresinin
 // bu sayfaya gelmesi gerekiyor.
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -19,17 +20,18 @@ import {
 import {MyInput, MyButton, AppName} from '../components';
 import {useTheme} from '@react-navigation/native';
 import Modal from 'react-native-modal';
+import auth from '@react-native-firebase/auth';
 
 const Settings = (props) => {
+  const user = auth().currentUser;
   const {colors} = useTheme();
   const styles = customStyles(colors);
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
+  const [newMail, setNewMail] = useState(user.email);
 
-  const [newMail, setNewMail] = useState('');
-
-  const setNewmail = (text) => setNewMail(text);
+  const setnewmail = (text) => setNewMail(text);
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
@@ -43,6 +45,9 @@ const Settings = (props) => {
   };
 
   const updateMail = () => {
+    user
+      .updateEmail(newMail)
+      .then(Alert.alert('Mail adresiniz başarıyla değiştirildi.'));
     console.log(newMail);
     toggleModal();
   };
@@ -50,6 +55,31 @@ const Settings = (props) => {
   const saveInfo = () => {
     Alert.alert('Freebie Notes', 'Kaydedildi', [{text: 'Tamam'}]);
     props.navigation.goBack();
+  };
+
+  const resetPass = () => {
+    auth()
+      .sendPasswordResetEmail(newMail)
+      .then(function () {
+        Alert.alert('Parola sıfırlama talebi mail adresinize gönderildi.');
+      })
+      .catch(function (error) {
+        // An error happened.
+      });
+  };
+
+  const deleteUser = () => {
+    user
+      .delete()
+      .then(function () {
+        Alert.alert('Freebie Notes', 'Hesap başarıyla silindi !', [
+          {text: 'Tamam'},
+        ]);
+        props.navigation.navigate('Login');
+      })
+      .catch(function (error) {
+        // An error happened.
+      });
   };
 
   return (
@@ -89,6 +119,16 @@ const Settings = (props) => {
             />
           </TouchableOpacity>
         </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignSelf: 'center',
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity style={styles.mail} onPress={resetPass}>
+            <Text style={styles.infoTexts}>Parola Sıfırlama Maili Gönder</Text>
+          </TouchableOpacity>
+        </View>
         <View>
           <Modal
             isVisible={isModalVisible}
@@ -102,7 +142,7 @@ const Settings = (props) => {
                 </Text>
               </View>
               <MyInput
-                changeText={setNewmail}
+                changeText={setnewmail}
                 style={styles.input}
                 holder="Mail adresi.."
                 capital="none"
@@ -148,6 +188,16 @@ const Settings = (props) => {
           />
         </View>
         <View style={styles.buttonContainer}>
+          <MyButton
+            style={styles.button}
+            buttonName="Hesabı Sil"
+            pressButton={() =>
+              Alert.alert('Freebie Notes Hesap Silme', 'Emin misiniz ?', [
+                {text: 'Sil', onPress: deleteUser},
+                {text: 'Vazgeç'},
+              ])
+            }
+          />
           <MyButton
             style={styles.button}
             buttonName="Kaydet"
@@ -197,7 +247,7 @@ const customStyles = (colors) =>
       padding: 10,
       borderRadius: 10,
       borderColor: 'white',
-      marginVertical: 35,
+      marginVertical: 25,
       alignSelf: 'center',
       flexDirection: 'row',
     },
@@ -207,7 +257,7 @@ const customStyles = (colors) =>
       color: 'white',
     },
     buttonContainer: {
-      marginVertical: 70,
+      marginVertical: 40,
     },
     button: {
       backgroundColor: 'white',
