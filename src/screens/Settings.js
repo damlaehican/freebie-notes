@@ -21,8 +21,10 @@ import {MyInput, MyButton, AppName} from '../components';
 import {useTheme} from '@react-navigation/native';
 import Modal from 'react-native-modal';
 import auth from '@react-native-firebase/auth';
+import {useNavigation} from '@react-navigation/native';
 
 const Settings = (props) => {
+  const navigation = useNavigation();
   const user = auth().currentUser;
   const {colors} = useTheme();
   const styles = customStyles(colors);
@@ -47,9 +49,13 @@ const Settings = (props) => {
   const updateMail = () => {
     user
       .updateEmail(newMail)
-      .then(Alert.alert('Mail adresiniz başarıyla değiştirildi.'));
-    console.log(newMail);
-    toggleModal();
+      .then(
+        Alert.alert(
+          'Mail adresiniz başarıyla değiştirildi. Tekrar giriş yapınız.',
+        ),
+        [{text: 'Tamam'}],
+      );
+    navigation.navigate('Login');
   };
 
   const saveInfo = () => {
