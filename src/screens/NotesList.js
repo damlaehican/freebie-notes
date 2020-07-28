@@ -26,8 +26,6 @@ if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
 
-
-
 const NotesList = (props) => {
 
   const { colors } = useTheme();
@@ -35,20 +33,34 @@ const NotesList = (props) => {
 
   const user = auth().currentUser
   const [data, setData] = useState([]);
+  const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const getData = () => {
-    firebase.database().ref(`/notes/`).on('value', snapshot => {
+    firebase.database().ref(`notes/${user.uid}`).on('value', snapshot => {
+      if (snapshot.val() != null) {
         let responselist = Object.values(snapshot.val())
         setData(responselist)
         console.log(snapshot.val())
         setLoading(true);
+      }
     });
   }
 
   useEffect(() => {
       getData();
   }, []);
+
+  const Search = (text) => {
+    let filteredList = data.filter(function (item){
+      const itemData = item.toUpperCase()
+      const textData = text.toUpperCase()
+      return (
+        itemData.indexOf(textData) > -1
+      )
+    })
+    setData(filteredList)
+  }
   
   const renderItem = ({ item }) => {
     return (
@@ -67,7 +79,7 @@ const NotesList = (props) => {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       
-      <NoteSearchBar />
+      <NoteSearchBar/>
       {!loading ? (
         <View style={{ alignItems: 'center' }}>
           <ActivityIndicator color="#ff5227" />

@@ -34,7 +34,7 @@ const AddNote = (props) => {
     newList.push(data)
     setList(newList)
 
-    firebase.database().ref('notes/').push({
+    firebase.database().ref(`notes/${user.uid}`).push({
       noteTitle: data,
       noteDetails: data2,
       uid: user.uid,
