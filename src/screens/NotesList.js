@@ -41,6 +41,7 @@ const NotesList = (props) => {
       if (snapshot.val() != null) {
         let responselist = Object.values(snapshot.val())
         setData(responselist)
+        setList(responselist)
         console.log(snapshot.val())
         setLoading(true);
       }
@@ -52,14 +53,15 @@ const NotesList = (props) => {
   }, []);
 
   const Search = (text) => {
-    let filteredList = data.filter(function (item){
-      const itemData = item.toUpperCase()
+    let list = [...data]
+    let filteredList = list.filter(function (item){
+      const itemData = item.noteTitle.toUpperCase()
       const textData = text.toUpperCase()
       return (
         itemData.indexOf(textData) > -1
       )
     })
-    setData(filteredList)
+    setList(filteredList)
   }
   
   const renderItem = ({ item }) => {
@@ -79,14 +81,14 @@ const NotesList = (props) => {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       
-      <NoteSearchBar/>
+      <NoteSearchBar onSearch={Search}/>
       {!loading ? (
         <View style={{ alignItems: 'center' }}>
           <ActivityIndicator color="#ff5227" />
         </View>
       ) : (
           <FlatList
-            data={data}
+            data={list}
             numColumns={2}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
