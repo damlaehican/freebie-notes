@@ -7,3 +7,7 @@ export {default as Light} from './Light';
 export {default as Menu} from './Menu';
 export {default as Clock} from './Clock';
 export {default as Note} from './Note';
+export {default as Star} from './Star';
+export {default as Sun} from './Sun';
+export {default as Moon} from './Moon';
+export {default as SettingsIcon} from './Settings';

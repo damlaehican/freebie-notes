@@ -9,9 +9,9 @@ import {
   VoiceNote,
   AddNote,
   Favourites,
-  Theme,
   Settings,
   Map,
+  DrawerContent,
 } from '../screens';
 import { 
   NavigationContainer, 
@@ -22,7 +22,7 @@ import {
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Microphone, Menu, Note } from '../components/SVGR-Components';
+import { Microphone, Menu, Note, Star, SettingsIcon } from '../components/SVGR-Components';
 import Provider from '../context/Provider';
 
 const Stack = createStackNavigator();
@@ -33,6 +33,11 @@ const icons = {
   Photo: <Menu fill="gray" width={25} height={25} />,
   Notes: <Note fill="gray" width={25} height={25} />,
   Voice: <Microphone fill="gray" width={24} height={25} />,
+};
+const drawerIcons = {
+  Notes: <Note fill="gray" width={25} height={25} />,
+  Settings: <SettingsIcon stroke="gray" width={25} height={25} />,
+  Favourites: <Star stroke="gray" width={25} height={25} />,
 };
 
 const darkTheme = {
@@ -61,13 +66,18 @@ function Menus({ navigation }) {
 
   return (
     <Drawer.Navigator
-      initialRouteName="Tabs"
-      drawerContentOptions={{
-        activeTintColor: '#FF5227',
-      }}>
-      <Drawer.Screen name="Favoriler" component={Favourites} />
-      <Drawer.Screen name="Tema" component={Theme} />
-      <Drawer.Screen name="Tabs" component={Tabs} />
+      initialRouteName="Notes"
+      drawerContent={props => <DrawerContent {...props} />}
+      screenOptions={({ route }) => ({
+        drawerIcon: () => drawerIcons[route.name],
+      })}
+      drawerContentOptions = {{
+        activeBackgroundColor: null,
+      }}
+    >
+      <Drawer.Screen name="Notes" component={Tabs} />
+      <Drawer.Screen name="Favourites" component={Favourites} />
+      <Drawer.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   );
 }
