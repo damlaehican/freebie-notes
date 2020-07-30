@@ -234,14 +234,14 @@ const customStyles = (colors) =>
       marginLeft: 20,
       borderWidth: 0.1,
       padding: 10,
-      borderBottomColor: 'white',
+      borderBottomColor: colors.secondary,
       borderColor: '#FF5227',
       borderBottomWidth: 5,
     },
     settingsText: {
       fontSize: 40,
       fontWeight: 'bold',
-      color: 'white',
+      color: colors.secondary,
     },
     settingsImage: {
       marginRight: 20,
@@ -252,7 +252,7 @@ const customStyles = (colors) =>
       borderWidth: 2,
       padding: 10,
       borderRadius: 10,
-      borderColor: 'white',
+      borderColor: colors.secondary,
       marginVertical: 25,
       alignSelf: 'center',
       flexDirection: 'row',
@@ -266,7 +266,7 @@ const customStyles = (colors) =>
       marginVertical: 40,
     },
     button: {
-      backgroundColor: 'white',
+      backgroundColor: colors.secondary,
       color: '#FF5227',
     },
     ignore: {
