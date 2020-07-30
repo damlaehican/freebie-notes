@@ -27,6 +27,7 @@ function MicButton({lang, func}) {
   return (
     <View>
       <Button title="Başla" onPress={() => startRecognizing()} />
+      <Button title="Durdur" onPress={() => Voice.stop()} />
     </View>
   );
 }

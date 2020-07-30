@@ -3,7 +3,7 @@ import { SafeAreaView, TextInput, StatusBar, StyleSheet, Button ,TouchableOpacit
 import { useTheme } from "@react-navigation/native";
 import firebase from 'firebase';
 import auth from '@react-native-firebase/auth';
-
+import VoiceNote from './VoiceNote'
 
 
 const AddNote = (props) => {
@@ -62,6 +62,7 @@ const AddNote = (props) => {
         placeholderTextColor={colors.text}
         style={styles.textInput}
         onChangeText={(text) => setData2(text)} />
+        <Button title="Sesli Not" onPress={()=><VoiceNote/>}/>
         <Button 
         title="Bitir"
         onPress={sendData}

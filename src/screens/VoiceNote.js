@@ -13,7 +13,7 @@ import {MicButton} from '../components';
 const VoiceNote = () => {
   const {colors} = useTheme();
   const styles = customStyles(colors);
-  const [words, setWords] = useState([]);
+  const [words, setWords] = useState('');
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
