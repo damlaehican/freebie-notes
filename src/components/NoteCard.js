@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
-import { View, Text, Dimensions, StyleSheet } from 'react-native';
-import { Clock } from '../components/SVGR-Components';
-import { useTheme } from "@react-navigation/native";
+import React, {useContext} from 'react';
+import {View, Text, Dimensions, StyleSheet} from 'react-native';
+import {Clock} from '../components/SVGR-Components';
+import {useTheme} from '@react-navigation/native';
 
 const NoteCard = (props) => {
-
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const styles = customStyles(colors);
 
   return (

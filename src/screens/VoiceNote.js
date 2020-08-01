@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {MicButton} from '../components';
+
 const VoiceNote = () => {
   const {colors} = useTheme();
   const styles = customStyles(colors);

@@ -13,16 +13,22 @@ import {
   Map,
   DrawerContent,
 } from '../screens';
-import { 
-  NavigationContainer, 
+import {
+  NavigationContainer,
   DefaultTheme as NavigatorDefaultTheme,
-  DarkTheme as NavigatorDarkTheme, 
-  useTheme 
+  DarkTheme as NavigatorDarkTheme,
+  useTheme,
 } from '@react-navigation/native';
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Microphone, Menu, Note, Star, SettingsIcon } from '../components/SVGR-Components';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {
+  Microphone,
+  Menu,
+  Note,
+  Star,
+  SettingsIcon,
+} from '../components/SVGR-Components';
 import Provider from '../context/Provider';
 
 const Stack = createStackNavigator();
@@ -45,36 +51,35 @@ const darkTheme = {
   colors: {
     ...NavigatorDarkTheme.colors,
     primary: '#FF5227',
-    secondary: '#37474f',//NotesCardColor
+    secondary: '#37474f', //NotesCardColor
     background: '#263238', //ScreenBackgroundColor
     card: '#263238', //NavigatorBackgroundColor
-  }
-}
+    placeHolder: 'white',
+  },
+};
 const defaultTheme = {
   ...NavigatorDefaultTheme,
   colors: {
     ...NavigatorDefaultTheme.colors,
     primary: '#FF5227',
-    secondary : '#fff',
-    background: '#fff', 
+    secondary: '#fff',
+    background: '#fff',
     card: '#fff',
-  }
-}
+    placeHolder: 'gray',
+  },
+};
 
-
-function Menus({ navigation }) {
-
+function Menus({navigation}) {
   return (
     <Drawer.Navigator
       initialRouteName="Notes"
-      drawerContent={props => <DrawerContent {...props} />}
-      screenOptions={({ route }) => ({
+      drawerContent={(props) => <DrawerContent {...props} />}
+      screenOptions={({route}) => ({
         drawerIcon: () => drawerIcons[route.name],
       })}
-      drawerContentOptions = {{
+      drawerContentOptions={{
         activeBackgroundColor: null,
-      }}
-    >
+      }}>
       <Drawer.Screen name="Notes" component={Tabs} />
       <Drawer.Screen name="Favourites" component={Favourites} />
       <Drawer.Screen name="Settings" component={Settings} />
@@ -86,7 +91,7 @@ const Tabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="Notes"
-      screenOptions={({ route }) => ({
+      screenOptions={({route}) => ({
         tabBarIcon: () => icons[route.name],
       })}
       tabBarOptions={{
@@ -100,23 +105,23 @@ const Tabs = () => {
     </Tab.Navigator>
   );
 };
-const MainNavigator = () => {
-
+const AppNavigator = () => {
   return (
     <Provider>
       <Context.Consumer>
-        {value =>
-          <NavigationContainer theme={value.state.isDarkTheme ? darkTheme : defaultTheme }>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {(value) => (
+          <NavigationContainer
+            theme={value.state.isDarkTheme ? darkTheme : defaultTheme}>
+            <Stack.Navigator screenOptions={{headerShown: false}}>
               <Stack.Screen
                 name="Login"
                 component={Login}
-                options={{ gestureEnabled: false }}
+                options={{gestureEnabled: false}}
               />
               <Stack.Screen
                 name="Tabs"
                 component={Tabs}
-                options={{ gestureEnabled: false }}
+                options={{gestureEnabled: false}}
               />
               <Stack.Screen name="ForgotPass" component={ForgotPass} />
               <Stack.Screen name="SignUp" component={SignUp} />
@@ -124,14 +129,14 @@ const MainNavigator = () => {
               <Stack.Screen
                 name="AddNote"
                 component={AddNote}
-                options={{ gestureDirection: 'vertical-inverted' }}
+                options={{gestureDirection: 'vertical-inverted'}}
               />
               <Stack.Screen name="Settings" component={Settings} />
             </Stack.Navigator>
           </NavigationContainer>
-        }
+        )}
       </Context.Consumer>
     </Provider>
   );
 };
-export default MainNavigator;
+export default AppNavigator;
