@@ -1,15 +1,4 @@
-export {default as EyeOff} from './EyeOff';
-export {default as Eye} from './Eye';
-export {default as Album} from './Album';
-export {default as Plus} from './Plus';
-export {default as Microphone} from './Microphone';
-export {default as Light} from './Light';
-export {default as Menu} from './Menu';
-export {default as Clock} from './Clock';
-export {default as Note} from './Note';
-export {default as Star} from './Star';
-export {default as Sun} from './Sun';
-export {default as Moon} from './Moon';
-export {default as SettingsIcon} from './Settings';
-export {default as Camera} from './Camera';
-export {default as Calender} from './Calender';
+export { default as EyeOff } from './EyeOff'
+export { default as Eye } from './Eye'
+export { default as Startrecord } from './Startrecord'
+export { default as Stoprecord } from './Stoprecord'
