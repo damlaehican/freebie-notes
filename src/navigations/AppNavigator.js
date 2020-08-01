@@ -55,6 +55,7 @@ const darkTheme = {
     background: '#263238', //ScreenBackgroundColor
     card: '#263238', //NavigatorBackgroundColor
     placeHolder: 'white',
+    profile: '#b0bec5',
   },
 };
 const defaultTheme = {
@@ -66,6 +67,7 @@ const defaultTheme = {
     background: '#fff',
     card: '#fff',
     placeHolder: 'gray',
+    profile: '#37474f',
   },
 };
 
@@ -126,11 +128,7 @@ const AppNavigator = () => {
               <Stack.Screen name="ForgotPass" component={ForgotPass} />
               <Stack.Screen name="SignUp" component={SignUp} />
               <Stack.Screen name="Menu" component={Menus} />
-              <Stack.Screen
-                name="AddNote"
-                component={AddNote}
-                options={{gestureDirection: 'vertical-inverted'}}
-              />
+              <Stack.Screen name="AddNote" component={AddNote} />
               <Stack.Screen name="Settings" component={Settings} />
             </Stack.Navigator>
           </NavigationContainer>

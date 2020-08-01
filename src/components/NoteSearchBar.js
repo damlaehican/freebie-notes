@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   TextInput,
@@ -7,13 +7,11 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import { Menu } from '../components/SVGR-Components';
-import { Profile } from '../screens';
-import { useNavigation, useTheme } from '@react-navigation/native';
-
+import {Menu} from '../components/SVGR-Components';
+import {Profile} from '../screens';
+import {useNavigation, useTheme} from '@react-navigation/native';
 
 const NotesSearchBar = (props) => {
-
   const styles = customStyles(useTheme().colors);
 
   return (
@@ -32,17 +30,17 @@ const NotesSearchBar = (props) => {
 };
 const Header1 = (props) => {
   const navigation = useNavigation();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const styles = customStyles(colors);
   return (
     <SafeAreaView style={styles.headerContainer}>
       <TouchableOpacity
-        style={{ marginLeft: 5 }}
+        style={{marginLeft: 5}}
         onPress={() => navigation.openDrawer()}>
         <Menu width={30} height={30} fill="white" />
       </TouchableOpacity>
 
-      <TouchableOpacity style={{ borderRadius: 100, marginRight: 10 }}>
+      <TouchableOpacity style={{borderRadius: 100, marginRight: 10}}>
         <Profile />
       </TouchableOpacity>
     </SafeAreaView>

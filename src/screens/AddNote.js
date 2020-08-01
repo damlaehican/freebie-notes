@@ -72,7 +72,7 @@ const AddNote = (props) => {
         style={{alignItems: 'flex-end', marginRight: 10}}
         onPress={() => {
           sendData();
-          props.navigation.navigate('Tabs');
+          props.navigation.goBack('Tabs');
         }}>
         <Text
           style={{
@@ -129,7 +129,7 @@ const customStyles = (colors) =>
       margin: 5,
       width: Dimensions.get('screen').width / 1,
       fontWeight: 'bold',
-      color: colors.text,
+      color: colors.placeholder,
       alignSelf: 'center',
       borderEndWidth: 0.5,
       textAlign: 'center',

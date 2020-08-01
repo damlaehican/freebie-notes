@@ -131,7 +131,7 @@ const customStyles = (colors) =>
     mailText: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: colors.primary,
+      color: colors.profile,
     },
     IconCont: {
       flexDirection: 'column',
@@ -156,6 +156,6 @@ const customStyles = (colors) =>
       marginVertical: 10,
       fontSize: 18,
       fontWeight: 'bold',
-      color: colors.primary,
+      color: colors.profile,
     },
   });

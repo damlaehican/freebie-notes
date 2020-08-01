@@ -26,7 +26,7 @@ const Login = (props) => {
   const login = async () => {
     //Burada girişe basıldığı gibi girilsin diye şimdilik
     try {
-      await auth().signInWithEmailAndPassword(usermail,userpass);
+      await auth().signInWithEmailAndPassword(usermail, userpass);
       props.navigation.navigate('Menu');
       AsyncStorage.setItem('@USER_ID', auth().currentUser.uid);
     } catch (error) {
