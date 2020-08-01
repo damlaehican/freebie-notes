@@ -101,7 +101,6 @@ const Tabs = () => {
         inactiveTintColor: 'gray',
       }}>
       <Tab.Screen name="Photo" component={PhotoNote} />
-      <Tab.Screen name="Voice" component={VoiceNote} />
       <Tab.Screen name="Notes" component={NotesList} />
       <Tab.Screen name="Map" component={Map} />
     </Tab.Navigator>
@@ -129,6 +128,7 @@ const AppNavigator = () => {
               <Stack.Screen name="SignUp" component={SignUp} />
               <Stack.Screen name="Menu" component={Menus} />
               <Stack.Screen name="AddNote" component={AddNote} />
+              <Stack.Screen name="Voice" component={VoiceNote} />
               <Stack.Screen name="Settings" component={Settings} />
             </Stack.Navigator>
           </NavigationContainer>

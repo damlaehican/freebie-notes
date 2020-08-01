@@ -107,7 +107,8 @@ const AddNote = (props) => {
             width: 40,
             height: 40,
             marginRight: 10,
-          }}>
+          }}
+          onPress={() => props.navigation.navigate('Voice')}>
           <Microphone fill="#FF5227" width={35} height={40} />
         </TouchableOpacity>
         <Camera fill="#FF5227" width={35} height={40} />
