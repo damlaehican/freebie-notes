@@ -71,8 +71,17 @@ const AddNote = (props) => {
       <TouchableOpacity
         style={{alignItems: 'flex-end', marginRight: 10}}
         onPress={() => {
-          sendData();
-          props.navigation.goBack('Tabs');
+          if (data != ""){
+            if(data2 != ""){
+              sendData();
+              props.navigation.goBack('Tabs');
+            }
+            else {
+              alert('Please Enter Note');
+            }}
+          else {
+            alert('Please Enter Title');
+          }
         }}>
         <Text
           style={{
