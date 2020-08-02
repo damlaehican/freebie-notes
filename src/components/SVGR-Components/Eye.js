@@ -8,7 +8,7 @@ function SvgEye(props) {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="currentColor"
+      stroke="grey"
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
