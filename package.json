@@ -8,8 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "pod": "cd ios; pod install; cd ..",
-    "svgr": "svgr ./src/icons -d ./src/components/SVGR-Components --native --icon --svg-props width=24,height=24"
+    "pod": "cd ios; pod install; cd .."
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
