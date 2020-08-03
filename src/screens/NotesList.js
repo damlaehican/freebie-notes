@@ -8,7 +8,7 @@ import {
   Dimensions,
   Text,
 } from 'react-native';
-import {NoteSearchBar, NoteCard} from '../components';
+import {NoteSearchBar, NoteCard,GhostLoader} from '../components';
 import {Plus} from '../components/SVGR-Components';
 import {ActivityIndicator} from 'react-native-paper';
 import {useTheme} from '@react-navigation/native';
@@ -91,24 +91,10 @@ const NotesList = (props) => {
       {!loading ? (
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: 'column',
           }}>
-          <ShimmerPlaceHolder
-            style={{
-              height: 250,
-              borderRadius: 10,
-              backgroundColor: colors.secondary,
-              width: Dimensions.get('window').width / 2.3,
-              marginRight: 10,
-              marginLeft: 10,
-              flexDirection: 'row',
-              marginLeft: 5,
-              padding: 10,
-              marginTop: 20,
-            }}
-            autoRun>
-            <Text>Damla</Text>
-          </ShimmerPlaceHolder>
+          <GhostLoader />
+          <GhostLoader />
         </View>
       ) : (
         <FlatList

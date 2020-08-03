@@ -4,3 +4,4 @@ export * from './AppName';
 export {default as NoteSearchBar} from './NoteSearchBar';
 export {default as NoteCard} from './NoteCard';
 export * from './MicButton';
+export * from './GhostLoader'
