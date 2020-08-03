@@ -102,7 +102,6 @@ const Tabs = () => {
       }}>
       <Tab.Screen name="Photo" component={PhotoNote} />
       <Tab.Screen name="Notes" component={NotesList} />
-      <Tab.Screen name="Map" component={Map} />
     </Tab.Navigator>
   );
 };

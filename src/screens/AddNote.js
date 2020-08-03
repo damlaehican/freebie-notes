@@ -4,7 +4,6 @@ import {
   TextInput,
   StatusBar,
   StyleSheet,
-  Button,
   View,
   Text,
   TouchableOpacity,
@@ -13,18 +12,18 @@ import {
 import {useTheme} from '@react-navigation/native';
 import firebase from 'firebase';
 import auth from '@react-native-firebase/auth';
-import VoiceNote from './VoiceNote';
-import {Microphone, Camera} from '../components/SVGR-Components';
+import Voice from '@react-native-community/voice';
+import {Camera, OpenMic, MuteMic, Trash} from '../components/SVGR-Components';
 
 const AddNote = (props) => {
   const {colors} = useTheme();
   const styles = customStyles(colors);
-
   const user = auth().currentUser;
   const date = new Date().toLocaleString();
   const [data, setData] = useState('');
   const [data2, setData2] = useState('');
   const [list, setList] = useState([]);
+  const [words, setWords] = useState('');
   const [push, setPush] = useState(false);
 
   const config = {
@@ -39,7 +38,23 @@ const AddNote = (props) => {
   if (!firebase.apps.length) {
     firebase.initializeApp(config);
   }
+  useEffect(() => {
+    const onSpeechResults = (e) => {
+      setWords(e.value);
+    };
+    Voice.onSpeechResults = onSpeechResults;
+    return () => {
+      Voice.destroy().then(Voice.removeAllListeners);
+    };
+  }, []);
 
+  const startRecognizing = async () => {
+    try {
+      await Voice.start('tr_TR');
+    } catch (e) {
+      console.error(e);
+    }
+  };
   const sendData = () => {
     let newList = [...list];
     newList.push(data);
@@ -54,6 +69,7 @@ const AddNote = (props) => {
         uid: user.uid,
         username: user.email,
         timestamp: date,
+        voiceNote: words,
       })
       .then((data) => {
         //success callback
@@ -69,28 +85,20 @@ const AddNote = (props) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
       <TouchableOpacity
-        style={{alignItems: 'flex-end', marginRight: 10}}
+        style={styles.saveButton}
         onPress={() => {
-          if (data != ""){
-            if(data2 != ""){
+          if (data != '') {
+            if (data2 != '') {
               sendData();
               props.navigation.goBack('Tabs');
+            } else {
+              alert('Bir not gir');
             }
-            else {
-              alert('Please Enter Note');
-            }}
-          else {
-            alert('Please Enter Title');
+          } else {
+            alert('Bir başlık gir ');
           }
         }}>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: '500',
-            color: '#FF5227',
-          }}>
-          Bitir
-        </Text>
+        <Text style={styles.text}>Bitir</Text>
       </TouchableOpacity>
       <TextInput
         placeholder="Başlık"
@@ -99,29 +107,42 @@ const AddNote = (props) => {
         multiline={true}
       />
       <TextInput
-        placeholder="Buraya notunuzu girin..."
+        placeholder="Not"
         style={[styles.textInput, {fontWeight: 'normal'}]}
         onChangeText={(text) => setData2(text)}
         multiline={true}
       />
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          margin: 30,
-        }}>
-        <TouchableOpacity
-          style={{
-            borderRadius: 100,
-            width: 40,
-            height: 40,
-            marginRight: 10,
-          }}
-          onPress={() => props.navigation.navigate('Voice')}>
-          <Microphone fill="#FF5227" width={35} height={40} />
+      <Text style={[styles.textInput, {fontWeight: 'normal'}]} multiline={true}>
+        {words}
+      </Text>
+      <View style={styles.iconBar}>
+        <TouchableOpacity style={styles.button}>
+          <Camera fill="#FF5227" width={50} height={40} />
         </TouchableOpacity>
-        <Camera fill="#FF5227" width={35} height={40} />
-        <TouchableOpacity />
+        {push ? (
+          <TouchableOpacity
+            style={[styles.button, {width: 40}]}
+            onPress={() => {
+              setPush(false);
+              Voice.stop();
+            }}>
+            <OpenMic width={40} height={40} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={[styles.button, {width: 40}]}
+            onPress={() => {
+              setPush(true);
+              startRecognizing();
+            }}>
+            <MuteMic width={40} height={40} />
+          </TouchableOpacity>
+        )}
+        <TouchableOpacity
+          onPress={() => setWords('')}
+          style={[styles.button, {width: 40}]}>
+          <Trash width={40} height={40} />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -143,5 +164,27 @@ const customStyles = (colors) =>
       alignSelf: 'center',
       borderEndWidth: 0.5,
       textAlign: 'center',
+    },
+    button: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      borderRadius: 100,
+      width: 50,
+      height: 40,
+      marginLeft: 10,
+    },
+    iconBar: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      padding: 50,
+    },
+    text: {
+      fontSize: 20,
+      fontWeight: '500',
+      color: '#FF5227',
+    },
+    saveButton: {
+      alignItems: 'flex-end',
+      marginRight: 10,
     },
   });
