@@ -20,7 +20,6 @@ const VoiceNote = () => {
       <StatusBar barStyle="dark-content" />
 
       <Text style={styles.text}>Burası Sesli not</Text>
-      <MicButton lang={'tr-TR'} func={setWords} />
       <View>
         <Text>{words}</Text>
       </View>

@@ -13,5 +13,6 @@ export {default as Moon} from './Moon';
 export {default as SettingsIcon} from './Settings';
 export {default as Camera} from './Camera';
 export {default as Calender} from './Calender';
-export { default as Startrecord } from './Startrecord';
-export { default as Stoprecord } from './Stoprecord';
+export {default as OpenMic} from './OpenMic';
+export {default as MuteMic} from './MuteMic';
+export {default as Trash} from './Trash';
