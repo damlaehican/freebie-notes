@@ -8,12 +8,22 @@ import {
   Text,
   TouchableOpacity,
   Dimensions,
+  Alert,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import firebase from 'firebase';
 import auth from '@react-native-firebase/auth';
 import Voice from '@react-native-community/voice';
-import {Camera, OpenMic, MuteMic, Trash} from '../components/SVGR-Components';
+import {
+  Camera,
+  OpenMic,
+  MuteMic,
+  Trash,
+  Location,
+} from '../components/SVGR-Components';
+import MapView, {PROVIDER_GOOGLE, Marker, Callout} from 'react-native-maps';
+import Modal from 'react-native-modal';
+import {SearchBar} from '../components';
 
 const AddNote = (props) => {
   const {colors} = useTheme();
@@ -25,6 +35,7 @@ const AddNote = (props) => {
   const [list, setList] = useState([]);
   const [words, setWords] = useState('');
   const [push, setPush] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const config = {
     apiKey: 'AIzaSyC7Wtd777P-gYVGWvtvx148h7c8YJZU8Qo',
@@ -80,6 +91,9 @@ const AddNote = (props) => {
         console.log('error ', error);
       });
   };
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -92,10 +106,10 @@ const AddNote = (props) => {
               sendData();
               props.navigation.goBack('Tabs');
             } else {
-              alert('Bir not gir');
+              Alert.alert('Bir not gir..', ' ', [{text: 'Tamam'}]);
             }
           } else {
-            alert('Bir başlık gir ');
+            Alert.alert('Bir başlık gir..', ' ', [{text: 'Tamam'}]);
           }
         }}>
         <Text style={styles.text}>Bitir</Text>
@@ -143,6 +157,24 @@ const AddNote = (props) => {
           style={[styles.button, {width: 40}]}>
           <Trash width={40} height={40} />
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => toggleModal()}
+          style={[styles.button, {width: 40}]}>
+          <Location width={40} height={40} />
+        </TouchableOpacity>
+        <Modal
+          isVisible={isModalVisible}
+          animationType="fade"
+          transparent={true}
+          onBackdropPress={() => setModalVisible(false)}>
+          <View style={{flex: 0.9, justifyContent: 'center'}}>
+            <SearchBar holder="Konum ara" />
+            <MapView
+              provider={PROVIDER_GOOGLE}
+              style={{flex: 0.9, borderRadius: 15}}
+            />
+          </View>
+        </Modal>
       </View>
     </SafeAreaView>
   );

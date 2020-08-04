@@ -17,4 +17,4 @@ export {default as OpenMic} from './OpenMic';
 export {default as MuteMic} from './MuteMic';
 export {default as Trash} from './Trash';
 export {default as Megaphone} from './Megaphone';
-
+export {default as Location} from './Location';
