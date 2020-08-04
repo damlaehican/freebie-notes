@@ -33,49 +33,24 @@ const ForgotPass = (props) => {
         <SafeAreaView style={styles.logoContainer}>
           <Image source={require('../assets/signUpLogo.png')} />
         </SafeAreaView>
-        <Text
-          style={{
-            alignSelf: 'center',
-            marginVertical: 50,
-            fontSize: 26,
-            fontWeight: 'bold',
-            color: 'white',
-          }}>
-          Şifremi Unuttum ?
-        </Text>
+        <Text style={styles.forgatPassText}>Şifremi Unuttum ?</Text>
         <MyInput
-          style={{paddingLeft: 30}}
+          style={styles.myInputPadding}
           holder="E-mail adresinizi giriniz.."
           changeText={setForgotPass}
           capital="none"
           keyboard="email-address"
         />
-        <Text
-          style={{
-            alignSelf: 'center',
-            marginBottom: 80,
-            fontSize: 15,
-            fontWeight: 'bold',
-            color: 'white',
-          }}>
+        <Text style={styles.warningText}>
           * Lütfen geçerli bir e-posta adresi giriniz !
         </Text>
         <MyButton
           buttonName="Gönder"
-          style={{backgroundColor: '#fff', color: '#FF5227'}}
+          style={styles.sendButton}
           pressButton={sendButton}
         />
         <TouchableOpacity onPress={() => props.navigation.goBack()}>
-          <Text
-            style={{
-              color: 'white',
-              textAlign: 'center',
-              fontSize: 22,
-              fontWeight: 'bold',
-              marginVertical: 20,
-            }}>
-            Vazgeç
-          </Text>
+          <Text style={styles.giveUpText}>Vazgeç</Text>
         </TouchableOpacity>
       </ImageBackground>
     </View>
@@ -94,6 +69,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 70,
+  },
+  forgatPassText: {
+    alignSelf: 'center',
+    marginVertical: 50,
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  myInputPadding: {
+    paddingLeft: 25,
+  },
+  warningText: {
+    alignSelf: 'center',
+    marginBottom: 80,
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  sendButton: {
+    backgroundColor: '#fff',
+    color: '#FF5227',
+  },
+  giveUpText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginVertical: 20,
   },
 });
 
