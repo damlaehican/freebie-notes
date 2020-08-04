@@ -11,7 +11,11 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Konuma görev eklemek için konum izni vermeniz gerekmektedir.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Konuma görev eklemek için konum izni vermeniz gerekmektedir.</string>
+  <string>Konuma görev eklemek için konum izni vermeniz gerekmektedir.</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>$(PRODUCT_NAME) would like access to your photo gallery</string>
+  <key>NSCameraUsageDescription</key>
+  <string>$(PRODUCT_NAME) would like to use your camera</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

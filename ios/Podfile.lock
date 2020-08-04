@@ -309,6 +309,8 @@ PODS:
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 3.5.0)
     - React
+  - react-native-image-picker (2.3.3):
+    - React
   - react-native-maps (0.27.1):
     - React
   - react-native-safe-area-context (3.1.1):
@@ -385,9 +387,9 @@ PODS:
     - Firebase/Auth (~> 6.27.0)
     - React
     - RNFBApp
-  - RNGestureHandler (1.7.0):
+  - RNGestureHandler (1.6.1):
     - React
-  - RNReanimated (1.10.1):
+  - RNReanimated (1.9.0):
     - React
   - RNScreens (2.9.0):
     - React
@@ -441,6 +443,7 @@ DEPENDENCIES:
   - react-native-appearance (from `../node_modules/react-native-appearance`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-google-maps (from `../node_modules/react-native-maps`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-voice (from `../node_modules/@react-native-community/voice`)"
@@ -530,6 +533,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
   react-native-safe-area-context:
@@ -619,6 +624,7 @@ SPEC CHECKSUMS:
   react-native-appearance: 0f0e5fc2fcef70e03d48c8fe6b00b9158c2ba8aa
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
+  react-native-image-picker: 3d3f85baabca60a00b75fb8facc1376db7bbdafa
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-safe-area-context: 344b969c45af3d8464d36e8dea264942992ef033
   react-native-voice: e3f9e7434f7ca545245a3019f6baa5190ba12c14
@@ -636,8 +642,8 @@ SPEC CHECKSUMS:
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNFBApp: 6fd8a7e757135d4168bf033a8812c241af7363a0
   RNFBAuth: 82b94c2f0a851be529a19f5fda2dffb390bfdd7f
-  RNGestureHandler: b6b359bb800ae399a9c8b27032bdbf7c18f08a08
-  RNReanimated: c2bb7438b57a3d987bb2e4e6e4bca94787e30b02
+  RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
+  RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
   RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNVectorIcons: da6fe858f5a65d7bbc3379540a889b0b12aa5976
@@ -646,4 +652,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: baa63c9ab8a5c9226ce4c78ecf3ac439b1f39a0c
 
-COCOAPODS: 1.9.2
+COCOAPODS: 1.9.3

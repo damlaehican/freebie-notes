@@ -1,13 +1,14 @@
 import React from 'react';
-import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
+import {SafeAreaView, View, Text, StyleSheet, StatusBar} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
 const Favourites = (props) => {
-  const {colors} = useTheme();
+  const {colors,dark} = useTheme();
   const styles = customStyles(colors);
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} />
       <View>
         <Text style={styles.text}>Favoriler</Text>
       </View>

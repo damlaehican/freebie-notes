@@ -5,12 +5,9 @@ import {
   SignUp,
   ForgotPass,
   NotesList,
-  PhotoNote,
-  VoiceNote,
   AddNote,
   Favourites,
   Settings,
-  Map,
   DrawerContent,
 } from '../screens';
 import {
@@ -53,6 +50,7 @@ const darkTheme = {
     primary: '#FF5227',
     secondary: '#37474f', //NotesCardColor
     background: '#263238', //ScreenBackgroundColor
+    noteBackground: '#b0bec5',
     card: '#263238', //NavigatorBackgroundColor
     placeHolder: 'white',
     profile: '#b0bec5',
@@ -65,6 +63,7 @@ const defaultTheme = {
     primary: '#FF5227',
     secondary: '#fff',
     background: '#fff',
+    noteBackground: '#fff',
     card: '#fff',
     placeHolder: 'gray',
     profile: '#37474f',
@@ -100,7 +99,6 @@ const Tabs = () => {
         activeTintColor: '#FF5227',
         inactiveTintColor: 'gray',
       }}>
-      <Tab.Screen name="Photo" component={PhotoNote} />
       <Tab.Screen name="Notes" component={NotesList} />
     </Tab.Navigator>
   );
@@ -127,7 +125,6 @@ const AppNavigator = () => {
               <Stack.Screen name="SignUp" component={SignUp} />
               <Stack.Screen name="Menu" component={Menus} />
               <Stack.Screen name="AddNote" component={AddNote} />
-              <Stack.Screen name="Voice" component={VoiceNote} />
               <Stack.Screen name="Settings" component={Settings} />
             </Stack.Navigator>
           </NavigationContainer>

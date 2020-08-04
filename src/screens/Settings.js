@@ -16,6 +16,7 @@ import {
   TouchableOpacity,
   Alert,
   Dimensions,
+  StatusBar,
 } from 'react-native';
 import {MyInput, MyButton, AppName} from '../components';
 import {useTheme} from '@react-navigation/native';
@@ -26,7 +27,7 @@ import {useNavigation} from '@react-navigation/native';
 const Settings = (props) => {
   const navigation = useNavigation();
   const user = auth().currentUser;
-  const {colors} = useTheme();
+  const {colors, dark} = useTheme();
   const styles = customStyles(colors);
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -90,6 +91,7 @@ const Settings = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} />
       <ImageBackground
         style={styles.imageBackground}
         source={require('../assets/background.png')}>
@@ -102,7 +104,7 @@ const Settings = (props) => {
         </View>
         <View style={styles.mail}>
           <Text style={styles.infoTexts}>İsim :</Text>
-          <Text style={styles.infoTexts}> Alper Karataş</Text>
+          <Text style={styles.infoTexts}>{user.displayName}</Text>
         </View>
         <View
           style={{

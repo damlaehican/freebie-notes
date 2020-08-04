@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {View, Text, Switch, StyleSheet} from 'react-native';
+import {View, Text, Switch, StyleSheet, StatusBar} from 'react-native';
 import {DrawerItem, DrawerItemList} from '@react-navigation/drawer';
 import {useTheme} from '@react-navigation/native';
 import {Gravatar, GravatarApi} from 'react-native-gravatar';
@@ -8,7 +8,7 @@ import {Moon, Sun} from '../components/SVGR-Components';
 
 const DrawerContent = (props) => {
   const user = auth().currentUser;
-  const {colors} = useTheme();
+  const {colors, dark} = useTheme();
   const styles = customStyles(colors);
   const {state, dispatch} = useContext(Context);
   const [isEnabled, setIsEnabled] = useState(false);
@@ -19,6 +19,7 @@ const DrawerContent = (props) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} />
       <View style={styles.header}>
         <Gravatar
           options={{
@@ -28,7 +29,7 @@ const DrawerContent = (props) => {
           }}
           style={styles.roundedProfileImage}
         />
-        <Text style={styles.userName}>UserName</Text>
+        <Text style={styles.userName}>{user.displayName}</Text>
       </View>
       <View style={styles.drawerListContainer}>
         <DrawerItemList {...props} />

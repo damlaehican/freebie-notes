@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   View,
@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
-import {MyInput, MyButton, AppName} from '../components';
+import { MyInput, MyButton, AppName } from '../components';
 
 const SignUp = (props) => {
   const [userName, setUserName] = useState('');
@@ -27,8 +27,12 @@ const SignUp = (props) => {
     if (userpass == userpassRep) {
       await auth()
         .createUserWithEmailAndPassword(usermail, userpass)
-        .then(() => {
-          props.navigation.navigate('Tabs');
+        .then((userCredentials) => {
+          userCredentials.user.updateProfile({
+            displayName: userName,
+          }).then(() => {
+            props.navigation.navigate('Login');
+          })
         })
         .catch((error) => {
           if (error.code === 'auth/email-already-in-use') {
@@ -51,11 +55,11 @@ const SignUp = (props) => {
       <ImageBackground
         style={styles.imageBackground}
         source={require('../assets/background.png')}>
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={{ flex: 1 }}>
           <View style={styles.logoContainer}>
             <Image source={require('../assets/signUpLogo.png')} />
           </View>
-          <View style={{marginVertical: 45}}>
+          <View style={{ marginVertical: 45 }}>
             <MyInput
               holder="Adınızı giriniz..."
               changeText={setName}
@@ -82,14 +86,14 @@ const SignUp = (props) => {
               secureText={true}
             />
           </View>
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <MyButton
               buttonName={'KAYIT OL'}
               pressButton={signUp}
-              style={{backgroundColor: '#fff', color: '#FF5227'}}
+              style={{ backgroundColor: '#fff', color: '#FF5227' }}
             />
           </View>
-          <AppName style={{color: '#fff'}} />
+          <AppName style={{ color: '#fff' }} />
         </SafeAreaView>
       </ImageBackground>
     </View>
@@ -109,4 +113,4 @@ const styles = StyleSheet.create({
     marginVertical: 40,
   },
 });
-export {SignUp};
+export { SignUp };

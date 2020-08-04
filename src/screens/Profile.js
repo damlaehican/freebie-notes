@@ -17,7 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '@react-navigation/native';
 
 const Profile = (props) => {
-  const {colors} = useTheme();
+  const {colors, dark} = useTheme();
   const styles = customStyles(colors);
   const user = auth().currentUser;
   const navigation = useNavigation();

@@ -30,7 +30,7 @@ if (!firebase.apps.length) {
 }
 
 const NotesList = (props) => {
-  const {colors} = useTheme();
+  const {colors, dark} = useTheme();
   const styles = customStyles(colors);
   const user = auth().currentUser;
   const mockData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -87,8 +87,7 @@ const NotesList = (props) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" />
-
+      <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} />
       <NoteSearchBar onSearch={Search} />
       {list == '' ? (
         <View style={styles.emptyNoteList}>
