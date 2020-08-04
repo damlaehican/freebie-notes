@@ -90,7 +90,13 @@ const NotesList = (props) => {
       <StatusBar barStyle="light-content" />
 
       <NoteSearchBar onSearch={Search} />
-      {!loading ? (
+      {list == '' ? (
+        <View style={styles.emptyNoteList}>
+          <Text style={styles.emptyNoteListText}>
+            Henüz kayıtlı notunuz bulunmuyor..
+          </Text>
+        </View>
+      ) : !loading ? (
         <View
           style={{
             flexDirection: 'column',
@@ -138,6 +144,16 @@ const customStyles = (colors) =>
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
       elevation: 5,
+    },
+    emptyNoteList: {
+      flex: 1,
+      alignSelf: 'center',
+      justifyContent: 'center',
+    },
+    emptyNoteListText: {
+      fontSize: 22,
+      fontWeight: 'bold',
+      color: colors.primary,
     },
   });
 export default NotesList;
