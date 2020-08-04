@@ -18,6 +18,7 @@ const NoteCard = (props) => {
       <Text style={[styles.bodyText, {color: '#006064'}]} numberOfLines={5}>
         {props.voice}
       </Text>
+      <Text style={[styles.bodyText, {color: '#d92027'}]}>{props.selectedDate}</Text>
       <View style={styles.clockView}>
         <Clock fill="#FF5227" width={18} height={18} />
       </View>

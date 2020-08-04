@@ -79,6 +79,7 @@ const NotesList = (props) => {
             icerik={item.noteDetails}
             date={item.timestamp}
             voice={item.voiceNote}
+            selectedDate={item.selectedDateTime}
           />
         </TouchableOpacity>
       </View>

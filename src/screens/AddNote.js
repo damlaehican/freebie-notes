@@ -45,6 +45,7 @@ const AddNote = (props) => {
   const [image, setImage] = useState(false);
   const [isImageFullScreen, setIsImageFullScreen] = useState(false);
   const [dates, setDate] = useState(new Date(1598051730000));
+  const [time, setTime] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
@@ -93,6 +94,7 @@ const AddNote = (props) => {
         timestamp: date,
         voiceNote: words,
         image: image,
+        selectedDateTime: formatDate(dates, time),
       })
       .then((data) => {
         //success callback
@@ -138,19 +140,35 @@ const AddNote = (props) => {
     )
   } 
 
-  const showMode=(currentMode)=>{
+  const showMode = (currentMode) => {
     setShow(true)
     setMode(currentMode)
   }
-  const openCalendar=()=>{
-    const currentDate = selectedDate || date
-    setShow(Platform.OS === 'ios')
-    setDate(currentDate)
+  const openCalendar =(event, selectedValue) => {
+    setShow(Platform.OS === 'ios');
+    if (mode == 'date') {
+      const currentDate = selectedValue || new Date();
+      setDate(currentDate);
+      setMode('time');
+      setShow(Platform.OS !== 'ios');
+    } else {
+      const selectedTime = selectedValue || new Date();
+      setTime(selectedTime);
+      setShow(Platform.OS === 'ios');
+      setMode('date');
+    }
   }
 
-  const showDate=()=>{
+  const showDate =() => {
     showMode('date')
   }
+  const showTime = () => {
+    showMode('time')
+  }
+  const formatDate = (date, time) => {
+    return `${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
+  };
 
   return (
     <ScrollView contentContainerStyle={{ flex: 1 }} bounces={false}>
@@ -159,8 +177,8 @@ const AddNote = (props) => {
         <TouchableOpacity
           style={styles.saveButton}
           onPress={() => {
-            if (data != '') {
-              if (data2 != '') {
+            if (data != '' || words != '') {
+              if (data2 != '' || words != '') {
                 sendData();
                 props.navigation.goBack('Tabs');
               } else {
@@ -187,6 +205,7 @@ const AddNote = (props) => {
         <Text style={[styles.textInput, { fontWeight: 'normal' }]} multiline={true}>
           {words}
         </Text>
+        <Text style={[styles.textInput, {fontWeight: 'normal'}]}>{formatDate(dates, time)}</Text>
         <View style={styles.iconBar}>
           <TouchableOpacity
             style={styles.button}
@@ -227,6 +246,7 @@ const AddNote = (props) => {
           {show && (
             <DateTimePicker
             testID="dateTimePicker"
+            timeZoneOffsetInMinutes={0}
             value={dates}
             mode={mode}
             is24Hour={true}
