@@ -11,6 +11,7 @@ import {
   Dimensions,
   Alert,
   ScrollView,
+  Platform
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import firebase from 'firebase';
@@ -22,11 +23,13 @@ import {
   MuteMic,
   Trash,
   Location,
+  Calender
 } from '../components/SVGR-Components';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 import Modal from 'react-native-modal';
 import { SearchBar } from '../components';
 import ImagePicker from 'react-native-image-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const AddNote = (props) => {
   const { colors, dark } = useTheme();
@@ -41,6 +44,9 @@ const AddNote = (props) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState(false);
   const [isImageFullScreen, setIsImageFullScreen] = useState(false);
+  const [dates, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
 
   const config = {
     apiKey: 'AIzaSyC7Wtd777P-gYVGWvtvx148h7c8YJZU8Qo',
@@ -130,6 +136,20 @@ const AddNote = (props) => {
         { text: 'Hayır', style: 'cancel' },
         { text: 'Evet', onPress: () => setImage(false) },]
     )
+  } 
+
+  const showMode=(currentMode)=>{
+    setShow(true)
+    setMode(currentMode)
+  }
+  const openCalendar=()=>{
+    const currentDate = selectedDate || date
+    setShow(Platform.OS === 'ios')
+    setDate(currentDate)
+  }
+
+  const showDate=()=>{
+    showMode('date')
   }
 
   return (
@@ -201,6 +221,19 @@ const AddNote = (props) => {
             onPress={() => toggleModal()}
             style={[styles.button, { width: 40 }]}>
             <Location width={40} height={40} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={showDate}>
+          <Calender width={40} height={40} />
+          {show && (
+            <DateTimePicker
+            testID="dateTimePicker"
+            value={dates}
+            mode={mode}
+            is24Hour={true}
+            display="default"
+            onChange={openCalendar}
+            />
+          )}
           </TouchableOpacity>
           <Modal
             isVisible={isModalVisible}
