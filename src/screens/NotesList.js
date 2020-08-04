@@ -8,7 +8,7 @@ import {
   Dimensions,
   Text,
 } from 'react-native';
-import {NoteSearchBar, NoteCard,GhostLoader} from '../components';
+import {NoteSearchBar, NoteCard, GhostLoader} from '../components';
 import {Plus} from '../components/SVGR-Components';
 import {ActivityIndicator} from 'react-native-paper';
 import {useTheme} from '@react-navigation/native';
@@ -46,6 +46,7 @@ const NotesList = (props) => {
       .on('value', (snapshot) => {
         if (snapshot.val() != null) {
           let responselist = Object.values(snapshot.val());
+          responselist = responselist.reverse();
           setData(responselist);
           setList(responselist);
           console.log(snapshot.val());
@@ -77,6 +78,7 @@ const NotesList = (props) => {
             title={item.noteTitle}
             icerik={item.noteDetails}
             date={item.timestamp}
+            voice={item.voiceNote}
           />
         </TouchableOpacity>
       </View>

@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {View, Text, Dimensions, StyleSheet} from 'react-native';
 import {Clock} from '../components/SVGR-Components';
 import {useTheme} from '@react-navigation/native';
+import {Megaphone} from '../components/SVGR-Components';
 
 const NoteCard = (props) => {
   const {colors} = useTheme();
@@ -13,6 +14,9 @@ const NoteCard = (props) => {
       <Text style={styles.titleText}>{props.title}</Text>
       <Text style={styles.bodyText} numberOfLines={5}>
         {props.icerik}
+      </Text>
+      <Text style={[styles.bodyText, {color: '#006064'}]} numberOfLines={5}>
+        {props.voice}
       </Text>
       <View style={styles.clockView}>
         <Clock fill="#FF5227" width={18} height={18} />

@@ -16,3 +16,5 @@ export {default as Calender} from './Calender';
 export {default as OpenMic} from './OpenMic';
 export {default as MuteMic} from './MuteMic';
 export {default as Trash} from './Trash';
+export {default as Megaphone} from './Megaphone';
+
