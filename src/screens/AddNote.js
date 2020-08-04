@@ -241,7 +241,8 @@ const AddNote = (props) => {
             style={[styles.button, { width: 40 }]}>
             <Location width={40} height={40} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={showDate}>
+          <TouchableOpacity onPress={showDate} 
+          style={styles.button}>
           <Calender width={40} height={40} />
           {show && (
             <DateTimePicker
