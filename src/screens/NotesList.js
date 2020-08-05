@@ -36,7 +36,7 @@ const NotesList = (props) => {
   const mockData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [data, setData] = useState([]);
   const [list, setList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
 
   const getData = () => {
@@ -51,6 +51,10 @@ const NotesList = (props) => {
           setList(responselist);
           console.log(snapshot.val());
           setLoading(true);
+        }
+        else {
+          setLoading(false);
+          console.log(loading);
         }
       });
   };
@@ -90,19 +94,17 @@ const NotesList = (props) => {
     <View style={styles.container}>
       <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} />
       <NoteSearchBar onSearch={Search} />
-      {list == '' ? (
+      { loading === false ? (
         <View style={styles.emptyNoteList}>
           <Text style={styles.emptyNoteListText}>
-            Henüz kayıtlı notunuz bulunmuyor..
+            Henüz bir not oluşturmadınız!
           </Text>
         </View>
-      ) : !loading ? (
+      ) : !loading === true ? (
         <View
           style={{
             flexDirection: 'column',
           }}>
-          <GhostLoader />
-          <GhostLoader />
         </View>
       ) : (
         <FlatList
