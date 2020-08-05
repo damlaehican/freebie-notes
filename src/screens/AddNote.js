@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   TextInput,
@@ -11,9 +11,9 @@ import {
   Dimensions,
   Alert,
   ScrollView,
-  Platform
+  Platform,
 } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 import firebase from 'firebase';
 import auth from '@react-native-firebase/auth';
 import Voice from '@react-native-community/voice';
@@ -23,16 +23,16 @@ import {
   MuteMic,
   Trash,
   Location,
-  Calender
+  Calender,
 } from '../components/SVGR-Components';
-import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Marker, Callout} from 'react-native-maps';
 import Modal from 'react-native-modal';
-import { SearchBar } from '../components';
+import {SearchBar} from '../components';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const AddNote = (props) => {
-  const { colors, dark } = useTheme();
+  const {colors, dark} = useTheme();
   const styles = customStyles(colors);
   const user = auth().currentUser;
   const date = new Date().toLocaleString();
@@ -111,40 +111,42 @@ const AddNote = (props) => {
 
   const chooseImage = () => {
     const options = {
-      title: "Select Image",
+      title: 'Select Image',
       storageOptions: {
         skipBackup: true,
         path: 'images',
       },
       quality: 0.2,
-    }
+    };
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else if (response.fileSize > 1000000) {
-        Alert.alert('Freebie Notes','Dosya boyutu çok büyük. Desteklenen maksimum dosya boyutu : 10.0 MB.');
+        Alert.alert(
+          'Freebie Notes',
+          'Dosya boyutu çok büyük. Desteklenen maksimum dosya boyutu : 10.0 MB.',
+        );
       } else {
         const source = 'data:image/jpeg;base64,' + response.data;
         setImage(source);
       }
     });
-  }
+  };
   const showFullScreenImage = () => setIsImageFullScreen(!isImageFullScreen);
   const deleteImage = () => {
-    Alert.alert('Freebie Notes', 'Fotoğrafı Sil?',
-      [
-        { text: 'Hayır', style: 'cancel' },
-        { text: 'Evet', onPress: () => setImage(false) },]
-    )
-  } 
+    Alert.alert('Freebie Notes', 'Fotoğrafı Sil?', [
+      {text: 'Hayır', style: 'cancel'},
+      {text: 'Evet', onPress: () => setImage(false)},
+    ]);
+  };
 
   const showMode = (currentMode) => {
-    setShow(true)
-    setMode(currentMode)
-  }
-  const openCalendar =(event, selectedValue) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+  const openCalendar = (event, selectedValue) => {
     setShow(Platform.OS === 'ios');
     if (mode == 'date') {
       const currentDate = selectedValue || new Date();
@@ -157,39 +159,47 @@ const AddNote = (props) => {
       setShow(Platform.OS === 'ios');
       setMode('date');
     }
-  }
+  };
 
-  const showDate =() => {
-    showMode('date')
-  }
+  const showDate = () => {
+    showMode('date');
+  };
   const showTime = () => {
-    showMode('time')
-  }
+    showMode('time');
+  };
   const formatDate = (date, time) => {
-    return `${date.getDate()}/${date.getMonth() +
-      1}/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
+    return `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
   };
 
   return (
-    <ScrollView contentContainerStyle={{ flex: 1 }} bounces={false}>
+    <ScrollView contentContainerStyle={{flex: 1}} bounces={false}>
       <SafeAreaView style={styles.container}>
-        <StatusBar barStyle={dark ? 'light-content': 'dark-content'} />
-        <TouchableOpacity
-          style={styles.saveButton}
-          onPress={() => {
-            if (data != '' || words != '') {
-              if (data2 != '' || words != '') {
-                sendData();
-                props.navigation.goBack('Tabs');
+        <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.saveButton}
+            onPress={() => props.navigation.goBack()}>
+            <Text style={styles.text}>Vazgeç</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.saveButton}
+            onPress={() => {
+              if (data != '' || words != '') {
+                if (data2 != '' || words != '') {
+                  sendData();
+                  props.navigation.goBack('Tabs');
+                } else {
+                  Alert.alert('Bir not gir..', ' ', [{text: 'Tamam'}]);
+                }
               } else {
-                Alert.alert('Bir not gir..', ' ', [{ text: 'Tamam' }]);
+                Alert.alert('Bir başlık gir..', ' ', [{text: 'Tamam'}]);
               }
-            } else {
-              Alert.alert('Bir başlık gir..', ' ', [{ text: 'Tamam' }]);
-            }
-          }}>
-          <Text style={styles.text}>Bitir</Text>
-        </TouchableOpacity>
+            }}>
+            <Text style={styles.text}>Bitir</Text>
+          </TouchableOpacity>
+        </View>
         <TextInput
           placeholder="Başlık"
           style={styles.textInput}
@@ -198,23 +208,25 @@ const AddNote = (props) => {
         />
         <TextInput
           placeholder="Not"
-          style={[styles.textInput, { fontWeight: 'normal' }]}
+          style={[styles.textInput, {fontWeight: 'normal'}]}
           onChangeText={(text) => setData2(text)}
           multiline={true}
         />
-        <Text style={[styles.textInput, { fontWeight: 'normal' }]} multiline={true}>
+        <Text
+          style={[styles.textInput, {fontWeight: 'normal'}]}
+          multiline={true}>
           {words}
         </Text>
-        <Text style={[styles.textInput, {fontWeight: 'normal'}]}>{formatDate(dates, time)}</Text>
+        <Text style={[styles.textInput, {fontWeight: 'normal'}]}>
+          {formatDate(dates, time)}
+        </Text>
         <View style={styles.iconBar}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={chooseImage}>
+          <TouchableOpacity style={styles.button} onPress={chooseImage}>
             <Camera fill="#FF5227" width={50} height={40} />
           </TouchableOpacity>
           {push ? (
             <TouchableOpacity
-              style={[styles.button, { width: 40 }]}
+              style={[styles.button, {width: 40}]}
               onPress={() => {
                 setPush(false);
                 Voice.stop();
@@ -222,72 +234,72 @@ const AddNote = (props) => {
               <OpenMic width={40} height={40} />
             </TouchableOpacity>
           ) : (
-              <TouchableOpacity
-                style={[styles.button, { width: 40 }]}
-                onPress={() => {
-                  setPush(true);
-                  startRecognizing();
-                }}>
-                <MuteMic width={40} height={40} />
-              </TouchableOpacity>
-            )}
+            <TouchableOpacity
+              style={[styles.button, {width: 40}]}
+              onPress={() => {
+                setPush(true);
+                startRecognizing();
+              }}>
+              <MuteMic width={40} height={40} />
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             onPress={() => setWords('')}
-            style={[styles.button, { width: 40 }]}>
+            style={[styles.button, {width: 40}]}>
             <Trash width={40} height={40} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => toggleModal()}
-            style={[styles.button, { width: 40 }]}>
+            style={[styles.button, {width: 40}]}>
             <Location width={40} height={40} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={showDate} 
-          style={styles.button}>
-          <Calender width={40} height={40} />
-          {show && (
-            <DateTimePicker
-            testID="dateTimePicker"
-            timeZoneOffsetInMinutes={0}
-            value={dates}
-            mode={mode}
-            is24Hour={true}
-            display="default"
-            onChange={openCalendar}
-            />
-          )}
+          <TouchableOpacity onPress={showDate} style={styles.button}>
+            <Calender width={40} height={40} />
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                timeZoneOffsetInMinutes={0}
+                value={dates}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={openCalendar}
+              />
+            )}
           </TouchableOpacity>
           <Modal
             isVisible={isModalVisible}
             animationType="fade"
             transparent={true}
             onBackdropPress={() => setModalVisible(false)}>
-            <View style={{ flex: 0.9, justifyContent: 'center' }}>
+            <View style={{flex: 0.9, justifyContent: 'center'}}>
               <SearchBar holder="Konum ara" />
               <MapView
                 provider={PROVIDER_GOOGLE}
-                style={{ flex: 0.9, borderRadius: 15 }}
+                style={{flex: 0.9, borderRadius: 15}}
               />
             </View>
           </Modal>
         </View>
-        {image &&
+        {image && (
           <View
-            style={isImageFullScreen ?
-              styles.fullScreenImageContainer :
-              styles.imageContainer}
-          >
+            style={
+              isImageFullScreen
+                ? styles.fullScreenImageContainer
+                : styles.imageContainer
+            }>
             <TouchableOpacity
               onPress={showFullScreenImage}
               onLongPress={deleteImage}>
               <Image
-                source={{ uri: image }}
-                style={isImageFullScreen ?
-                  styles.fullScreenImage :
-                  styles.image}
+                source={{uri: image}}
+                style={
+                  isImageFullScreen ? styles.fullScreenImage : styles.image
+                }
               />
             </TouchableOpacity>
           </View>
-        }
+        )}
       </SafeAreaView>
     </ScrollView>
   );
@@ -318,6 +330,11 @@ const customStyles = (colors) =>
       height: 40,
       marginLeft: 10,
     },
+    buttonContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      margin: 10,
+    },
     iconBar: {
       flexDirection: 'row',
       justifyContent: 'center',
@@ -339,20 +356,20 @@ const customStyles = (colors) =>
     fullScreenImage: {
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
-      resizeMode: "contain",
-      justifyContent: "center"
+      resizeMode: 'contain',
+      justifyContent: 'center',
     },
     imageContainer: {
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
       marginVertical: 10,
     },
     fullScreenImageContainer: {
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
-      position: "absolute",
+      position: 'absolute',
       backgroundColor: '#212121',
-      justifyContent: "center",
-      alignItems: "center",
-    }
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   });
