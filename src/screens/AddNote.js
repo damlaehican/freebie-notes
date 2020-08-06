@@ -170,7 +170,7 @@ const AddNote = (props) => {
     showMode('time');
   };
   const formatDate = (date, time) => {
-    return `${date.getDate()}/${
+    return `${date.getDate() - 1}/${
       date.getMonth() + 1
     }/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
   };
