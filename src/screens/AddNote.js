@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   TextInput,
@@ -13,7 +13,7 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 import firebase from 'firebase';
 import auth from '@react-native-firebase/auth';
 import Voice from '@react-native-community/voice';
@@ -22,17 +22,17 @@ import {
   OpenMic,
   MuteMic,
   Trash,
-  Location,
+  Map,
   Calender,
 } from '../components/SVGR-Components';
-import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Marker, Callout} from 'react-native-maps';
 import Modal from 'react-native-modal';
-import { SearchBar } from '../components';
+import {SearchBar} from '../components';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const AddNote = (props) => {
-  const { colors, dark } = useTheme();
+  const {colors, dark} = useTheme();
   const styles = customStyles(colors);
   const user = auth().currentUser;
   const date = new Date().toLocaleString();
@@ -138,8 +138,8 @@ const AddNote = (props) => {
   const showFullScreenImage = () => setIsImageFullScreen(!isImageFullScreen);
   const deleteImage = () => {
     Alert.alert('Freebie Notes', 'Fotoğrafı Sil?', [
-      { text: 'Hayır', style: 'cancel' },
-      { text: 'Evet', onPress: () => setImage(false) },
+      {text: 'Hayır', style: 'cancel'},
+      {text: 'Evet', onPress: () => setImage(false)},
     ]);
   };
 
@@ -172,11 +172,11 @@ const AddNote = (props) => {
   const formatDate = (date, time) => {
     return `${date.getDate()}/${
       date.getMonth() + 1
-      }/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
+    }/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
   };
 
   return (
-    <ScrollView contentContainerStyle={{ flex: 1 }} bounces={false}>
+    <ScrollView contentContainerStyle={{flex: 1}} bounces={false}>
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} />
         <View style={styles.buttonContainer}>
@@ -193,10 +193,10 @@ const AddNote = (props) => {
                   sendData();
                   props.navigation.goBack('Tabs');
                 } else {
-                  Alert.alert('Bir not gir..', ' ', [{ text: 'Tamam' }]);
+                  Alert.alert('Bir not gir..', ' ', [{text: 'Tamam'}]);
                 }
               } else {
-                Alert.alert('Bir başlık gir..', ' ', [{ text: 'Tamam' }]);
+                Alert.alert('Bir başlık gir..', ' ', [{text: 'Tamam'}]);
               }
             }}>
             <Text style={styles.text}>Bitir</Text>
@@ -210,16 +210,16 @@ const AddNote = (props) => {
         />
         <TextInput
           placeholder="Not"
-          style={[styles.textInput, { fontWeight: 'normal' }]}
+          style={[styles.textInput, {fontWeight: 'normal'}]}
           onChangeText={(text) => setData2(text)}
           multiline={true}
         />
         <Text
-          style={[styles.textInput, { fontWeight: 'normal' }]}
+          style={[styles.textInput, {fontWeight: 'normal'}]}
           multiline={true}>
           {words}
         </Text>
-        <Text style={[styles.textInput, { fontWeight: 'normal' }]}>
+        <Text style={[styles.textInput, {fontWeight: 'normal'}]}>
           {formatDate(dates, time)}
         </Text>
         <View style={styles.iconBar}>
@@ -228,7 +228,7 @@ const AddNote = (props) => {
           </TouchableOpacity>
           {push ? (
             <TouchableOpacity
-              style={[styles.button, { width: 40 }]}
+              style={[styles.button, {width: 40}]}
               onPress={() => {
                 setPush(false);
                 Voice.stop();
@@ -236,32 +236,45 @@ const AddNote = (props) => {
               <OpenMic width={40} height={40} />
             </TouchableOpacity>
           ) : (
-              <TouchableOpacity
-                style={[styles.button, { width: 40 }]}
-                onPress={() => {
-                  setPush(true);
-                  startRecognizing();
-                }}>
-                <MuteMic width={40} height={40} />
-              </TouchableOpacity>
-            )}
+            <TouchableOpacity
+              style={[styles.button, {width: 40}]}
+              onPress={() => {
+                setPush(true);
+                startRecognizing();
+              }}>
+              <MuteMic width={40} height={40} />
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             onPress={() => setWords('')}
-            style={[styles.button, { width: 40 }]}>
+            style={[styles.button, {width: 40}]}>
             <Trash width={40} height={40} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => toggleModal()}
-            style={[styles.button, { width: 40 }]}>
-            <Location width={40} height={40} />
+            style={[styles.button, {width: 40}]}>
+            <Map width={40} height={40} />
           </TouchableOpacity>
           <TouchableOpacity onPress={showDate} style={styles.button}>
             <Calender width={40} height={40} />
-            {show && (Platform.OS === 'ios' ?
-              (<Modal
-                isVisible={isDateModalVisible}
-                onBackdropPress={() => setDateModalVisible(false)}
-                style={{ justifyContent: 'flex-end', margin: 0, }}>
+            {show &&
+              (Platform.OS === 'ios' ? (
+                <Modal
+                  isVisible={isDateModalVisible}
+                  onBackdropPress={() => setDateModalVisible(false)}
+                  style={{justifyContent: 'flex-end', margin: 0}}>
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    timeZoneOffsetInMinutes={0}
+                    value={dates}
+                    mode={mode}
+                    is24Hour={true}
+                    display="default"
+                    onChange={openCalendar}
+                    style={{backgroundColor: colors.noteBackground}}
+                  />
+                </Modal>
+              ) : (
                 <DateTimePicker
                   testID="dateTimePicker"
                   timeZoneOffsetInMinutes={0}
@@ -270,30 +283,19 @@ const AddNote = (props) => {
                   is24Hour={true}
                   display="default"
                   onChange={openCalendar}
-                  style={{ backgroundColor: colors.noteBackground }}
                 />
-              </Modal>
-              ) : (<DateTimePicker
-                testID="dateTimePicker"
-                timeZoneOffsetInMinutes={0}
-                value={dates}
-                mode={mode}
-                is24Hour={true}
-                display="default"
-                onChange={openCalendar}
-              />)
-            )}
+              ))}
           </TouchableOpacity>
           <Modal
             isVisible={isModalVisible}
             animationType="fade"
             transparent={true}
             onBackdropPress={() => setModalVisible(false)}>
-            <View style={{ flex: 0.9, justifyContent: 'center' }}>
+            <View style={{flex: 0.9, justifyContent: 'center'}}>
               <SearchBar holder="Konum ara" />
               <MapView
                 provider={PROVIDER_GOOGLE}
-                style={{ flex: 0.9, borderRadius: 15 }}
+                style={{flex: 0.9, borderRadius: 15}}
               />
             </View>
           </Modal>
@@ -309,7 +311,7 @@ const AddNote = (props) => {
               onPress={showFullScreenImage}
               onLongPress={deleteImage}>
               <Image
-                source={{ uri: image }}
+                source={{uri: image}}
                 style={
                   isImageFullScreen ? styles.fullScreenImage : styles.image
                 }

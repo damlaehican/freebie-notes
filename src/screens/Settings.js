@@ -96,10 +96,6 @@ const Settings = (props) => {
         style={styles.imageBackground}
         source={require('../assets/background.png')}>
         <View style={styles.settingsContainer}>
-          <Image
-            style={styles.settingsImage}
-            source={require('../assets/settings2.png')}
-          />
           <Text style={styles.settingsText}>Ayarlar</Text>
         </View>
         <View style={styles.mail}>
