@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   SafeAreaView,
   TextInput,
@@ -49,7 +49,12 @@ const AddNote = (props) => {
   const [time, setTime] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  const [markers, setMarker] = useState([]);
+  const [markers, setMarker] = useState({
+    coordinate: {
+      latitude: 4,
+      longitude: 4,
+    }
+  });
     
 
   const config = {
@@ -98,6 +103,7 @@ const AddNote = (props) => {
         voiceNote: words,
         image: image,
         selectedDateTime: formatDate(dates, time),
+        coordinate: markers.coordinate,
       })
       .then((data) => {
         //success callback
@@ -176,12 +182,14 @@ const AddNote = (props) => {
       date.getMonth() + 1
     }/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
   };
-  
-  const addMarker = (coordinates) => {
-    setMarker({
-      markers: [...markers, {latlng: coordinates}]
-    })
-  }
+
+  const addMarker = useCallback(
+    (coordinates) => {
+      setMarker({
+      coordinate: coordinates
+    })},
+    [],
+  );
 
   return (
     <ScrollView contentContainerStyle={{flex: 1}} bounces={false}>
@@ -310,15 +318,13 @@ const AddNote = (props) => {
                   latitudeDelta: 1,
                   longitudeDelta: 1
                 }}
-                onPoiClick={(e) => addMarker(e.nativeEvent.coordinate)}
+                onPress={(e) => addMarker(e.nativeEvent.coordinate)}
               >
-              {
-              markers.map((marker)=> (
                 <Marker
-                coordinate={marker.latlng}
-                />
-              ))
-              }
+                coordinate={markers.coordinate}
+                title={"asdadadad"}
+                > 
+                </Marker>
               </MapView>
             </View>
           </Modal>
