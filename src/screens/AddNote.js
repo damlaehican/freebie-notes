@@ -49,6 +49,8 @@ const AddNote = (props) => {
   const [time, setTime] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
+  const [markers, setMarker] = useState([]);
+    
 
   const config = {
     apiKey: 'AIzaSyC7Wtd777P-gYVGWvtvx148h7c8YJZU8Qo',
@@ -174,6 +176,12 @@ const AddNote = (props) => {
       date.getMonth() + 1
     }/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
   };
+  
+  const addMarker = (coordinates) => {
+    setMarker({
+      markers: [...markers, {latlng: coordinates}]
+    })
+  }
 
   return (
     <ScrollView contentContainerStyle={{flex: 1}} bounces={false}>
@@ -296,7 +304,22 @@ const AddNote = (props) => {
               <MapView
                 provider={PROVIDER_GOOGLE}
                 style={{flex: 0.9, borderRadius: 15}}
-              />
+                initialRegion={{
+                  latitude: 41.008240,
+                  longitude: 28.978359,
+                  latitudeDelta: 1,
+                  longitudeDelta: 1
+                }}
+                onPoiClick={(e) => addMarker(e.nativeEvent.coordinate)}
+              >
+              {
+              markers.map((marker)=> (
+                <Marker
+                coordinate={marker.latlng}
+                />
+              ))
+              }
+              </MapView>
             </View>
           </Modal>
         </View>
