@@ -47,12 +47,7 @@ const styles = {
       },
     }),
     appName: StyleSheet.create({
-      container: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        marginVertical: 15,
-      },
+      container: {},
       textStyle: {
         fontWeight: 'bold',
         fontSize: 16,

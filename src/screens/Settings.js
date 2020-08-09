@@ -19,10 +19,18 @@ import {
   StatusBar,
 } from 'react-native';
 import {MyInput, MyButton, AppName} from '../components';
+import {
+  User,
+  Key,
+  Mail,
+  Notification,
+  Delete,
+} from '../components/SVGR-Components';
 import {useTheme} from '@react-navigation/native';
 import Modal from 'react-native-modal';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
+import TextField from '../components/TextField';
 
 const Settings = (props) => {
   const navigation = useNavigation();
@@ -91,98 +99,55 @@ const Settings = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} />
-      <ImageBackground
-        style={styles.imageBackground}
-        source={require('../assets/background.png')}>
-        <View style={styles.settingsContainer}>
-          <Text style={styles.settingsText}>Ayarlar</Text>
-        </View>
-        <View style={styles.mail}>
-          <Text style={styles.infoTexts}>İsim :</Text>
-          <Text style={styles.infoTexts}>{user.displayName}</Text>
-        </View>
+      <Text
+        style={{
+          fontSize: 28,
+          paddingLeft: 5,
+          color: '#546e7a',
+          fontWeight: 'bold',
+          paddingBottom: 50,
+        }}>
+        Ayarlar
+      </Text>
+      <View style={{flexDirection: 'row'}}>
+        <User color="black" width={24} height={24} />
+        <TextField title="Kullanıcı Adı:" details={user.displayName} />
+      </View>
+      <View style={{flexDirection: 'row'}}>
+        <Mail color="black" width={24} height={24} />
+        <TextField title="Email" details={newMail} />
+      </View>
+      <TouchableOpacity
+        style={{
+          flexDirection: 'row',
+          height: Dimensions.get('window').height / 18,
+        }}
+        onPress={resetPass}>
+        <Key width={24} height={24} />
+        <Text style={{fontSize: 18, paddingLeft: 5, color: '#546e7a'}}>
+          Parola Sıfırla
+        </Text>
+      </TouchableOpacity>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          width: Dimensions.get('window').height / 2.25,
+          height: Dimensions.get('window').height / 18,
+        }}>
         <View
           style={{
             flexDirection: 'row',
-            alignSelf: 'center',
-            alignItems: 'center',
           }}>
-          <View style={styles.mail}>
-            <Text style={styles.infoTexts}>E-mail :</Text>
-            <Text style={styles.infoTexts}> {newMail}</Text>
-          </View>
-          <TouchableOpacity onPress={editMail}>
-            <Image
-              style={{
-                width: 30,
-                height: 30,
-                marginHorizontal: 10,
-              }}
-              source={require('../assets/edit.png')}
-            />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignSelf: 'center',
-            alignItems: 'center',
-          }}>
-          <TouchableOpacity style={styles.mail} onPress={resetPass}>
-            <Text style={styles.infoTexts}>Parola Sıfırlama Maili Gönder</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <Modal
-            isVisible={isModalVisible}
-            animationType="fade"
-            transparent={true}
-            onBackdropPress={() => setModalVisible(false)}>
-            <View style={styles.modalContainer}>
-              <View style={styles.newMailCont}>
-                <Text style={styles.newMailText}>
-                  Yeni mail adresinizi giriniz
-                </Text>
-              </View>
-              <MyInput
-                changeText={setnewmail}
-                style={styles.input}
-                holder="Mail adresi.."
-                capital="none"
-              />
-              <Text
-                style={{
-                  fontSize: 11,
-                  marginTop: -10,
-                  marginBottom: 15,
-                  fontWeight: '600',
-                }}>
-                Lütfen geçerli bir mail adresi giriniz !
-              </Text>
-              <View style={styles.yesOrNo}>
-                <TouchableOpacity
-                  style={{marginRight: 70}}
-                  onPress={updateMail}>
-                  <Image
-                    style={{width: 35, height: 35}}
-                    source={require('../assets/okey.png')}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => toggleModal()}>
-                  <Image
-                    style={{width: 35, height: 35}}
-                    source={require('../assets/close.png')}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
-        </View>
-        <View style={styles.mail}>
-          <Text style={[styles.infoTexts, {paddingRight: 15}]}>
-            Bildirimler :
+          <Notification color="black" width={24} height={24} />
+          <Text style={{fontSize: 18, paddingLeft: 5, color: '#546e7a'}}>
+            Bildirimler
           </Text>
+        </View>
+        <View
+          style={{
+            paddingLeft: 20,
+          }}>
           <Switch
             trackColor={{false: colors.background, true: colors.text}}
             thumbColor={isEnabled ? colors.background : colors.background}
@@ -191,28 +156,23 @@ const Settings = (props) => {
             value={isEnabled}
           />
         </View>
-        <View style={styles.buttonContainer}>
-          <MyButton
-            style={styles.button}
-            buttonName="Hesabı Sil"
-            pressButton={() =>
-              Alert.alert('Freebie Notes Hesap Silme', 'Emin misiniz ?', [
-                {text: 'Sil', onPress: deleteUser},
-                {text: 'Vazgeç'},
-              ])
-            }
-          />
-          <MyButton
-            style={styles.button}
-            buttonName="Kaydet"
-            pressButton={saveInfo}
-          />
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Text style={styles.ignore}>Vazgeç</Text>
-          </TouchableOpacity>
-        </View>
-        <AppName style={styles.appName} />
-      </ImageBackground>
+      </View>
+      <TouchableOpacity
+        onPress={() =>
+          Alert.alert('Freebie Notes Hesabınız Silinecek', 'Emin misiniz ?', [
+            {text: 'Sil', onPress: deleteUser},
+            {text: 'Vazgeç'},
+          ])
+        }
+        style={{
+          flexDirection: 'row',
+          height: Dimensions.get('window').height / 18,
+        }}>
+        <Delete width={24} height={24} />
+        <Text style={{fontSize: 18, paddingLeft: 5, color: '#546e7a'}}>
+          Hesabı Sil
+        </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -221,87 +181,9 @@ const customStyles = (colors) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.primary,
-    },
-    imageBackground: {
-      flex: 1,
-    },
-    settingsContainer: {
-      flexDirection: 'row',
-      marginVertical: 10,
-      marginLeft: 20,
-      borderWidth: 0.1,
-      padding: 10,
-      borderBottomColor: colors.secondary,
-      borderColor: '#FF5227',
-      borderBottomWidth: 5,
-    },
-    settingsText: {
-      fontSize: 40,
-      fontWeight: 'bold',
-      color: colors.secondary,
-    },
-    settingsImage: {
-      marginRight: 20,
-      width: 45,
-      height: 45,
-    },
-    mail: {
-      borderWidth: 2,
-      padding: 10,
-      borderRadius: 10,
-      borderColor: colors.secondary,
-      marginVertical: 25,
-      alignSelf: 'center',
-      flexDirection: 'row',
-    },
-    infoTexts: {
-      fontWeight: 'bold',
-      fontSize: 22,
-      color: 'white',
-    },
-    buttonContainer: {
-      marginVertical: 40,
-    },
-    button: {
-      backgroundColor: colors.secondary,
-      color: '#FF5227',
-    },
-    ignore: {
-      color: 'white',
-      textAlign: 'center',
-      fontSize: 22,
-      fontWeight: 'bold',
-      marginVertical: 20,
-    },
-    appName: {
-      color: 'white',
-    },
-    modalContainer: {
-      borderRadius: 10,
-      backgroundColor: colors.background,
-      height: Dimensions.get('window').height / 4.4,
-      borderWidth: 3,
-      borderColor: 'grey',
-      alignItems: 'center',
-    },
-    newMailCont: {
-      margin: 13,
-    },
-    newMailText: {
-      fontSize: 16,
-      fontWeight: '600',
-      color: '#FF5227',
-    },
-    input: {
-      justifyContent: 'center',
-      width: 300,
-      paddingLeft: 10,
-    },
-    yesOrNo: {
-      flexDirection: 'row',
-      justifyContent: 'space-evenly',
+      marginTop: 50,
+      marginLeft: 10,
     },
   });
 
-export {Settings};
+export default Settings;

@@ -69,7 +69,9 @@ const Login = (props) => {
             <Text style={styles.signUpText}>Kaydol</Text>
           </TouchableOpacity>
         </View>
-        <AppName />
+        <View style={{alignItems: 'center'}}>
+          <AppName />
+        </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
