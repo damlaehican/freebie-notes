@@ -3,7 +3,7 @@ export default function reducer(state, action) {
         case 'SET_THEME':
             state.isDarkTheme = !state.isDarkTheme;
             return {...state};
-        default:s
+        default:
             return state;
     }
 }
