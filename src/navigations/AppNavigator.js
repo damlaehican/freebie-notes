@@ -33,9 +33,8 @@ const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 const icons = {
-  Photo: <Menu fill="gray" width={25} height={25} />,
   Notes: <Note fill="gray" width={25} height={25} />,
-  Voice: <Microphone fill="gray" width={24} height={25} />,
+  Favourites: <Star stroke="gray" width={27} height={27} />,
 };
 const drawerIcons = {
   Notes: <Note fill="gray" width={25} height={25} />,
@@ -100,6 +99,7 @@ const Tabs = () => {
         inactiveTintColor: 'gray',
       }}>
       <Tab.Screen name="Notes" component={NotesList} />
+      <Tab.Screen name="Favourites" component={Favourites} />
     </Tab.Navigator>
   );
 };
