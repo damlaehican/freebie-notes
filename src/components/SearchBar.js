@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Image, TextInput, StyleSheet, Dimensions} from 'react-native';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 const SearchBar = (props) => {
   return (
@@ -9,11 +10,15 @@ const SearchBar = (props) => {
         style={{width: 20, height: 20, alignSelf: 'center', marginLeft: 15}}
         source={require('../assets/search.png')}
       />
-      <TextInput
-        style={styles.textInputStyle}
-        onChangeText={props.onSearch}
-        placeholder={props.holder}
-        placeholderTextColor="gray"
+      <GooglePlacesAutocomplete
+        placeholder="Konum ara"
+        onPress={(data,details=null)=>{
+          console.log(data,details)
+        }}
+        query={{
+          key:'AIzaSyBFHZOXnvhTzrQEmeIDDssNpqoc8SPgf4E',
+          language:'tr'
+        }}
       />
     </View>
   );
