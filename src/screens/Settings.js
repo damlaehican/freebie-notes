@@ -31,6 +31,8 @@ import Modal from 'react-native-modal';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
 import TextField from '../components/TextField';
+import { LocalNotification } from '../services/LocalPushController';
+
 
 const Settings = (props) => {
   const navigation = useNavigation();
@@ -97,6 +99,12 @@ const Settings = (props) => {
       });
   };
 
+  const handlePress = () => {
+    if (isEnabled === false){
+      LocalNotification()
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text
@@ -153,8 +161,9 @@ const Settings = (props) => {
             thumbColor={isEnabled ? colors.background : colors.background}
             ios_backgroundColor="grey"
             onValueChange={toggleSwitch}
+            onTouchStart={handlePress}
             value={isEnabled}
-          />
+            />
         </View>
       </View>
       <TouchableOpacity
