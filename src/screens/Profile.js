@@ -28,6 +28,7 @@ const Profile = (props) => {
   const signOut = () => {
     auth().signOut();
     AsyncStorage.removeItem('@USER_ID');
+    AsyncStorage.removeItem('@THEME');
     navigation.navigate('Login');
     setModalVisible(false);
   };

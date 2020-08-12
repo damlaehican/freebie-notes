@@ -157,8 +157,8 @@ const Settings = (props) => {
             paddingLeft: 20,
           }}>
           <Switch
-            trackColor={{false: colors.background, true: colors.text}}
-            thumbColor={isEnabled ? colors.background : colors.background}
+            trackColor={{false: 'lightgray', true: colors.text}}
+            thumbColor={colors.primary}
             ios_backgroundColor="grey"
             onValueChange={toggleSwitch}
             onTouchStart={handlePress}

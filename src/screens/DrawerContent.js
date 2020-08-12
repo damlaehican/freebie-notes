@@ -11,7 +11,7 @@ const DrawerContent = (props) => {
   const {colors, dark} = useTheme();
   const styles = customStyles(colors);
   const {state, dispatch} = useContext(Context);
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(state.isDarkTheme);
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
     dispatch({type: 'SET_THEME'});

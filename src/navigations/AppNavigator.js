@@ -122,7 +122,7 @@ const AppNavigator = () => {
               <Stack.Screen name="Splash" component={Splash} />
               <Stack.Screen name="ForgotPass" component={ForgotPass} />
               <Stack.Screen name="SignUp" component={SignUp} />
-              <Stack.Screen name="Menu" component={Menus} />
+              <Stack.Screen name="Menu" component={Menus} options={{gestureEnabled: false}}/>
               <Stack.Screen name="AddNote" component={AddNote} />
               <Stack.Screen name="Settings" component={Settings} />
             </Stack.Navigator>
