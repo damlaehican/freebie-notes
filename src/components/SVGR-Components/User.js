@@ -27,7 +27,7 @@ function User(props) {
         x2={49}
         y2={-0.015}
         gradientTransform="matrix(1 0 0 -1 0 104)">
-        <Stop offset={0} stopColor="ff9800" />
+        <Stop offset={0} stopColor="#ff9800" />
         <Stop offset={1} stopColor="#f57c00" />
       </LinearGradient>
       <Path

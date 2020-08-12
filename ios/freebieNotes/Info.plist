@@ -2,20 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
- 	<key>NSMicrophoneUsageDescription</key>
-    <string>Sesli not eklemek için mikrofon izni veriniz</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Sesli not eklemek için konuşma tanıma izni veriniz</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Harita üzerinde konumunuzun görüntülenebilmesi için konum izni vermeniz gereklidir.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Konuma görev eklemek için konum izni vermeniz gerekmektedir.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-  <string>Konuma görev eklemek için konum izni vermeniz gerekmektedir.</string>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>$(PRODUCT_NAME) would like access to your photo gallery</string>
-  <key>NSCameraUsageDescription</key>
-  <string>$(PRODUCT_NAME) would like to use your camera</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -51,8 +37,20 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to use your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Sesli not eklemek için mikrofon izni veriniz</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like access to your photo gallery</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Sesli not eklemek için konuşma tanıma izni veriniz</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

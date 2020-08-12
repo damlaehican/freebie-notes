@@ -5,16 +5,6 @@ import auth from '@react-native-firebase/auth';
 
 const user = auth().currentUser;
 
-firebase
-      .database()
-      .ref(`notes/${user.uid}`)
-      .on('value', (snapshot) => {
-        if (snapshot.val() != null) {
-          let responselist = Object.values(snapshot.val());
-          console.log(responselist)
-        }
-    });
-    
 PushNotification.configure({
     onNotification: function(notification) {
       console.log('LOCAL NOTIFICATION ==>', notification)

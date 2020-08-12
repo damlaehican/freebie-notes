@@ -7,3 +7,4 @@ export {default as Favourites} from './Favourites';
 export * from './Profile';
 export {default as Settings} from './Settings';
 export * from './DrawerContent';
+export * from './Splash';

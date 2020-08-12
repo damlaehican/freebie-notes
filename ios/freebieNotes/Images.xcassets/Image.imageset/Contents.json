@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "signUpLogo copy.png",
+      "filename" : "splashlogo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "signUpLogo copy-1.png",
+      "filename" : "splashlogo-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "signUpLogo copy-2.png",
+      "filename" : "splashlogo-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

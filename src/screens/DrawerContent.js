@@ -35,13 +35,13 @@ const DrawerContent = (props) => {
         <DrawerItemList {...props} />
         <View style={styles.switchContainer}>
           <DrawerItem
-            label="Theme"
+            label={isEnabled ? 'Açık Tema' : 'Koyu Tema'}
             onPress={toggleSwitch}
             icon={() =>
               isEnabled ? (
-                <Moon stroke="gray" width={25} height={25} />
-              ) : (
                 <Sun stroke="gray" width={25} height={25} />
+                ) : (
+                <Moon stroke="gray" width={25} height={25} />
               )
             }
           />
