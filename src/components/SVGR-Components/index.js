@@ -25,3 +25,5 @@ export {default as User} from './User';
 export {default as Notification} from './Notification';
 export {default as Delete} from './Delete';
 export {default as SplashLogo} from './SplashLogo';
+export {default as Dots} from './Dots';
+export {default as Done} from './Done';

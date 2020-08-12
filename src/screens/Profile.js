@@ -41,7 +41,7 @@ const Profile = (props) => {
       <TouchableOpacity onPress={toggleModal}>
         <Gravatar
           options={{
-            email: user.email, //m.enver.akkoc@gmail.com
+            email: user.email,
             parameters: {size: '200', d: 'mm'},
             secure: true,
           }}
@@ -57,7 +57,7 @@ const Profile = (props) => {
           <View style={{alignSelf: 'center'}}>
             <Gravatar
               options={{
-                email: user.email, //m.enver.akkoc@gmail.com
+                email: user.email,
                 parameters: {size: '200', d: 'mm'},
                 secure: true,
               }}
