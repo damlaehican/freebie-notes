@@ -32,7 +32,7 @@ const Favourites = (props) => {
           let favouriteList = responselist.filter(item =>  item.isFavourite === true)
           setData(favouriteList);
           setList(favouriteList);
-          setLoading(true);
+          setLoading(favouriteList.length ? true : false);
         }
         else {
           setLoading(false);
