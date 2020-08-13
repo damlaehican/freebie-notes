@@ -40,7 +40,7 @@ const DrawerContent = (props) => {
             icon={() =>
               isEnabled ? (
                 <Sun stroke="gray" width={25} height={25} />
-                ) : (
+              ) : (
                 <Moon stroke="gray" width={25} height={25} />
               )
             }

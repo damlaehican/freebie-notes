@@ -6502,6 +6502,11 @@ react-native-copilot@^2.4.8:
     hoist-non-react-statics "^3.0.1"
     mitt "^1.1.3"
 
+react-native-fade@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-fade/-/react-native-fade-1.0.3.tgz#e27cd5a75c0d09a9ee82d854fb3851006c228d23"
+  integrity sha512-MVqjYVxzuUBDjkgMygZKJIkrsM3WI1SqwFc+7nTR72bUcn6HpqCDHH5ZfUT2H5dqKDtndvNkRtNER9PZr9yGTA==
+
 react-native-gesture-handler@^1.6.1, react-native-gesture-handler@~1.6.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.6.1.tgz#678e2dce250ed66e93af409759be22cd6375dd17"
@@ -6528,12 +6533,20 @@ react-native-gravatar@^1.0.2:
   dependencies:
     gravatar-api "^1.5.0"
 
+react-native-header-scroll-view@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-header-scroll-view/-/react-native-header-scroll-view-2.0.0.tgz#68781256fdaac8f7ee4ed23f71016fcbabc50924"
+  integrity sha512-9JuMaa5Ec/WfZlQl4LnHiHO3c8Od/43EKJU/NKy20b4z7C3ZD14Ho4gloXiv33E2NR4KLnKJsKDulgGIwXuQHQ==
+  dependencies:
+    react-native-fade "^1.0.3"
+    react-native-iphone-x-helper "^1.2.0"
+
 react-native-image-picker@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-2.3.3.tgz#eaacd4a1ed9e9887613be31f0765478ca2f18a51"
   integrity sha512-i/7JDnxKkUGSbFY2i7YqFNn3ncJm1YlcrPKXrXmJ/YUElz8tHkuwknuqBd9QCJivMfHX41cmq4XvdBDwIOtO+A==
 
-react-native-iphone-x-helper@^1.2.1:
+react-native-iphone-x-helper@^1.2.0, react-native-iphone-x-helper@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==

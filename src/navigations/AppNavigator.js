@@ -10,7 +10,7 @@ import {
   Settings,
   DrawerContent,
   Splash,
-  NoteDetails
+  NoteDetails,
 } from '../screens';
 import {
   NavigationContainer,
@@ -21,11 +21,7 @@ import {
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {
-  Note,
-  Star,
-  SettingsIcon,
-} from '../components/SVGR-Components';
+import {Note, Star, SettingsIcon} from '../components/SVGR-Components';
 import Provider from '../context/Provider';
 
 const Stack = createStackNavigator();
@@ -80,8 +76,16 @@ function Menus({navigation}) {
       drawerContentOptions={{
         activeBackgroundColor: null,
       }}>
-      <Drawer.Screen name="Notes" component={Tabs} options={{ title:'Notlar'}}/>
-      <Drawer.Screen name="Settings" component={Settings} options={{ title:'Ayarlar'}}/>
+      <Drawer.Screen
+        name="Notes"
+        component={Tabs}
+        options={{title: 'Notlar'}}
+      />
+      <Drawer.Screen
+        name="Settings"
+        component={Settings}
+        options={{title: 'Ayarlar'}}
+      />
     </Drawer.Navigator>
   );
 }
@@ -97,8 +101,16 @@ const Tabs = () => {
         activeTintColor: '#FF5227',
         inactiveTintColor: 'gray',
       }}>
-      <Tab.Screen name="Notes" component={NotesList} options={{ title:'Notlar'}}/>
-      <Tab.Screen name="Favourites" component={Favourites} options={{ title:'Favoriler'}} />
+      <Tab.Screen
+        name="Notes"
+        component={NotesList}
+        options={{title: 'Notlar'}}
+      />
+      <Tab.Screen
+        name="Favourites"
+        component={Favourites}
+        options={{title: 'Favoriler'}}
+      />
     </Tab.Navigator>
   );
 };
@@ -109,7 +121,9 @@ const AppNavigator = () => {
         {(value) => (
           <NavigationContainer
             theme={value.state.isDarkTheme ? darkTheme : defaultTheme}>
-            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Splash" >
+            <Stack.Navigator
+              screenOptions={{headerShown: false}}
+              initialRouteName="Splash">
               <Stack.Screen
                 name="Login"
                 component={Login}
@@ -123,10 +137,14 @@ const AppNavigator = () => {
               <Stack.Screen name="Splash" component={Splash} />
               <Stack.Screen name="ForgotPass" component={ForgotPass} />
               <Stack.Screen name="SignUp" component={SignUp} />
-              <Stack.Screen name="Menu" component={Menus} options={{gestureEnabled: false}}/>
+              <Stack.Screen
+                name="Menu"
+                component={Menus}
+                options={{gestureEnabled: false}}
+              />
               <Stack.Screen name="AddNote" component={AddNote} />
               <Stack.Screen name="Settings" component={Settings} />
-              <Stack.Screen name="NoteDetails" component={NoteDetails}/>
+              <Stack.Screen name="NoteDetails" component={NoteDetails} />
             </Stack.Navigator>
           </NavigationContainer>
         )}

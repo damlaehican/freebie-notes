@@ -110,11 +110,9 @@ const AddNote = (props) => {
       })
       .then((data) => {
         //success callback
-        console.log('data ', data);
       })
       .catch((error) => {
         //error callback
-        console.log('error ', error);
       });
   };
   const toggleModal = () => {
@@ -132,9 +130,7 @@ const AddNote = (props) => {
     };
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
-        console.log('User cancelled image picker');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
       } else if (response.fileSize > 1000000) {
         Alert.alert(
           'Freebie Notes',

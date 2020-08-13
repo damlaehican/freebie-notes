@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,19 +7,17 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import { Clock } from '../components/SVGR-Components';
-import { useTheme } from '@react-navigation/native';
-import { Dots, Delete, Done, Star } from '../components/SVGR-Components';
+import {Clock} from '../components/SVGR-Components';
+import {useTheme} from '@react-navigation/native';
+import {Dots, Delete, Done, Star} from '../components/SVGR-Components';
 import Modal from 'react-native-modal';
 import firebase from 'firebase';
 import auth from '@react-native-firebase/auth';
 
-
 const NoteCard = (props) => {
-
   const user = auth().currentUser;
   const [key, value] = props.item;
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const styles = customStyles(colors);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isFavourite, setIsFavourite] = useState(value.isFavourite);
@@ -29,10 +27,7 @@ const NoteCard = (props) => {
   };
 
   const deleteItem = () => {
-    firebase
-      .database()
-      .ref(`notes/${user.uid}/${key}`)
-      .remove();
+    firebase.database().ref(`notes/${user.uid}/${key}`).remove();
     setModalVisible(false);
     Alert.alert('Delete');
   };
@@ -44,17 +39,13 @@ const NoteCard = (props) => {
 
   const favourItem = () => {
     setIsFavourite(!isFavourite);
-    firebase
-      .database()
-      .ref(`notes/${user.uid}/${key}`)
-      .update({
-        isFavourite: !value.isFavourite,
-      })
-  }
+    firebase.database().ref(`notes/${user.uid}/${key}`).update({
+      isFavourite: !value.isFavourite,
+    });
+  };
 
   return (
     <View style={styles.container}>
-
       <View style={styles.cardContainer}>
         <Modal
           isVisible={isModalVisible}
@@ -63,37 +54,39 @@ const NoteCard = (props) => {
           onBackdropPress={() => setModalVisible(false)}>
           <View style={styles.modalView}>
             <TouchableOpacity onPress={deleteItem}>
-              <Delete style={{ width: 40, height: 40 }} />
+              <Delete style={styles.iconStyle} />
             </TouchableOpacity>
             <TouchableOpacity onPress={doneItem}>
-              <Done style={{ width: 40, height: 40 }} />
+              <Done style={styles.iconStyle} />
             </TouchableOpacity>
             <TouchableOpacity onPress={favourItem}>
-              <Star stroke={'#FF5227'} fill={isFavourite ? '#FF5227' : 'none'} />
+              <Star
+                stroke={'#FF5227'}
+                fill={isFavourite ? '#FF5227' : 'none'}
+              />
             </TouchableOpacity>
           </View>
         </Modal>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={styles.touchableOpacity}>
           <Text style={styles.dateText}>{value.timestamp}</Text>
           <TouchableOpacity onPress={toggleModal}>
-            <Dots style={{ width: 25, height: 25 }} />
+            <Dots style={{width: 25, height: 25}} />
           </TouchableOpacity>
         </View>
         <Text style={styles.titleText}>{value.noteTitle}</Text>
         <Text style={styles.bodyText} numberOfLines={5}>
           {value.noteDetails}
         </Text>
-        <Text style={[styles.bodyText, { color: '#006064' }]} numberOfLines={5}>
+        <Text style={[styles.bodyText, {color: '#006064'}]} numberOfLines={5}>
           {value.voiceNote}
         </Text>
-        <Text style={[styles.bodyText, { color: '#d92027' }]}>
+        <Text style={[styles.bodyText, {color: '#d92027'}]}>
           {value.selectedDateTime}
         </Text>
         <View style={styles.clockView}>
           <Clock fill="#FF5227" width={18} height={18} />
         </View>
       </View>
-
     </View>
   );
 };
@@ -152,6 +145,14 @@ const customStyles = (colors) =>
       width: Dimensions.get('window').width / 2,
       borderWidth: 3,
       borderColor: 'grey',
+    },
+    iconStyle: {
+      width: 40,
+      height: 40,
+    },
+    touchableOpacity: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
   });
 export default NoteCard;

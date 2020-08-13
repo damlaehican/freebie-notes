@@ -47,8 +47,7 @@ const NotesList = (props) => {
           setData(responselist);
           setList(responselist);
           setLoading(true);
-        }
-        else {
+        } else {
           setLoading(false);
         }
       });
@@ -66,23 +65,25 @@ const NotesList = (props) => {
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
-    setList(filteredList); 
+    setList(filteredList);
   };
 
-  const renderItem = ({item}) => { 
-    return(
-      <TouchableOpacity onPress={() => props.navigation.navigate('NoteDetails',{item:item[1]})}>
+  const renderItem = ({item}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          props.navigation.navigate('NoteDetails', {item: item[0]});
+        }}>
         <NoteCard item={item} />
       </TouchableOpacity>
-    )
-  }
-     
+    );
+  };
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle={dark ? 'light-content' : 'dark-content'} />
       <NoteSearchBar onSearch={Search} />
-      { loading === false ? (
+      {loading === false ? (
         <View style={styles.emptyNoteList}>
           <Text style={styles.emptyNoteListText}>
             Henüz bir not oluşturmadınız!
@@ -92,8 +93,8 @@ const NotesList = (props) => {
         <View
           style={{
             flexDirection: 'column',
-          }}>
-        </View>
+          }}
+        />
       ) : (
         <FlatList
           data={list}
