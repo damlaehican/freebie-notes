@@ -79,7 +79,7 @@ const Favourites = (props) => {
       { loading === false ? (
         <View style={styles.emptyNoteList}>
           <Text style={styles.emptyNoteListText}>
-            Henüz favori bir notunuz bulunmuyor!
+            Favori notunuz bulunmuyor!
           </Text>
         </View>
       ) : !loading === true ? (

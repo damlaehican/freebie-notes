@@ -10,11 +10,9 @@ import {
 } from 'react-native';
 import {NoteSearchBar, NoteCard, GhostLoader} from '../components';
 import {Plus} from '../components/SVGR-Components';
-import {ActivityIndicator} from 'react-native-paper';
 import {useTheme} from '@react-navigation/native';
 import firebase from 'firebase';
 import auth from '@react-native-firebase/auth';
-import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 
 const config = {
   apiKey: 'AIzaSyC7Wtd777P-gYVGWvtvx148h7c8YJZU8Qo',
@@ -33,7 +31,6 @@ const NotesList = (props) => {
   const {colors, dark} = useTheme();
   const styles = customStyles(colors);
   const user = auth().currentUser;
-  const mockData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [data, setData] = useState([]);
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,16 +42,14 @@ const NotesList = (props) => {
       .ref(`notes/${user.uid}`)
       .on('value', (snapshot) => {
         if (snapshot.val() != null) {
-          let responselist = Object.values(snapshot.val());
+          let responselist = Object.entries(snapshot.val());
           responselist = responselist.reverse();
           setData(responselist);
           setList(responselist);
-          console.log(snapshot.val());
           setLoading(true);
         }
         else {
           setLoading(false);
-          console.log(loading);
         }
       });
   };
@@ -71,24 +66,10 @@ const NotesList = (props) => {
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
-    setList(filteredList);
+    setList(filteredList); 
   };
 
-  const renderItem = ({item}) => {
-    return (
-      <View style={{marginRight: 10, marginLeft: 10}}>
-        <TouchableOpacity>
-          <NoteCard
-            title={item.noteTitle}
-            icerik={item.noteDetails}
-            date={item.timestamp}
-            voice={item.voiceNote}
-            selectedDate={item.selectedDateTime}
-          />
-        </TouchableOpacity>
-      </View>
-    );
-  };
+  const renderItem = ({item}) =>  <NoteCard item={item} />
 
   return (
     <View style={styles.container}>

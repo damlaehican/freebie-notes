@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,13 +7,19 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {Clock} from '../components/SVGR-Components';
-import {useTheme} from '@react-navigation/native';
-import {Dots, Delete, Done} from '../components/SVGR-Components';
+import { Clock } from '../components/SVGR-Components';
+import { useTheme } from '@react-navigation/native';
+import { Dots, Delete, Done, Star } from '../components/SVGR-Components';
 import Modal from 'react-native-modal';
+import firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 
-const NoteCard = (props) => {
-  const {colors} = useTheme();
+
+const NoteCard = ({ item }) => {
+
+  const user = auth().currentUser;
+  const [key, value] = item;
+  const { colors } = useTheme();
   const styles = customStyles(colors);
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -21,51 +27,68 @@ const NoteCard = (props) => {
     setModalVisible(!isModalVisible);
   };
 
-  const DeleteItem = () => {
+  const deleteItem = () => {
+    firebase
+      .database()
+      .ref(`notes/${user.uid}/${key}`)
+      .remove()
+      .then(() => console.log('başarılı'))
+      .catch(err => console.log(err));
     setModalVisible(false);
     Alert.alert('Delete');
   };
 
-  const DoneItem = () => {
+  const doneItem = () => {
     setModalVisible(false);
     Alert.alert('Done');
   };
 
+  const favourItem = () => {
+
+  }
+
   return (
     <View style={styles.container}>
-      <Modal
-        isVisible={isModalVisible}
-        animationType="fade"
-        transparent={true}
-        onBackdropPress={() => setModalVisible(false)}>
-        <View style={styles.modalView}>
-          <TouchableOpacity onPress={DeleteItem}>
-            <Delete style={{width: 40, height: 40}} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={DoneItem}>
-            <Done style={{width: 40, height: 40}} />
-          </TouchableOpacity>
+      <TouchableOpacity>
+        <View style={styles.cardContainer}>
+          <Modal
+            isVisible={isModalVisible}
+            animationType="fade"
+            transparent={true}
+            onBackdropPress={() => setModalVisible(false)}>
+            <View style={styles.modalView}>
+              <TouchableOpacity onPress={deleteItem}>
+                <Delete style={{ width: 40, height: 40 }} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={doneItem}>
+                <Done style={{ width: 40, height: 40 }} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={favourItem}>
+                <Star style={{ width: 40, height: 40 }} />
+              </TouchableOpacity>
+            </View>
+          </Modal>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text style={styles.dateText}>{value.timestamp}</Text>
+            <TouchableOpacity onPress={toggleModal}>
+              <Dots style={{ width: 25, height: 25 }} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.titleText}>{value.noteTitle}</Text>
+          <Text style={styles.bodyText} numberOfLines={5}>
+            {value.noteDetails}
+          </Text>
+          <Text style={[styles.bodyText, { color: '#006064' }]} numberOfLines={5}>
+            {value.voiceNote}
+          </Text>
+          <Text style={[styles.bodyText, { color: '#d92027' }]}>
+            {value.selectedDateTime}
+          </Text>
+          <View style={styles.clockView}>
+            <Clock fill="#FF5227" width={18} height={18} />
+          </View>
         </View>
-      </Modal>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Text style={styles.dateText}>{props.date}</Text>
-        <TouchableOpacity onPress={toggleModal}>
-          <Dots style={{width: 25, height: 25}} />
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.titleText}>{props.title}</Text>
-      <Text style={styles.bodyText} numberOfLines={5}>
-        {props.icerik}
-      </Text>
-      <Text style={[styles.bodyText, {color: '#006064'}]} numberOfLines={5}>
-        {props.voice}
-      </Text>
-      <Text style={[styles.bodyText, {color: '#d92027'}]}>
-        {props.selectedDate}
-      </Text>
-      <View style={styles.clockView}>
-        <Clock fill="#FF5227" width={18} height={18} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -73,6 +96,9 @@ const NoteCard = (props) => {
 const customStyles = (colors) =>
   StyleSheet.create({
     container: {
+      marginHorizontal: 10,
+    },
+    cardContainer: {
       height: 250,
       borderRadius: 10,
       backgroundColor: colors.secondary,
