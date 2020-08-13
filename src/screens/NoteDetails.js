@@ -33,8 +33,6 @@ const NoteDetails = (props) => {
           <Text style={(styles.text, {fontWeight: 'bold'})}>
             {props.route.params.item.noteTitle}
           </Text>
-          <Text>Damla</Text>
-          <Text>ısdhgflkgşdflg</Text>
           <Text>{props.route.params.item.noteDetails}</Text>
           {imageUri && (
             <Image source={{uri: imageUri}} style={{width: 250, height: 250}} />

@@ -72,7 +72,7 @@ const NotesList = (props) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          props.navigation.navigate('NoteDetails', {item: item[0]});
+          props.navigation.navigate('NoteDetails', {item: item[1]});
         }}>
         <NoteCard item={item} />
       </TouchableOpacity>
