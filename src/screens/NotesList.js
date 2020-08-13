@@ -69,13 +69,14 @@ const NotesList = (props) => {
     setList(filteredList); 
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item}) => { 
     return(
-      <TouchableOpacity onPress={()=>props.navigation.navigate('NoteDetails')}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('NoteDetails')}>
         <NoteCard item={item} />
       </TouchableOpacity>
     )
   }
+     
 
   return (
     <View style={styles.container}>

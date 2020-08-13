@@ -15,13 +15,14 @@ import firebase from 'firebase';
 import auth from '@react-native-firebase/auth';
 
 
-const NoteCard = ({ item }) => {
+const NoteCard = (props) => {
 
   const user = auth().currentUser;
-  const [key, value] = item;
+  const [key, value] = props.item;
   const { colors } = useTheme();
   const styles = customStyles(colors);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(value.isFavourite);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -31,9 +32,7 @@ const NoteCard = ({ item }) => {
     firebase
       .database()
       .ref(`notes/${user.uid}/${key}`)
-      .remove()
-      .then(() => console.log('başarılı'))
-      .catch(err => console.log(err));
+      .remove();
     setModalVisible(false);
     Alert.alert('Delete');
   };
@@ -44,51 +43,57 @@ const NoteCard = ({ item }) => {
   };
 
   const favourItem = () => {
-
+    setIsFavourite(!isFavourite);
+    firebase
+      .database()
+      .ref(`notes/${user.uid}/${key}`)
+      .update({
+        isFavourite: !value.isFavourite,
+      })
   }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <View style={styles.cardContainer}>
-          <Modal
-            isVisible={isModalVisible}
-            animationType="fade"
-            transparent={true}
-            onBackdropPress={() => setModalVisible(false)}>
-            <View style={styles.modalView}>
-              <TouchableOpacity onPress={deleteItem}>
-                <Delete style={{ width: 40, height: 40 }} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={doneItem}>
-                <Done style={{ width: 40, height: 40 }} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={favourItem}>
-                <Star style={{ width: 40, height: 40 }} />
-              </TouchableOpacity>
-            </View>
-          </Modal>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={styles.dateText}>{value.timestamp}</Text>
-            <TouchableOpacity onPress={toggleModal}>
-              <Dots style={{ width: 25, height: 25 }} />
+
+      <View style={styles.cardContainer}>
+        <Modal
+          isVisible={isModalVisible}
+          animationType="fade"
+          transparent={true}
+          onBackdropPress={() => setModalVisible(false)}>
+          <View style={styles.modalView}>
+            <TouchableOpacity onPress={deleteItem}>
+              <Delete style={{ width: 40, height: 40 }} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={doneItem}>
+              <Done style={{ width: 40, height: 40 }} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={favourItem}>
+              <Star stroke={'#FF5227'} fill={isFavourite ? '#FF5227' : 'none'} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.titleText}>{value.noteTitle}</Text>
-          <Text style={styles.bodyText} numberOfLines={5}>
-            {value.noteDetails}
-          </Text>
-          <Text style={[styles.bodyText, { color: '#006064' }]} numberOfLines={5}>
-            {value.voiceNote}
-          </Text>
-          <Text style={[styles.bodyText, { color: '#d92027' }]}>
-            {value.selectedDateTime}
-          </Text>
-          <View style={styles.clockView}>
-            <Clock fill="#FF5227" width={18} height={18} />
-          </View>
+        </Modal>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Text style={styles.dateText}>{value.timestamp}</Text>
+          <TouchableOpacity onPress={toggleModal}>
+            <Dots style={{ width: 25, height: 25 }} />
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+        <Text style={styles.titleText}>{value.noteTitle}</Text>
+        <Text style={styles.bodyText} numberOfLines={5}>
+          {value.noteDetails}
+        </Text>
+        <Text style={[styles.bodyText, { color: '#006064' }]} numberOfLines={5}>
+          {value.voiceNote}
+        </Text>
+        <Text style={[styles.bodyText, { color: '#d92027' }]}>
+          {value.selectedDateTime}
+        </Text>
+        <View style={styles.clockView}>
+          <Clock fill="#FF5227" width={18} height={18} />
+        </View>
+      </View>
+
     </View>
   );
 };

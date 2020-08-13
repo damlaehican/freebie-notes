@@ -46,7 +46,6 @@ const AddNote = (props) => {
   const [isDateModalVisible, setDateModalVisible] = useState(false);
   const [image, setImage] = useState(false);
   const [isImageFullScreen, setIsImageFullScreen] = useState(false);
-  const [isFavourite, setIsFavourite] = useState(false);
   const [dates, setDate] = useState(new Date(1598051730000));
   const [time, setTime] = useState(new Date());
   const [mode, setMode] = useState('date');
@@ -106,7 +105,7 @@ const AddNote = (props) => {
         image: image,
         selectedDateTime: formatDate(dates, time),
         coordinate: markers.coordinate,
-        isFavourite: isFavourite,
+        isFavourite: false,
         isDone: isDone,
       })
       .then((data) => {
