@@ -57,6 +57,7 @@ const AddNote = (props) => {
       longitude: 4,
     },
   });
+  const [isDone, setDone] = useState(false);
 
   const config = {
     apiKey: 'AIzaSyC7Wtd777P-gYVGWvtvx148h7c8YJZU8Qo',
@@ -106,6 +107,7 @@ const AddNote = (props) => {
         selectedDateTime: formatDate(dates, time),
         coordinate: markers.coordinate,
         isFavourite: isFavourite,
+        isDone: isDone,
       })
       .then((data) => {
         //success callback
