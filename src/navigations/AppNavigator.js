@@ -10,6 +10,7 @@ import {
   Settings,
   DrawerContent,
   Splash,
+  NoteDetails
 } from '../screens';
 import {
   NavigationContainer,
@@ -125,6 +126,7 @@ const AppNavigator = () => {
               <Stack.Screen name="Menu" component={Menus} options={{gestureEnabled: false}}/>
               <Stack.Screen name="AddNote" component={AddNote} />
               <Stack.Screen name="Settings" component={Settings} />
+              <Stack.Screen name="NoteDetails" component={NoteDetails}/>
             </Stack.Navigator>
           </NavigationContainer>
         )}
