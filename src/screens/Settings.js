@@ -189,7 +189,7 @@ const Settings = (props) => {
       <TouchableOpacity
         style={styles.vazgecContainer}
         onPress={() => navigation.goBack()}>
-        <Text style={styles.vazgecText}>Vazgeç</Text>
+        <Text style={styles.vazgecText}>Kaydet</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

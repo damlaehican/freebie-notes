@@ -1,20 +1,21 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   StyleSheet,
-  StatusBar,
   Dimensions,
   Text,
   SafeAreaView,
   Image,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
+import {Back} from '../components/SVGR-Components';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 const NoteDetails = (props) => {
-  const { colors, dark } = useTheme();
+  const {colors, dark} = useTheme();
   const styles = customStyles(colors);
   const item = props.route.params.item;
 
@@ -24,27 +25,24 @@ const NoteDetails = (props) => {
         <View style={styles.noteContainer}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.infoContainer}>
-              <Text style={styles.noteTitle}>
-                {item.noteTitle}
-              </Text>
+              <TouchableOpacity onPress={() => props.navigation.goBack()}>
+                <Back style={{width: 30, height: 30, marginTop: -10}} />
+              </TouchableOpacity>
+              <Text style={styles.noteTitle}>{item.noteTitle}</Text>
             </View>
             <View style={styles.infoContainer}>
-              <Text style={styles.noteDetails}>
-                {item.noteDetails}
-              </Text>
+              <Text style={styles.noteDetails}>{item.noteDetails}</Text>
             </View>
             <View style={styles.seperator} />
             <View style={styles.infoContainer}>
               <Text style={styles.boldText}>Sesli Not</Text>
-              <Text style={styles.lightText}>{
-                item.voiceNote
-                  ? item.voiceNote
-                  : 'Sesli not bulunmuyor'
-              }</Text>
+              <Text style={styles.lightText}>
+                {item.voiceNote ? item.voiceNote : 'Sesli not bulunmuyor'}
+              </Text>
             </View>
             <View style={styles.imageContainer}>
               {item.image && (
-                <Image source={{ uri: item.image }} style={styles.image} />
+                <Image source={{uri: item.image}} style={styles.image} />
               )}
             </View>
             <View style={styles.additionalInfo}>
@@ -54,15 +52,15 @@ const NoteDetails = (props) => {
               </View>
               <View style={styles.infoContainer}>
                 <Text style={styles.boldText}>Hatırlatıcı</Text>
-                <Text style={styles.lightText} >{item.selectedDateTime}</Text>
+                <Text style={styles.lightText}>{item.selectedDateTime}</Text>
               </View>
               <View style={styles.infoContainer}>
                 <Text style={styles.boldText}>Lokasyon</Text>
-                <Text style={styles.lightText}>{
-                  item.selectedPlace.placeName
+                <Text style={styles.lightText}>
+                  {item.selectedPlace.placeName
                     ? item.selectedPlace.placeName
-                    : 'Lokasyon bilgisi bulunmuyor'
-                }</Text>
+                    : 'Lokasyon bilgisi bulunmuyor'}
+                </Text>
               </View>
             </View>
           </ScrollView>
@@ -82,7 +80,7 @@ const customStyles = (colors) =>
       backgroundColor: colors.primary,
       margin: 20,
       borderRadius: 15,
-      shadowColor: "#000",
+      shadowColor: '#000',
       shadowOffset: {
         width: 0,
         height: 2,
@@ -99,7 +97,7 @@ const customStyles = (colors) =>
       padding: 20,
     },
     imageContainer: {
-      shadowColor: "#000",
+      shadowColor: '#000',
       shadowOffset: {
         width: 0,
         height: 2,
@@ -115,12 +113,12 @@ const customStyles = (colors) =>
       marginVertical: 10,
     },
     rowContainer: {
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
     seperator: {
       borderColor: 'gray',
       borderWidth: 0.5,
-      shadowColor: "#000",
+      shadowColor: '#000',
       shadowOffset: {
         width: 0,
         height: 2,
@@ -134,6 +132,7 @@ const customStyles = (colors) =>
       fontSize: 24,
       fontWeight: 'bold',
       color: colors.text,
+      marginVertical: 15,
     },
     noteDetails: {
       fontSize: 20,
@@ -151,9 +150,7 @@ const customStyles = (colors) =>
     },
     infoContainer: {
       marginVertical: 10,
-    }
-  })
+    },
+  });
 
-
-
-export { NoteDetails };
+export {NoteDetails};

@@ -27,3 +27,4 @@ export {default as Delete} from './Delete';
 export {default as SplashLogo} from './SplashLogo';
 export {default as Dots} from './Dots';
 export {default as Done} from './Done';
+export {default as Back} from './Back';
