@@ -46,7 +46,7 @@ const Favourites = (props) => {
   const Search = (text) => {
     let list = [...data];
     let filteredList = list.filter(function (item) {
-      const itemData = item.noteTitle.toUpperCase();
+      const itemData = item[1].noteTitle.toUpperCase();
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
