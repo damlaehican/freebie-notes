@@ -10,15 +10,11 @@ const SearchBar = (props) => {
         style={{width: 20, height: 20, alignSelf: 'center', marginLeft: 15}}
         source={require('../assets/search.png')}
       />
-      <GooglePlacesAutocomplete
-        placeholder="Konum ara"
-        onPress={(data,details=null)=>{
-          console.log(data,details)
-        }}
-        query={{
-          key:'AIzaSyBFHZOXnvhTzrQEmeIDDssNpqoc8SPgf4E',
-          language:'tr'
-        }}
+      <TextInput
+        style={styles.textInputStyle}
+        onChangeText={props.onChangeText}
+        placeholder={props.holder}
+        placeholderTextColor="gray"
       />
     </View>
   );
@@ -30,15 +26,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: 'white',
-    padding: 5,
-    margin: 5,
+    margin: 2,
     borderRadius: 10,
     width: Dimensions.get('window').width / 1.1,
     height: Dimensions.get('window').height / 23,
     //marginTop: -30,
   },
   textInputStyle: {
-    fontSize: 20,
+    fontSize: 12,
     justifyContent: 'center',
     color: 'black',
     marginLeft: 15,

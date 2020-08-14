@@ -57,6 +57,7 @@ const AddNote = (props) => {
     },
   });
   const [isDone, setDone] = useState(false);
+  const [place,setPlace] = useState('');
 
   const config = {
     apiKey: 'AIzaSyC7Wtd777P-gYVGWvtvx148h7c8YJZU8Qo',
@@ -104,7 +105,7 @@ const AddNote = (props) => {
         voiceNote: words,
         image: image,
         selectedDateTime: formatDate(dates, time),
-        coordinate: markers.coordinate,
+        selectedPlace: {coordinate: markers.coordinate, placeName: place},
         isFavourite: false,
         isDone: isDone,
       })
@@ -316,7 +317,7 @@ const AddNote = (props) => {
             transparent={true}
             onBackdropPress={() => setModalVisible(false)}>
             <View style={{flex: 0.9, justifyContent: 'center'}}>
-              <SearchBar holder="Konum ara" />
+              <SearchBar holder="Konum" onChangeText={(text) => setPlace(text)}/>
               <MapView
                 provider={PROVIDER_GOOGLE}
                 style={{flex: 0.9, borderRadius: 15}}
@@ -327,7 +328,8 @@ const AddNote = (props) => {
                   longitudeDelta: 1,
                 }}
                 onPress={(e) => addMarker(e.nativeEvent.coordinate)}>
-                <Marker coordinate={markers.coordinate} title={'asdadadad'} />
+                <Marker coordinate={markers.coordinate} title={place}>
+                </Marker>
               </MapView>
             </View>
           </Modal>
