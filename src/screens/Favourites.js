@@ -7,7 +7,7 @@ import {
   StatusBar,
   Text,
 } from 'react-native';
-import { NoteSearchBar, NoteCard } from '../components';
+import { NoteSearchBar, FavouriteCard } from '../components';
 import { useTheme } from '@react-navigation/native';
 import firebase from 'firebase';
 import auth from '@react-native-firebase/auth';
@@ -35,7 +35,6 @@ const Favourites = (props) => {
         }
         else {
           setLoading(false);
-          console.log(loading);
         }
       });
   };
@@ -56,9 +55,12 @@ const Favourites = (props) => {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => props.navigation.navigate('NoteDetails')}>
-        <NoteCard item={item} />
-      </TouchableOpacity>
+      <TouchableOpacity
+      onPress={() => {
+        props.navigation.navigate('NoteDetails', {item: item[1]});
+      }}>
+      <FavouriteCard item={item} />
+    </TouchableOpacity>
     )
   };
 

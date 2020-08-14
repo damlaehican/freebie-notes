@@ -4,94 +4,21 @@ import {
   Text,
   Dimensions,
   StyleSheet,
-  TouchableOpacity,
-  Alert,
 } from 'react-native';
 import {Clock} from '../components/SVGR-Components';
 import {useTheme} from '@react-navigation/native';
-import {Dots, Delete, Done, Star} from '../components/SVGR-Components';
-import Modal from 'react-native-modal';
-import firebase from 'firebase';
-import auth from '@react-native-firebase/auth';
+import {Done, Star} from '../components/SVGR-Components';
 
 const NoteCard = (props) => {
-  const user = auth().currentUser;
   const [key, value] = props.item;
   const {colors} = useTheme();
   const styles = customStyles(colors);
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [isFavourite, setIsFavourite] = useState(value.isFavourite);
-  const [done, setDone] = useState(value.isDone);
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
-  const deleteItem = () => {
-    firebase.database().ref(`notes/${user.uid}/${key}`).remove();
-    setTimeout(() => {
-      setModalVisible(false);
-    }, 500);
-  };
-
-  const doneItem = () => {
-    firebase.database().ref(`notes/${user.uid}/${key}`).update({
-      isDone: !value.isDone,
-    });
-    setTimeout(() => {
-      setModalVisible(false);
-    }, 300);
-    firebase
-      .database()
-      .ref(`notes/${user.uid}/${key}/isDone`)
-      .on('value', (snapshot) => {
-        if (snapshot.val() == true) {
-          setDone(true);
-        } else {
-          setDone(false);
-        }
-      });
-  };
   
-  const favourItem = () => {
-    setIsFavourite(!isFavourite);
-    firebase.database().ref(`notes/${user.uid}/${key}`).update({
-      isFavourite: !value.isFavourite,
-    });
-    setTimeout(() => {
-      setModalVisible(false);
-    }, 300);
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
-        <Modal
-          isVisible={isModalVisible}
-          animationType="fade"
-          transparent={true}
-          onBackdropPress={() => setModalVisible(false)}>
-          <View style={styles.modalView}>
-            <TouchableOpacity onPress={deleteItem}>
-              <Delete style={styles.iconStyle} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={doneItem}>
-              <Done style={styles.iconStyle} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={favourItem}>
-              <Star
-                style={styles.iconStyle}
-                stroke={'#FF5227'}
-                fill={isFavourite ? '#FF5227' : 'none'}
-              />
-            </TouchableOpacity>
-          </View>
-        </Modal>
         <View style={styles.touchableOpacity}>
           <Text style={styles.dateText}>{value.timestamp}</Text>
-          <TouchableOpacity onPress={toggleModal}>
-            <Dots style={{width: 25, height: 25}} />
-          </TouchableOpacity>
         </View>
         <View style={{marginHorizontal: 5, marginTop: 5}}>
           <Text style={styles.titleText}>{value.noteTitle}</Text>
