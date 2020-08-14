@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingLeft: 10,
     paddingRight: 40,
-    width: Dimensions.get('window').width / 1,
-    height: Dimensions.get('window').height / 18,
+    width: Dimensions.get('window').width / 1.05,
+    height: Dimensions.get('window').height / 11,
   },
   text: {
     color: '#546e7a',

@@ -32,6 +32,7 @@ import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
 import TextField from '../components/TextField';
 import {LocalNotification} from '../services/LocalPushController';
+import { color } from 'react-native-reanimated';
 
 const Settings = (props) => {
   const navigation = useNavigation();
@@ -113,21 +114,23 @@ const Settings = (props) => {
           color: '#546e7a',
           fontWeight: 'bold',
           paddingBottom: 50,
+          marginVertical: 20,
         }}>
         Ayarlar
       </Text>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row', marginLeft: 5}}>
         <User color="black" width={24} height={24} />
         <TextField title="Kullanıcı Adı:" details={user.displayName} />
       </View>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row', marginLeft: 5}}>
         <Mail color="black" width={24} height={24} />
-        <TextField title="Email" details={newMail} />
+        <TextField title="Email:" details={newMail} />
       </View>
       <TouchableOpacity
         style={{
           flexDirection: 'row',
-          height: Dimensions.get('window').height / 18,
+          height: Dimensions.get('window').height / 10,
+          marginLeft: 5,
         }}
         onPress={resetPass}>
         <Key width={24} height={24} />
@@ -139,8 +142,9 @@ const Settings = (props) => {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          width: Dimensions.get('window').height / 2.25,
-          height: Dimensions.get('window').height / 18,
+          width: Dimensions.get('window').height / 2.35,
+          height: Dimensions.get('window').height / 10,
+          marginLeft: 5,
         }}>
         <View
           style={{
@@ -175,11 +179,17 @@ const Settings = (props) => {
         style={{
           flexDirection: 'row',
           height: Dimensions.get('window').height / 18,
+          marginLeft: 5,
         }}>
         <Delete width={24} height={24} />
         <Text style={{fontSize: 18, paddingLeft: 5, color: '#546e7a'}}>
           Hesabı Sil
         </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.vazgecContainer}
+        onPress={() => navigation.goBack()}>
+        <Text style={styles.vazgecText}>Vazgeç</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -191,6 +201,15 @@ const customStyles = (colors) =>
       flex: 1,
       marginTop: 50,
       marginLeft: 10,
+    },
+    vazgecContainer: {
+      alignItems: 'center',
+      marginVertical: 60,
+    },
+    vazgecText: {
+      fontWeight: 'bold',
+      fontSize: 25,
+      color: colors.primary,
     },
   });
 

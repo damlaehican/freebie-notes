@@ -28,8 +28,9 @@ const NoteCard = (props) => {
 
   const deleteItem = () => {
     firebase.database().ref(`notes/${user.uid}/${key}`).remove();
-    setModalVisible(false);
-    Alert.alert('Delete');
+    setTimeout(() => {
+      setModalVisible(false);
+    }, 500);
   };
 
   const doneItem = () => {
@@ -42,6 +43,9 @@ const NoteCard = (props) => {
     firebase.database().ref(`notes/${user.uid}/${key}`).update({
       isFavourite: !value.isFavourite,
     });
+    setTimeout(() => {
+      setModalVisible(false);
+    }, 300);
   };
 
   return (
@@ -80,11 +84,11 @@ const NoteCard = (props) => {
         <Text style={[styles.bodyText, {color: '#006064'}]} numberOfLines={5}>
           {value.voiceNote}
         </Text>
-        <Text style={[styles.bodyText, {color: '#d92027'}]}>
-          {value.selectedDateTime}
-        </Text>
         <View style={styles.clockView}>
           <Clock fill="#FF5227" width={18} height={18} />
+          <Text style={[styles.bodyText, {color: '#d92027'}]}>
+            {value.selectedDateTime}
+          </Text>
         </View>
       </View>
     </View>
@@ -129,10 +133,11 @@ const customStyles = (colors) =>
     },
     clockView: {
       flex: 1,
-      justifyContent: 'flex-end',
+      justifyContent: 'space-evenly',
       alignItems: 'flex-end',
       bottom: 5,
       right: 5,
+      flexDirection: 'row',
     },
     modalView: {
       flexDirection: 'row',
@@ -153,6 +158,7 @@ const customStyles = (colors) =>
     touchableOpacity: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      marginVertical: 5,
     },
   });
 export default NoteCard;
